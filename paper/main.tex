@@ -1,0 +1,27 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+%% * Format of \maketitle
+\title{My First \LaTeX{} Test}
+\author{Abraham}
+\date{\today}
+
+\begin{document}
+
+%% * Paper Name
+\maketitle
+
+%% * Introduction
+\input{sections/00-introduction.tex}
+
+%% * Conclusion
+\input{sections/01-conclusion.tex}
+
+%% * References
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
