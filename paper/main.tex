@@ -1,8 +1,16 @@
-\documentclass[12pt]{article}
+\documentclass{article}
 
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{hyperref}
+%% * Relevant packages & required template styling
+\usepackage[nonatbib, preprint]{neurips_2026} % ! THE TEMPLATE
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
 
 %% * Format of \maketitle
 \title{My First \LaTeX{} Test}
@@ -14,14 +22,38 @@
 %% * Paper Name
 \maketitle
 
+%% * Abstract
+\input{sections/00-abstract.tex}
+
 %% * Introduction
-\input{sections/00-introduction.tex}
+\input{sections/01-introduction.tex}
+
+%% * Related Work
+\input{sections/02-related_work.tex}
+ 
+%% * Methodology
+\input{sections/03-methodology.tex}
+
+%% * Experimental Setup
+\input{sections/04-experimental_setup.tex}
+
+%% * Results
+\input{sections/05-results.tex}
+
+%% * Discussion
+\input{sections/06-discussion.tex}
 
 %% * Conclusion
-\input{sections/01-conclusion.tex}
+\input{sections/07-conclusion.tex}
+
+%% * Acknowledgement of AI Usage
+\input{sections/08-ai_acknowledgement.tex}
 
 %% * References
 \bibliographystyle{plain}
-\bibliography{references}
+\bibliography{references.bib}
+
+%% * Appendix
+\input{sections/09-appendix.tex}
 
 \end{document}
