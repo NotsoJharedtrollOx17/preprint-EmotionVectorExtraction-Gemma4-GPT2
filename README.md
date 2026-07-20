@@ -1,7 +1,7 @@
-# lorem ipsum dolor
+# arxiv-preprint-template
 
-lorem ipsum dolor
+Repo hosting general arXiV preprint template for LaTeX documents of my authorship
 
-## Lorem ipsum dolor
+## How to change the remote repo endpoint
 
-lorem ipsum dolor
+- Just run `./changeGitOrigin.ps1` and follow its instructions.
