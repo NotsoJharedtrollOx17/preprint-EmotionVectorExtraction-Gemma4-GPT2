@@ -1,5 +1,18 @@
 \begin{abstract}
 
-lorem ipsum dolor
+We discuss the results obtained by replicating specific sections of Anthropic's Emotion Vectors. These particular sections
+encompass (i) PCA Valence/Arousal Projection, (ii) Emotion Vector Cosine Similarity, and (iii) Causal Effects of Emotion Vector 
+Steering. Anthropic found that emotion vectors do affect reasoning and output of Claude Sonnet 4.5, an LLM developed by Anthropic.
+Their findings suggest that the semantic understanding of the model is comprised of the operative emotion vector, which is the vector
+currently processed by the model originating from the input prompt. These claims are partially supported by other non-academic
+replications using \texttt{meta-llama/Llama-3.3-70B-Instruct} and \texttt{google/gemma-4-e4b}, although other models
+have not been used for replication attempts such as \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b}.
+Our contribution replicates results (i), (ii), and (iii) using \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b}
+inside a Google Colab environment. We found that (1) both models display an emergent Valence axis in the PCA plot, (2) both models display
+similarity clusters of related emotion vectors, and (3) \texttt{openai-community/gpt-2-medium} displays greater steering sensitivity
+compared to \texttt{\emph{google/gemma-4-e2b}}. Our findings suggest that emotion vectors \emph{do emerge} on antiquated LLMs such as
+\texttt{\emph{openai-community/gpt-2-medium}}, and on modern offerings such as \texttt{google/gemma-4-e2b}. Furthermore, our 
+findings about emotion vector steering offer compelling evidence of their functional effects being present on models not related to the
+Claude family.
 
 \end{abstract}
