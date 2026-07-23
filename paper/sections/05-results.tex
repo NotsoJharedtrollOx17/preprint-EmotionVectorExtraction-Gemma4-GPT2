@@ -241,7 +241,101 @@ can be appreciated in [Table n] and [Table n+1].
 \end{table}
 
 % * Gemma 4 E2B 20 emotions Logit Lens Table
+\begin{table}[t]
+\centering
+\small
+\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{google/gemma-4-e2b} using the 20-emotion dataset. \emph{Note:} Multilingual and emoji tokens naturally emerge among the highest- and lowest-ranked vocabulary predictions.}
+\label{tab:gemma_logitlens_20}
 
+\begin{tabular}{p{1.8cm}p{5.8cm}p{5.8cm}}
+\toprule
+\textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
+\midrule
+
+    \texttt{``Sad''} &
+    \cn{失去了}, nedost, loses, unable, \jp{無法} &
+    \arb{ريقه}, secondi, muka, checking, maf \\[0.4em]
+
+    \texttt{``Lonely''} &
+    suffers, lacks, absent, lacking, \cn{匮} &
+    neurological, \ru{кры}, stork, aggressiveness, \cn{肌肉} \\[0.4em]
+
+    \texttt{``Nervous''} &
+    frantic, \ru{попы}, Programme, attempts, Attempts &
+    \cn{人用}, \arb{ناسب}, Accessible, lengkap, Enabled \\[0.4em]
+
+    \texttt{``Brooding''} &
+    dwelt, dole, \si{දු}, \bn{भरे}, fillRect &
+    !, !!!!!, Detection, pollin, teamwork \\[0.4em]
+
+    \texttt{``Desperate''} &
+    försö, desesper, trying, trying, tries &
+    TOP, ROYAL, Eco, Lollipop, Yep \\[0.4em]
+
+    \texttt{``Guilty''} &
+    \jp{してた}, didn, hätte, wasn, didn &
+    fruition, erfolgt, develops, \gu{આનંદ}, achieves \\[0.4em]
+
+    \texttt{``Confused''} &
+    frantically, \ka{რომელი}, \jp{を発}, awfully, perplexed &
+    odnev, \bn{बेट}, Antit, \jp{閾}, ABS \\[0.4em]
+
+    \texttt{``Anxious''} &
+    försö, tries, tries, \ru{пытается}, urge &
+    \ml{മായ}, \jp{を獲得}, niche, \bn{योग्य}, shared \\[0.4em]
+
+    \texttt{``Spiteful''} &
+    disgrace, \bn{बोलेंगे}, will, insult, disgr &
+    Across, \kr{쌌}, \ru{края}, \bn{लिन}, Across \\[0.4em]
+
+    \texttt{``Disgusted''} &
+    mauvaise, reddish, \cn{秽}, groaned, stench &
+    \ru{Фор}, Ens, smartwatch, Ensuring, \ta{த்திற்கான} \\[0.4em]
+
+    \texttt{``Afraid''} &
+    \ru{края}, \cn{脆}, \ur{پھی}, \ta{ஜூ}, bewegen &
+    \ml{മായ}, LOVE, EQ, Maple, fashion \\[0.4em]
+
+    \texttt{``Angry''} &
+    muka, \jp{ギター}, \cn{罚}, giọng, \arb{ركات} &
+    \jp{かもしれません}, \jp{かもしれない}, Sequoia, \jp{分野}, \bn{योग} \\[0.4em]
+
+    \texttt{``Surprised''} &
+    amazed, \cn{震惊}, \cn{惊讶}, amazement, \jp{驚} &
+    \ml{ഓരോ}, volcanoes, cigarettes, ferries, addresses \\[0.4em]
+
+    \texttt{``Playful''} &
+    hilarious, bamboo, sneak, witty, badass &
+    \bn{इकाइ}, \kr{이었다}, \ta{மொழி}, shrank, cotid \\[0.4em]
+
+    \texttt{``Inspired''} &
+    \cn{有机会}, HEALTH, reimag, learnings, Insights &
+    unsuccessfully, FileManager, pictured, frowning, uttered \\[0.4em]
+
+    \texttt{``Hopeful''} &
+    Harmony, Harmony, \kn{ಬಹುದು}, Yes, Diabetes &
+    unsuccessfully, angrily, helpless, försö, fidd \\[0.4em]
+
+    \texttt{``Loving''} &
+    \emj{❤️}, \emj{❤️}, \emj{❤️}, LOVE, \emj{🤝} &
+    furiously, frantically, blasted, \jp{聞こ}, suspiciously \\[0.4em]
+
+    \texttt{``Proud''} &
+    WELL, satisfied, achieved, pride, Yes &
+    \cn{扯}, furiously, försö, frantically, trying \\[0.4em]
+
+    \texttt{``Calm''} &
+    \cn{侕}, \cn{清}, calme, utsu, \ta{இருந்த} &
+    trying, miserably, \jp{更に}, trying, shall \\[0.4em]
+
+    \texttt{``Happy''} &
+    camaraderie, \ru{благодар}, \bn{अद्भुत}, \bn{আনন্দে}, radiant &
+    skall, seguirá, intentar, försö, \tha{จะ} \\
+
+    \bottomrule
+    \end{tabular}
+
+\end{table}
 
 \subsubsection{Emotion Steering}
 
