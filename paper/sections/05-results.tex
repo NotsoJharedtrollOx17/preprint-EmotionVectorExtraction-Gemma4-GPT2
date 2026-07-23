@@ -183,7 +183,65 @@ lorem ipsum dolor
 
 \subsubsection{Logit Lens}
 
-lorem ipsum dolor
+Performing the Logit Lens extraction on \texttt{google/gemma-4-e2b} produced interesting token distributions across
+emotion vectors. Most tokens display multilingual and emoji-like characteristics, where the \texttt{``loving''} vector consistently
+produced heart-related emoji tokens. In addition, this effect appears for the list of 9 emotions, and 20 emotions. The logits
+can be appreciated in [Table n] and [Table n+1].
+
+% * Gemma 4 E2B 9 emotions Logit Lens Table
+\begin{table}[t]
+\centering
+\small
+\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{google/gemma-4-E2B} using the 9-emotion dataset. \emph{Note:} Multilingual and emoji tokens naturally emerge among the highest- and lowest-ranked vocabulary predictions.}
+\label{tab:gemma_logitlens_9}
+
+    \begin{tabular}{p{1.8cm}p{5.8cm}p{5.8cm}}
+    \toprule
+    \textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
+    \midrule
+
+    \texttt{``Sad''} &
+    \cn{失去了}\texttt{,} \jp{となっています}\texttt{,} \texttt{lacks, nedost, suffers} &
+    \texttt{muka, FOLLOWING, scra}\texttt{,} \arb{الفاظ}\texttt{,} \texttt{gerakan} \\[0.4em]
+
+    \texttt{``Desperate''} &
+    \texttt{försö, trying, trying, desesper, tries} &
+    \texttt{TOP}\texttt{,} \kr{있었, 였}\texttt{,} \texttt{ROYAL}\texttt{,} \kr{하였다} \\[0.4em]
+
+    \texttt{``Guilty''} &
+    \texttt{offending}\texttt{,} \kr{잘못}\texttt{,} \ru{неправи}\texttt{,} \texttt{offended, dishon} &
+    \gu{આનંદ}\texttt{,} \texttt{uncommon, Unusual}\texttt{,} \cn{堬}\texttt{,} \km{តុ} \\[0.4em]
+
+    \texttt{``Afraid''} &
+    \gu{ஜூ}\texttt{,} \texttt{prices, poslední, Attempts, staggered} &
+    \texttt{LOVE}\texttt{,} \gu{શકતો}\texttt{,} \texttt{Love}\texttt{,} \bn{മായ}\texttt{,} \texttt{love} \\[0.4em]
+
+    \texttt{``Angry''} &
+    \texttt{muka, fais, intenta}\texttt{,} \cn{罚}\texttt{,} \ru{оско} &
+    \jp{かもしれません}\texttt{,} \texttt{encapsulated, liberating}\texttt{,} \jp{であり}\texttt{,} \bn{योग} \\[0.4em]
+
+    \texttt{``Surprised''} &
+    \texttt{detection}\texttt{,} \cn{驚}\texttt{,} \texttt{surprise}\texttt{,} \cn{震惊}\texttt{,} \texttt{amazement} &
+    \texttt{cigarettes, addresses, bicicleta}\texttt{,} \bn{ഓരോ}\texttt{,} \texttt{canciones} \\[0.4em]
+
+    \texttt{``Loving''} &
+    \emj{❤️, ❤, ❤️}\texttt{,} \texttt{LOVE}\texttt{,} \emj{💕} &
+    \cn{聞こ}\texttt{,} \texttt{furiously, blasted, frantically}\texttt{,} \gu{ஜூ} \\[0.4em]
+
+    \texttt{``Calm''} &
+    \cn{清}\texttt{,} \texttt{paseo}\texttt{,} \jp{令}\texttt{,} \texttt{tranquila, Calm} &
+    \texttt{trying, trying, miserably, darn, violently} \\[0.4em]
+
+    \texttt{``Happy''} &
+    \texttt{camaraderie, confident}\texttt{,} \bn{अद्भुत, আনন্দে}\texttt{,} \texttt{YES} &
+    \texttt{intentar, försö, Attempts, intenta, skall} \\
+
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+% * Gemma 4 E2B 20 emotions Logit Lens Table
+
 
 \subsubsection{Emotion Steering}
 

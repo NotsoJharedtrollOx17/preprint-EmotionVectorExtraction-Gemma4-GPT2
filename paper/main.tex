@@ -2,8 +2,11 @@
 
 %% * Relevant packages & required template styling
 \usepackage[preprint, nonatbib]{neurips_2026} % ! THE TEMPLATE
-\usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+%\usepackage[utf8]{inputenc} % allow utf-8 input
+%\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{fontenc}        % for LuaLaTeX ONLY
+\usepackage{fontspec}
+\usepackage{babel}
 \usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
@@ -13,6 +16,59 @@
 \usepackage{xcolor}         % colors
 \usepackage[most]{tcolorbox}
 \usepackage[nameinlink]{cleveref}
+
+% * Font style for multilingual chars
+    % * for japanese
+\babelprovide[import]{japanese}
+\babelfont[japanese]{rm}{Yu Gothic}
+    % * for korean
+\babelprovide[import]{korean}
+\babelfont[korean]{rm}{Malgun Gothic}
+    % * for arabic
+\babelprovide[import]{arabic}
+\babelfont[arabic]{rm}{Segoe UI}
+    % * for hindi
+\babelprovide[import]{hindi}
+\babelfont[hindi]{rm}{Segoe UI}
+    % * for chinese
+\babelprovide[import]{chinese}
+\babelfont[chinese]{rm}{Microsoft YaHei}
+    % * for russian
+\babelprovide[import]{russian}
+\babelfont[russian]{rm}{Segoe UI}
+    % * for burmese
+\babelprovide[import]{khmer}
+\babelfont[khmer]{rm}{Leelawadee UI}
+    % * for bengali
+\babelprovide[import]{bengali}
+\babelfont[bengali]{rm}{Nirmala UI}
+    % * for gujarati
+\babelprovide[import]{gujarati}
+\babelfont[gujarati]{rm}{Nirmala UI}
+    % * for emojis
+\newfontfamily\emoji{Segoe UI Emoji}
+
+% * Custom commands for easier wrapup of foreign language text
+    % * for japanese
+\newcommand{\jp}[1]{\foreignlanguage{japanese}{#1}}
+    % * for korean
+\newcommand{\kr}[1]{\foreignlanguage{korean}{#1}}
+    % * for arabic
+\newcommand{\arb}[1]{\foreignlanguage{arabic}{#1}}
+    % * for hindi
+\newcommand{\hi}[1]{\foreignlanguage{hindi}{#1}}
+    % * for chinese
+\newcommand{\cn}[1]{\foreignlanguage{chinese}{#1}}
+    % * for russian
+\newcommand{\ru}[1]{\foreignlanguage{russian}{#1}}
+    % * for burmese (khmer)
+\newcommand{\km}[1]{\foreignlanguage{khmer}{#1}}
+    % * for bengali
+\newcommand{\bn}[1]{\foreignlanguage{bengali}{#1}}
+    % * for gujarati
+\newcommand{\gu}[1]{\foreignlanguage{gujarati}{#1}}
+    % * for emojis
+\newcommand{\emj}[1]{{\emoji #1}}
 
 %% * Format of \maketitle
     %% * Title of the paper
