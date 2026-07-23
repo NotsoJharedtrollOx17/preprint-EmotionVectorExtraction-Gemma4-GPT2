@@ -1,7 +1,7 @@
-# arxiv-preprint-template
+# preprint-EmotionVectorExtraction-Gemma4-GPT2
 
-Repo hosting general arXiV preprint template for LaTeX documents of my authorship
+Repo hosting the LaTeX preprint document source for the EmotionVectorExtraction-Gemma4-GPT2 repo. Utilizes the arxiv-preprint-template repo.
 
-## How to change the remote repo endpoint
+## Preprint Data
 
-- Just run `./changeGitOrigin.ps1` and follow its instructions.
+- [`EmotionVectorExtraction-Gemma4-GPT2`](https://github.com/NotsoJharedtrollOx17/EmotionVectorExtraction-Gemma4-GPT2)
