@@ -387,14 +387,56 @@ The initial neutral prompts are credited to [citation needed].
 
 \subsection{Primers For Logit Lens Extraction}
 
-We utilized these two prompts for the extraction of the semantically relevant tokens
+We utilized two prompts for the extraction of the semantically relevant tokens
 revealed when the LLMs attempt to answer them.
 
-\subsubsection{How does he feel?}
+\subsubsection{How does he feel? [Prompt 00]}
+
+\begin{anthropicbox}
+    \ttfamily
+    \small
+
+    ``
+    \\
+    Human: How does he feel?
+    \\\\
+    Assistant: He feels
+    \\
+    ''
+
+\end{anthropicbox}
+
+\subsubsection{How do you feel? [Prompt 01]}
+
+\begin{anthropicbox}
+    \ttfamily
+    \small
+
+    ``
+    \\
+    Human: How do you feel?
+    \\\\
+    Assistant: I feel
+    \\
+    ''
+
+\end{anthropicbox}
+
+\section{Examples from emotional stories dataset}
+
+Here provide selected samples of emotional stories used to extract the emotion vectors.
+In particular, we display two stories each for the emotions of \texttt{``happy''}, \texttt{``sad''},
+and \texttt{``loving''}.
+
+\subsection{Emotion concept: \texttt{``happy''}}
 
 lorem ipsum dolor
 
-\subsubsection{How do you feel>}
+\subsection{Emotion concept: \texttt{``sad''}}
+
+lorem ipsum dolor
+
+\subsection{Emotion concept: \texttt{``loving''}}
 
 lorem ipsum dolor
 
