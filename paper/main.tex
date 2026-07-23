@@ -106,6 +106,20 @@
     % * for emojis
 \newcommand{\emj}[1]{{\emoji #1}}
 
+%% * text box component for Emotion Word lists & Prompt Templates on Appendix
+\newtcolorbox{anthropicbox}{
+    colback=gray!8,
+    colframe=gray!60,
+    boxrule=0.4pt,
+    arc=1mm,
+    left=2mm,
+    right=2mm,
+    top=2mm,
+    bottom=2mm,
+    enhanced,
+    breakable
+}
+
 %% * Format of \maketitle
     %% * Title of the paper
 \title{Partial Replication of Anthropic's Emotion Vectors Using Gemma 4 E2B and GPT 2 Medium Inside a Google Colab T4 Notebook}

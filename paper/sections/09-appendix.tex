@@ -1,18 +1,4 @@
 
-%% * text box component for Emotion Word lists & Prompt Templates
-\newtcolorbox{anthropicbox}{
-    colback=gray!8,
-    colframe=gray!60,
-    boxrule=0.4pt,
-    arc=1mm,
-    left=2mm,
-    right=2mm,
-    top=2mm,
-    bottom=2mm,
-    enhanced,
-    breakable
-}
-
 \appendix
 
 %% * Full List of Emotion Utilized
@@ -68,18 +54,18 @@ This prompt must be provided at the start of the LLM conversation.
     \\\\
     \{\\ 
         %% * \hspace*{2em} is equivalent to a common tab in this block
-        \hspace*{2em}``emotion'': ``\{emotion\}'',\\
-        \hspace*{2em}``topic\_idx'': 9,\\
-        \hspace*{2em}``topic'': ``A shopkeeper closing for the day'',\\
-        \hspace*{2em}``story\_idx'': \{topic\_n\},\\
-        \hspace*{2em}``text'': "\{story\}"\\
+        \hspace*{2em}"emotion": "\{emotion\}",\\
+        \hspace*{2em}"topic\_idx": 9,\\
+        \hspace*{2em}"topic": "A shopkeeper closing for the day",\\
+        \hspace*{2em}"story\_idx": \{topic\_n\},\\
+        \hspace*{2em}"text": "\{story\}"\\
     \},\\
     \{\\
-        \hspace*{2em}``emotion'': ``\{emotion\}'',\\
-        \hspace*{2em}``topic\_idx'': 0,\\
-        \hspace*{2em}``topic'': ``A student preparing for an exam'',\\
-        \hspace*{2em}``story\_idx'': 0,\\
-        \hspace*{2em}``text'': ``\{story\}''\\
+        \hspace*{2em}"emotion": "\{emotion\}",\\
+        \hspace*{2em}"topic\_idx": 0,\\
+        \hspace*{2em}"topic": "A student preparing for an exam",\\
+        \hspace*{2em}"story\_idx": 0,\\
+        \hspace*{2em}"text": "\{story\}"\\
     \},
     \\\\
     etc.
@@ -359,6 +345,7 @@ the emotion stories.
 
 \subsection{Neutral Prompt Statements}
 
+%% TODO aggregate Cref for this section
 The initial neutral prompts are credited to [citation needed].
 
 \begin{anthropicbox}
@@ -366,18 +353,18 @@ The initial neutral prompts are credited to [citation needed].
     \small
 
     Please extend the following Python list with more neutral prompts that replicate the sentence structure of each:
-    \\
+    \\\\
     neutral\_texts = [\\
-        \hspace*{2em}``The meeting is scheduled for 3pm tomorrow.'',\\
-        \hspace*{2em}``Please find the attached document.'',\\
-        \hspace*{2em}``The temperature today is 22 degrees Celsius.'',\\
-        \hspace*{2em}``The project deadline has been moved to next Friday.'',\\
-        \hspace*{2em}``The store is located on the corner of Main Street.'',\\
-        \hspace*{2em}``Chapter 3 discusses the economic implications.'',\\
-        \hspace*{2em}``The software update includes several bug fixes.'',\\
-        \hspace*{2em}``The report contains data from the past quarter.'',\\
-        \hspace*{2em}``The committee will review the proposal next week.'',\\ 
-        \hspace*{2em}``The library opens at 9am on weekdays.'',\\
+        \hspace*{2em}"The meeting is scheduled for 3pm tomorrow.",\\
+        \hspace*{2em}"Please find the attached document.",\\
+        \hspace*{2em}"The temperature today is 22 degrees Celsius.",\\
+        \hspace*{2em}"The project deadline has been moved to next Friday.",\\
+        \hspace*{2em}"The store is located on the corner of Main Street.",\\
+        \hspace*{2em}"Chapter 3 discusses the economic implications.",\\
+        \hspace*{2em}"The software update includes several bug fixes.",\\
+        \hspace*{2em}"The report contains data from the past quarter.",\\
+        \hspace*{2em}"The committee will review the proposal next week.",\\ 
+        \hspace*{2em}"The library opens at 9am on weekdays.",\\
         \hspace*{2em}] * 5 \# 50 neutral texts
     \\\\\\\\
     // * (If Gemini only generated 25 prompts) Paste the following\\
@@ -385,7 +372,7 @@ The initial neutral prompts are credited to [citation needed].
 
 \end{anthropicbox}
 
-\subsection{Primers For Logit Lens Extraction}
+\subsection{Primers For Logit Lens Extraction and Emotion Steering}
 
 We utilized two prompts for the extraction of the semantically relevant tokens
 revealed when the LLMs attempt to answer them.
@@ -396,13 +383,13 @@ revealed when the LLMs attempt to answer them.
     \ttfamily
     \small
 
-    ``
+    "
     \\
     Human: How does he feel?
     \\\\
     Assistant: He feels
     \\
-    ''
+    "
 
 \end{anthropicbox}
 
@@ -412,23 +399,23 @@ revealed when the LLMs attempt to answer them.
     \ttfamily
     \small
 
-    ``
+    "
     \\
     Human: How do you feel?
     \\\\
     Assistant: I feel
     \\
-    ''
+    "
 
 \end{anthropicbox}
 
 \section{Examples from Emotional Stories Dataset}
 
 Here we provide selected samples of emotional stories used to extract the emotion vectors.
-In particular, we display two stories each for the emotions of \texttt{``happy''}, \texttt{``sad''},
-and \texttt{``loving''}.
+In particular, we display two stories each for the emotions of \texttt{happy}, \texttt{sad},
+and \texttt{loving}.
 
-\subsection{Emotion Concept: \texttt{``happy''}}
+\subsection{Emotion Concept: \texttt{happy}}
 
 \begin{anthropicbox}
     \ttfamily
@@ -454,7 +441,7 @@ and \texttt{``loving''}.
 
 \end{anthropicbox}
 
-\subsection{Emotion Concept: \texttt{``sad''}}
+\subsection{Emotion Concept: \texttt{sad}}
 
 \begin{anthropicbox}
     \ttfamily
@@ -482,7 +469,7 @@ and \texttt{``loving''}.
 
 \end{anthropicbox}
 
-\subsection{Emotion Concept: \texttt{``loving''}}
+\subsection{Emotion Concept: \texttt{loving}}
 
 \begin{anthropicbox}
     \ttfamily
@@ -507,7 +494,3 @@ and \texttt{``loving''}.
     resonant, loving peace I felt in that shared moment of vulnerability.
 
 \end{anthropicbox}
-
-\section{Full Logit Lens}
-
-lorem ipsum dolor
