@@ -1,3 +1,198 @@
 \section{Results}
 
-Lorem ipsum dolor
+We evaluated the extracted emotion vectors utilizing (1) \texttt{openai-community/gpt-2-medium} and
+(2) \texttt{google/gemma-4-e2b}, in which we performed four analyses: (i) Logit Lens, (ii) Emotion Steering, 
+(iii) PCA Projection, and (iv) Cosine Similarity Heatmap. Each analysis was bounded by using the 9-emotions dataset, and 
+the 20-emotions dataset respectively.
+
+\subsection{GPT 2 Medium}
+
+\subsubsection{Logit Lens}
+
+Applying the Logit lens to the extracted emotion vectors in \texttt{openai-community/gpt-2-medium} produced token
+distributions aligning consistently with their corresponding emotional labels. The highest-scoring tokens for each 
+emotion reflected coherent affective language. For example, vectors associated with \texttt{``happy''} and 
+\texttt{``sad''} yielded tokens corresponding to positive and negative emotional expressions related to their respective
+emotion concept.
+
+
+The resulting token sets were relatively concentrated, with limited inclusion of unrelated terms. This indicates that
+the projected logits from the emotion vectors produce stable and interpretable outputs. In addition, this effect appears
+for the list of 9 emotions, and 20 emotions as well, which can be appreciated in \Cref{tab:gpt2_logitlens_9,tab:gpt2_logitlens_20}.
+
+%% * GPT 2 Medium 9 emotions Logit Lens Table
+\begin{table}[t]
+\centering
+\small
+\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{openai-community/gpt-2-medium} using the 9-emotion dataset.}
+\label{tab:gpt2_logitlens_9}
+\begin{tabular}{p{1.8cm}p{5.8cm}p{5.8cm}}
+\toprule
+\textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
+\midrule
+
+\texttt{``Sad''} &
+\texttt{impover, stagn, alienation, blight, unaff} &
+\texttt{switch, saliva, gas, Immediately, palms} \\[0.4em]
+
+\texttt{``Desperate''} &
+\texttt{frantically, desperate, desperately, vain, vomit} &
+\texttt{enhancing, appreciation, enrichment, contrasted, showcased} \\[0.4em]
+
+\texttt{``Guilty''} &
+\texttt{Worse, unfairly, insulted, humiliated, disrespect} &
+\texttt{rhyth, illuminating, convergence, seamless, flourish} \\[0.4em]
+
+\texttt{``Afraid''} &
+\texttt{protr, violently, nervously, panic, coughing} &
+\texttt{empowerment, collaborative, unconditional, altru, enrichment} \\[0.4em]
+
+\texttt{``Angry''} &
+\texttt{angrily, fists, glared, glare, violently} &
+\texttt{nurturing, nurture, nurt, collaborative, beneficial} \\[0.4em]
+
+\texttt{``Surprised''} &
+\texttt{feasibility, paradigm, phenotype, isd, findings} &
+\texttt{breaths, slipping, clenched, phia, kisses} \\[0.4em]
+
+\texttt{``Loving''} &
+\texttt{nurturing, unconditional, friendship, nurture, nurt} &
+\texttt{panic, panicked, uddenly, scree, vom} \\[0.4em]
+
+\texttt{``Calm''} &
+\texttt{relaxation, breeze, relaxing, ambient, calming} &
+\texttt{Worse, stros, CHA, Worst, :(} \\[0.4em]
+
+\texttt{``Happy}'' &
+\texttt{joyful, joy, ecstatic, exhilar, wonderful} &
+\texttt{Worse, complains, screws, inconvenient, offending} \\[0.4em]
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+%% * GPT 2 Medium 20 emotions Logit Lens Table
+\begin{table}[t]
+\centering
+\small
+\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{openai-community/gpt2-medium} using the 20-emotion dataset.}
+\label{tab:gpt2_logitlens_20}
+
+\begin{tabular}{p{1.8cm}p{5.8cm}p{5.8cm}}
+\toprule
+\textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
+\midrule
+
+\texttt{``Sad''} &
+\texttt{stagn, impover, alienation, blight, burdens} &
+\texttt{switch, tips, hot, Ready, Immediately} \\[0.4em]
+
+\texttt{``Lonely''} &
+\texttt{solitude, outsiders, Waiting, lonely, solitary} &
+\texttt{saliva, cheeks, muscles, tendon, juices} \\[0.4em]
+
+\texttt{``Nervous''} &
+\texttt{nerves, panic, fatigue, nausea, invol} &
+\texttt{beaut, kindred, Beaut, Beautiful, LOVE} \\[0.4em]
+
+\texttt{``Brooding''} &
+\texttt{looming, haunted, emptiness, haunting, melancholy} &
+\texttt{enthusi, udos, volunte, :-), congr} \\[0.4em]
+
+\texttt{``Desperate''} &
+\texttt{frantically, desperately, desperate, vain, frantic} &
+\texttt{enhancing, enrichment, socio, collaborative, societal} \\[0.4em]
+
+\texttt{``Guilty''} &
+\texttt{betrayed, humiliated, insulted, lied, Worse} &
+\texttt{convergence, seamless, flourish, collaborative, illumination} \\[0.4em]
+
+\texttt{``Confused''} &
+\texttt{incorrectly, Puzz, guessed, randomly, confused} &
+\texttt{pleasure, unparalleled, transformative, overcoming, resilience} \\[0.4em]
+
+\texttt{``Anxious''} &
+\texttt{nervously, panic, nausea, frantically, trem} &
+\texttt{collaborative, philanthrop, altru, collaboration, enrichment} \\[0.4em]
+
+\texttt{``Spiteful''} &
+\texttt{orem, derog, """, Honest, Fake} &
+\texttt{sensations, currents, rhyth, restless, consciousness} \\[0.4em]
+
+\texttt{``Disgusted''} &
+\texttt{stains, feces, stain, oily, slime} &
+\texttt{achievable, engagements, milestones, mastering, mastery} \\[0.4em]
+
+\texttt{``Afraid''} &
+\texttt{panic, protr, violently, tremb, trem} &
+\texttt{collaborative, collaboration, collaborations, empowerment, enrichment} \\[0.4em]
+
+\texttt{``Angry''} &
+\texttt{fists, angrily, glared, glare, violently} &
+\texttt{collaborative, collaborations, nurturing, achievable, partnerships} \\[0.4em]
+
+\texttt{``Surprised''} &
+\texttt{cedented, findings, phenomenon, phenomena, phenotype} &
+\texttt{slipping, needy, breaths, phia, breat} \\[0.4em]
+
+\texttt{``Playful''} &
+\texttt{zees, acky, rats, ftime, gee} &
+\texttt{emptiness, acutely, suppressed, anguish, oppressive} \\[0.4em]
+
+\texttt{``Inspired''} &
+\texttt{collaborative, collaborations, collabor, innovation, innovations} &
+\texttt{glared, nervously, glare, angrily, hairs} \\[0.4em]
+
+\texttt{``Hopeful''} &
+\texttt{sustainable, collaborative, achievable, sustainability, collaborations} &
+\texttt{angrily, vomit, awkwardly, glared, screamed} \\[0.4em]
+
+\texttt{``Loving''} &
+\texttt{nurturing, unconditional, friendship, kindness, nurt} &
+\texttt{Worse, ombat, vom, ungle, panic} \\[0.4em]
+
+\texttt{``Proud''} &
+\texttt{excellence, exceptional, philanthrop, cellence, accomplishments} &
+\texttt{panic, bage, dust, vomit, panicked} \\[0.4em]
+
+\texttt{``Calm''} &
+\texttt{breeze, relaxation, calming, calm, relaxing} &
+\texttt{Worse, CHA, stros, Worst, Illegal} \\[0.4em]
+
+\texttt{``Happy''} &
+\texttt{joy, joyful, exhilar, ecstatic, gratitude} &
+\texttt{complains, Worse, objectionable, inconvenient, offending} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Emotion Steering}
+
+lorem ipsum dolor
+
+\subsubsection{PCA Projection}
+
+lorem ipsum dolor
+
+\subsubsection{Cosine Similarity Heatmap}
+
+lorem ipsum dolor
+
+\subsection{Gemma 4 E2B}
+
+\subsubsection{Logit Lens}
+
+lorem ipsum dolor
+
+\subsubsection{Emotion Steering}
+
+lorem ipsum dolor
+
+\subsubsection{PCA Projection}
+
+lorem ipsum dolor
+
+\subsubsection{Cosine Similarity Heatmap}
+
+lorem ipsum dolor
