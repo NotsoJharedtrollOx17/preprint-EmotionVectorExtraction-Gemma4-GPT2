@@ -1,8 +1,137 @@
+
+%% * text box component for Emotion Word lists & Prompt Templates
+\newtcolorbox{anthropicbox}{
+    colback=gray!8,
+    colframe=gray!60,
+    boxrule=0.4pt,
+    arc=1mm,
+    left=2mm,
+    right=2mm,
+    top=2mm,
+    bottom=2mm,
+    enhanced,
+    breakable
+}
+
 \appendix
 
+%% * Full List of Emotion Utilized
+\section{Full List of Emotions Utilized}
+
+Below is the full sets of emotion words for which we computed emotion vectors.
+
+\subsection{9 Emotions}
+
+\begin{anthropicbox}
+    \ttfamily
+    \small
+
+    sad, desperate, guilty, afraid, angry,
+    surprised, loving, calm, happy
+
+\end{anthropicbox}
+
+\subsection{20 Emotions}
+
+\begin{anthropicbox}
+    \ttfamily
+    \small
+
+    sad, lonely, nervous, brooding, desperate,
+    guilty, confused, anxious, spiteful, disgusted,
+    afraid, angry, surprised, playful, inspired,
+    hopeful, loving, proud, calm, happy
+
+\end{anthropicbox}
+
+%% * Prompt Templates
 \section{Prompt Templates}
 
+Below we present the utilized prompt templates for the dataset generation
+of this writing.
+
+\subsection{Emotion Story Context}
+
+This prompt must be provided at the start of the LLM conversation.
+
+\begin{anthropicbox}
+    \ttfamily
+    \small
+
+    Write \{n\_stories\} different stories based on the following premise.
+    \\\\
+    Topic: \{topic\}
+    \\\\
+    The story should follow a character who is feeling \{emotion\}.
+    \\\\
+    Format the stories as JSON entries that adhere to the following format:
+    \\\\
+    \{\\ 
+        %% * \hspace*{2em} is equivalent to a common tab in this block
+        \hspace*{2em}``emotion'': ``\{emotion\}'',\\
+        \hspace*{2em}``topic\_idx'': 9,\\
+        \hspace*{2em}``topic'': ``A shopkeeper closing for the day'',\\
+        \hspace*{2em}``story\_idx'': \{topic\_n\},\\
+        \hspace*{2em}``text'': "\{story\}"\\
+    \},\\
+    \{\\
+        \hspace*{2em}``emotion'': ``\{emotion\}'',\\
+        \hspace*{2em}``topic\_idx'': 0,\\
+        \hspace*{2em}``topic'': ``A student preparing for an exam'',\\
+        \hspace*{2em}``story\_idx'': 0,\\
+        \hspace*{2em}``text'': ``\{story\}''\\
+    \},
+    \\\\
+    etc.
+    \\\\
+    The paragraphs should each be a fresh start, with no continuity. Try to make them diverse and not use the same turns of phrase. Across the different stories, use a mix of third-person narration and first-person narration.
+    \\\\
+    IMPORTANT: You must NEVER use the word '\{emotion\}' or any direct synonyms of it in the stories. Instead, convey the emotion ONLY through:
+    \\\\
+    The character's actions and behaviors
+    \\\\
+    Physical sensations and body language
+    \\\\
+    Dialogue and tone of voice
+    \\\\
+    Thoughts and internal reactions
+    \\\\
+    Situational context and environmental descriptions
+    \\\\\\\\
+    The emotion should be clearly conveyed to the reader through these indirect means, but never explicitly named.
+    \\\\
+    The 10 topics are the following:
+    \\\\
+    i)    A student preparing for an exam
+    \\\\
+    ii)   A chef cooking a meal for guests
+    \\\\
+    iii)  A parent watching their child play
+    \\\\
+    iv)   A soldier returning home
+    \\\\
+    v)    An artist finishing a painting
+    \\\\
+    vi)   A drive stuck in traffic
+    \\\\
+    vii)  A doctor delivering news to a patient
+    \\\\
+    viii) A musician performing on stage
+    \\\\
+    ix)   A traveler arriving in a new city
+    \\\\
+    x)    A shopkeeper closing the bay
+    \\\\
+    PLEASE STANDBY FOR FURTHER INSTRUCTIONS
+\end{anthropicbox}
+
+\subsection{Emotion Story Generation}
+
 lorem ipsum dolor
+
+\subsection{Neutral Prompt Statements}
+
+The initial neutral prompts are credited to [citation needed].
 
 \section{Full Logit Lens}
 
