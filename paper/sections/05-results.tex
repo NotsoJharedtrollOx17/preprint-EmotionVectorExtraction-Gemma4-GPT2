@@ -253,7 +253,34 @@ appreciated in \Cref{fig:gpt2-pca-projection}.
 
 \subsubsection{Cosine Similarity Heatmap}
 
-lorem ipsum dolor
+Pairwise cosine similarity between emotion vectors in \texttt{openai-community/gpt-2-medium} display clear relationships
+between emotional categories. Similar emotions exhibited higher similarity scores, while opposing emotions displayed lower
+or negative similarity values. The Cosine Similarity Heatmaps can be appreciated in \Cref{fig:gpt2-cos-sim9,fig:gpt2-cos-sim20}.
+
+
+In particular, the similarities and differences are more pronounced when we utilize 20 emotions. As we can observe, lorem ipsum dolor.
+
+
+% * Cosine Similarity  for GPT 2 Medium with 9 emotions
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/CosineHeatmapGPT2Medium-9emotions-layer16.pdf}
+    \caption{Cosine Similarity Heatmaps for 9 emotions with \texttt{openai-community/gpt-2-medium}.}
+    \label{fig:gpt2-cos-sim9}
+\end{figure}
+
+% * Cosine Similarity  for GPT 2 Medium with 20 emotions
+\begin{landscape}
+    \begin{figure}[t]
+    \centering
+    \includegraphics[
+        width=\linewidth,
+        height=0.98\textwidth,
+        ]{figures/CosineHeatmapGPT2Medium-20emotions-layer16.pdf}
+    \caption{Cosine Similarity Heatmaps for 20 emotions with \texttt{openai-community/gpt-2-medium}.}
+    \label{fig:gpt2-cos-sim20}
+    \end{figure}
+\end{landscape}
 
 \subsection{Gemma 4 E2B}
 
@@ -493,4 +520,27 @@ valence emotions are found on Quadrants I and IV.
 
 \subsubsection{Cosine Similarity Heatmap}
 
-lorem ipsum dolor
+The cosine similarity values show lower similarity between most emotion vector pairs. While some expected relationships were present,
+the overall magnitude of similarity scores was lower. The similarity matrix contained more moderate values, indicating increased 
+overlap between the vector representations. The heatmaps can be appreciated in \Cref{fig:gemma-cos-sim9,fig:gemma-cos-sim20}.
+
+% * Cosine Similarity  for Gemma 4 E2B with 9 emotions
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/CosineHeatmapGemma4E2B-9emotions-layer23.pdf}
+    \caption{Cosine Similarity Heatmaps for 9 emotions with \texttt{google/gemma-4-e2b}.}
+    \label{fig:gemma-cos-sim9}
+\end{figure}
+
+% * Cosine Similarity  for Gemma 4 E2B Medium with 20 emotions
+\begin{landscape}
+    \begin{figure}[t]
+    \centering
+    \includegraphics[
+        width=\linewidth,
+        height=0.98\textwidth,
+        ]{figures/CosineHeatmapGemma4E2B-20emotions-layer23.pdf}
+    \caption{Cosine Similarity Heatmaps for 20 emotions with \texttt{google/gemma-4-e2b}.}
+    \label{fig:gemma-cos-sim20}
+    \end{figure}
+\end{landscape}
