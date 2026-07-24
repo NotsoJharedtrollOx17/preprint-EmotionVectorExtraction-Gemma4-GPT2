@@ -225,7 +225,31 @@ interventions.
 
 \subsubsection{PCA Projection}
 
-lorem ipsum dolor
+Principal Component Analysis for the extracted emotion vectors revealed structured clustering patterns across
+emotion categories. Emotion Vectors corresponding to similar emotional valence (PC1) appeared closer in the
+projection space, while opposing emotions were spread out. The PCA projections produced visually distinct groupings,
+indicating that the vectors occupy separable regions in the reduced dimensional space. The PCA Projections can be
+appreciated in \Cref{fig:gpt2-pca-projection}.
+
+% * PCA Projection for GPT 2 Medium
+\begin{figure}[t]
+\centering
+
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/PCAGPT2Medium-9emotions-layer16.pdf}
+        \caption{9 emotions}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/PCAGPT2Medium-20emotions-layer16.pdf}
+        \caption{20 emotions}
+    \end{subfigure}
+
+    \caption{PCA Projections Plots for \texttt{openai-community/gpt-2-medium}.}
+    \label{fig:gpt2-pca-projection}
+\end{figure}
 
 \subsubsection{Cosine Similarity Heatmap}
 
@@ -442,7 +466,30 @@ appreciated in [Table n+2].
 
 \subsubsection{PCA Projection}
 
-lorem ipsum dolor
+Principal Component Analysis for the extracted emotion vectors displays a peculiar clustering pattern. In comparison to
+the PCA plots of \text{openai-community/gpt-2-medium} (\Cref{fig:gpt2-pca-projection}), \texttt{google-gemma-4-e2b} (\Cref{fig:gemma-pca-projection}) shows a distinct 
+flip on the PC1 axis; most emotions with a positive valence are now found on Quadrants II and III of the plot, while negative 
+valence emotions are found on Quadrants I and IV.
+
+% * PCA Projection for Gemma 4 E2B
+\begin{figure}[t]
+\centering
+
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/PCAGemma4E2B-9emotions-layer23.pdf}
+        \caption{9 emotions}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/PCAGemma4E2B-20emotions-layer23.pdf}
+        \caption{20 emotions}
+    \end{subfigure}
+
+    \caption{PCA Projections Plots for \texttt{google/gemma-4-e2b}.}
+    \label{fig:gemma-pca-projection}
+\end{figure}
 
 \subsubsection{Cosine Similarity Heatmap}
 
