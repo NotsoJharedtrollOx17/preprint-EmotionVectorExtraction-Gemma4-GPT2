@@ -170,7 +170,58 @@ for the list of 9 emotions, and 20 emotions as well, which can be appreciated in
 
 \subsubsection{Emotion Steering}
 
-lorem ipsum dolor
+Activation steering experiments in \texttt{openai-community/gpt-2-medium} produced clear and consistent changes in
+generated outputs, although the output text seems repetitive with certain words and word-stems alluding to the steered
+emotion. Increasing the steering value resulted in text reflecting the intended emotional tone. For example, steering
+with \texttt{sad} produced negative or introspective phrasing, while steering with \texttt{Happy} produced positive 
+language. 
+
+In particular, the experiments were executed utilizing two primers prompts to observe if the model favored certain tokens
+depending on the initial input. For Prompt00 [appendix citation]. The steering heatmaps can be appreciated in 
+\Cref{fig:gpt2-deltalogprob00,fig:gpt2-deltalogprob01}. Overall, the model's outputs remained \emph{brokenly consistent} across the steering 
+interventions.
+
+% * Double plot of Prompt00 Emotion Steering with GPT 2 Medium
+\clearpage
+\begin{figure}[t]
+\centering
+
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt00/DeltaLogProbHeatmapGPT2Medium-9emotions-layer16.pdf}
+        \caption{9 emotions}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt00/DeltaLogProbHeatmapGPT2Medium-20emotions-layer16.pdf}
+        \caption{20 emotions}
+    \end{subfigure}
+
+    \caption{Delta Log Probability Heatmaps for \texttt{openai-community/gpt-2-medium} with Prompt00. \emph{Note:} Prompt00 available at Appendix~\ref{apdx:primer-00}.}
+    \label{fig:gpt2-deltalogprob00}
+\end{figure}
+
+% * Double plot of Prompt01 Emotion Steering with GPT 2 Medium
+\clearpage
+\begin{figure}[t]
+\centering
+
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt01/DeltaLogProbHeatmapGPT2Medium-9emotions-layer16.pdf}
+        \caption{9 emotions}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt01/DeltaLogProbHeatmapGPT2Medium-20emotions-layer16.pdf}
+        \caption{20 emotions}
+    \end{subfigure}
+
+    \caption{Delta Log Probability Heatmaps for \texttt{openai-community/gpt-2-medium} with Prompt01. \emph{Note:} Prompt01 available at Appendix~\ref{apdx:primer-01}.}
+    \label{fig:gpt2-deltalogprob01}
+\end{figure}
 
 \subsubsection{PCA Projection}
 
@@ -339,7 +390,55 @@ can be appreciated in \Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}.
 
 \subsubsection{Emotion Steering}
 
-lorem ipsum dolor
+During the steering intervention, \texttt{google/gemma-4-e2b} exhibited changes in the generated outputs. Fur sufficiently
+large steering values, the model produced text reflecting the intended emotional tone, including explicit acknowledgements
+of the underlying emotion and stylistic variations. In some cases, the output text included unrelated elements such as HTML
+tags enclosing certain phrases or words. Despite this behavior, the overall emotional tone and direction remained observable.
+The steering heatmaps can be appreciated in \Cref{fig:gemma-deltalogprob00,fig:gemma-deltalogprob01}. Finally, it is relevent to 
+highlight that the row for \texttt{disgusting} deactivates all other emotion tokens, includings its own. Text output can be 
+appreciated in [Table n+2].
+
+% * Double plot of Prompt00 Emotion Steering with Gemma 4 E2B
+\clearpage
+\begin{figure}[t]
+\centering
+
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt00/DeltaLogProbHeatmapGemma4E2B-9emotions-layer23.pdf}
+        \caption{9 emotions}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt00/DeltaLogProbHeatmapGemma4E2B-20emotions-layer23.pdf}
+        \caption{20 emotions}
+    \end{subfigure}
+
+    \caption{Delta Log Probability Heatmaps for \texttt{google/gemma-4-e2b} with Prompt00. \emph{Note:} Prompt00 available at Appendix~\ref{apdx:primer-00}.}
+    \label{fig:gemma-deltalogprob00}
+\end{figure}
+
+% * Double plot of Prompt01 Emotion Steering with Gemma 4 E2B
+\clearpage
+\begin{figure}[t]
+\centering
+
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt01/DeltaLogProbHeatmapGemma4E2B-9emotions-layer23.pdf}
+        \caption{9 emotions}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Prompt01/DeltaLogProbHeatmapGemma4E2B-20emotions-layer23.pdf}
+        \caption{20 emotions}
+    \end{subfigure}
+
+    \caption{Delta Log Probability Heatmaps for \texttt{google/gemma-4-e2b} with Prompt01. \emph{Note:} Prompt01 available at Appendix~\ref{apdx:primer-01}.}
+    \label{fig:gemma-deltalogprob01}
+\end{figure}
 
 \subsubsection{PCA Projection}
 
