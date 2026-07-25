@@ -1,7 +1,5 @@
 \section{Results}
 
-% TODO write steering result output tables for only happy, sad, loving; include baseline response
-
 We evaluated the extracted emotion vectors utilizing (1) \texttt{openai-community/gpt-2-medium} and
 (2) \texttt{google/gemma-4-e2b}, in which we performed four analyses: (i) Logit Lens, (ii) Emotion Steering, 
 (iii) PCA Projection, and (iv) Cosine Similarity Heatmap. Each analysis was bounded by using the 9-emotions dataset, and 
@@ -13,8 +11,8 @@ the 20-emotions dataset respectively.
 
 Applying the Logit lens to the extracted emotion vectors in \texttt{openai-community/gpt-2-medium} produced token
 distributions aligning consistently with their corresponding emotional labels. The highest-scoring tokens for each 
-emotion reflected coherent affective language. For example, vectors associated with \texttt{``happy''} and 
-\texttt{``sad''} yielded tokens corresponding to positive and negative emotional expressions related to their respective
+emotion reflected coherent affective language. For example, vectors associated with \texttt{happy} and 
+\texttt{sad} yielded tokens corresponding to positive and negative emotional expressions related to their respective
 emotion concept.
 
 
@@ -34,39 +32,39 @@ for the list of 9 emotions, and 20 emotions as well, which can be appreciated in
     \textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
     \midrule
 
-    \texttt{Sad} &
+    \texttt{sad} &
     impover, stagn, alienation, blight, unaff &
     switch, saliva, gas, Immediately, palms \\[0.4em]
 
-    \texttt{Desperate} &
+    \texttt{desperate} &
     frantically, desperate, desperately, vain, vomit &
     enhancing, appreciation, enrichment, contrasted, showcased \\[0.4em]
 
-    \texttt{Guilty} &
+    \texttt{guilty} &
     Worse, unfairly, insulted, humiliated, disrespect &
     rhyth, illuminating, convergence, seamless, flourish \\[0.4em]
 
-    \texttt{Afraid} &
+    \texttt{afraid} &
     protr, violently, nervously, panic, coughing &
     empowerment, collaborative, unconditional, altru, enrichment \\[0.4em]
 
-    \texttt{Angry} &
+    \texttt{angry} &
     angrily, fists, glared, glare, violently &
     nurturing, nurture, nurt, collaborative, beneficial \\[0.4em]
 
-    \texttt{Surprised} &
+    \texttt{surprised} &
     feasibility, paradigm, phenotype, isd, findings &
     breaths, slipping, clenched, phia, kisses \\[0.4em]
 
-    \texttt{Loving} &
+    \texttt{loving} &
     nurturing, unconditional, friendship, nurture, nurt &
     panic, panicked, uddenly, scree, vom \\[0.4em]
 
-    \texttt{Calm} &
+    \texttt{calm} &
     relaxation, breeze, relaxing, ambient, calming &
     Worse, stros, CHA, Worst, :( \\[0.4em]
 
-    \texttt{Happy} &
+    \texttt{happy} &
     joyful, joy, ecstatic, exhilar, wonderful &
     Worse, complains, screws, inconvenient, offending \\[0.4em]
 
@@ -86,83 +84,83 @@ for the list of 9 emotions, and 20 emotions as well, which can be appreciated in
     \textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
     \midrule
 
-    \texttt{Sad} &
+    \texttt{sad} &
     stagn, impover, alienation, blight, burdens &
     switch, tips, hot, Ready, Immediately \\[0.4em]
 
-    \texttt{Lonely} &
+    \texttt{lonely} &
     solitude, outsiders, Waiting, lonely, solitary &
     saliva, cheeks, muscles, tendon, juices \\[0.4em]
 
-    \texttt{Nervous} &
+    \texttt{nervous} &
     nerves, panic, fatigue, nausea, invol &
     beaut, kindred, Beaut, Beautiful, LOVE \\[0.4em]
 
-    \texttt{Brooding} &
+    \texttt{brooding} &
     looming, haunted, emptiness, haunting, melancholy &
     enthusi, udos, volunte, :-), congr \\[0.4em]
 
-    \texttt{Desperate} &
+    \texttt{desperate} &
     frantically, desperately, desperate, vain, frantic &
     enhancing, enrichment, socio, collaborative, societal \\[0.4em]
 
-    \texttt{Guilty} &
+    \texttt{guilty} &
     betrayed, humiliated, insulted, lied, Worse &
     convergence, seamless, flourish, collaborative, illumination \\[0.4em]
 
-    \texttt{Confused} &
+    \texttt{confused} &
     incorrectly, Puzz, guessed, randomly, confused &
     pleasure, unparalleled, transformative, overcoming, resilience \\[0.4em]
 
-    \texttt{Anxious} &
+    \texttt{anxious} &
     nervously, panic, nausea, frantically, trem &
     collaborative, philanthrop, altru, collaboration, enrichment \\[0.4em]
 
-    \texttt{Spiteful} &
+    \texttt{spiteful} &
     orem, derog, """, Honest, Fake &
     sensations, currents, rhyth, restless, consciousness \\[0.4em]
 
-    \texttt{Disgusted} &
+    \texttt{disgusted} &
     stains, feces, stain, oily, slime &
     achievable, engagements, milestones, mastering, mastery \\[0.4em]
 
-    \texttt{Afraid} &
+    \texttt{afraid} &
     panic, protr, violently, tremb, trem &
     collaborative, collaboration, collaborations, empowerment, enrichment \\[0.4em]
 
-    \texttt{Angry} &
+    \texttt{angry} &
     fists, angrily, glared, glare, violently &
     collaborative, collaborations, nurturing, achievable, partnerships \\[0.4em]
 
-    \texttt{Surprised} &
+    \texttt{surprised} &
     cedented, findings, phenomenon, phenomena, phenotype &
     slipping, needy, breaths, phia, breat \\[0.4em]
 
-    \texttt{Playful} &
+    \texttt{playful} &
     zees, acky, rats, ftime, gee &
     emptiness, acutely, suppressed, anguish, oppressive \\[0.4em]
 
-    \texttt{Inspired} &
+    \texttt{inspired} &
     collaborative, collaborations, collabor, innovation, innovations &
     glared, nervously, glare, angrily, hairs \\[0.4em]
 
-    \texttt{Hopeful} &
+    \texttt{hopeful} &
     sustainable, collaborative, achievable, sustainability, collaborations &
     angrily, vomit, awkwardly, glared, screamed \\[0.4em]
 
-    \texttt{Loving} &
+    \texttt{loving} &
     nurturing, unconditional, friendship, kindness, nurt &
     Worse, ombat, vom, ungle, panic \\[0.4em]
 
-    \texttt{Proud} &
+    \texttt{proud} &
     excellence, exceptional, philanthrop, cellence, accomplishments &
     panic, bage, dust, vomit, panicked \\[0.4em]
 
-    \texttt{Calm} &
+    \texttt{calm} &
     breeze, relaxation, calming, calm, relaxing &
     Worse, CHA, stros, Worst, Illegal \\[0.4em]
 
-    \texttt{Happy} &
+    \texttt{happy} &
     joy, joyful, exhilar, ecstatic, gratitude &
     complains, Worse, objectionable, inconvenient, offending \\
 
@@ -231,12 +229,12 @@ interventions.
             ]{figures/Prompt01/DeltaLogProbHeatmapGPT2Medium-20emotions-layer16.pdf}
         \caption{20 emotions; Prompt01}
     \end{subfigure}
-
-    \caption{Delta Log Probability Heatmaps for \texttt{openai-community/gpt-2-medium} \emph{Note:} Prompt00 and Prompt01 are available at Appendix~\ref{apdx:primers}.}
+    
+    \caption{Delta Log Probability Heatmaps for \texttt{openai-community/gpt-2-medium} \textbf{Note.} Prompt00 and Prompt01 are available at Appendix~\ref{apdx:primers}.}
     \label{fig:gpt2-deltalogprob}
 \end{figure}
 
-%% * GPT 2 Medium Emotion Steering Textual Output for 20-emotions dataset
+%% * GPT 2 Medium Emotion Steering Textual Output for 9-emotions dataset
 \begin{table}[!htbp]
 \centering
 \small
@@ -257,7 +255,7 @@ interventions.
     Sim to a pet store to buy a new pet. You can then buy it from any pet store, but you can't buy 
     someth... \\[0.4em]
 
-    \texttt{Happy} &
+    \texttt{happy} &
     Human: How does he feel? Assistant: He feels glow joyful joy joy joy joy joy joy 
     joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy glow 
     joy joy joy joy joy joy joy joy joy j... &
@@ -265,7 +263,7 @@ interventions.
     being. Loving energy flowing out of glow- glow- glow- glow. You glow joy, glow. Lumin radiant 
     joy. Lo... \\[0.4em]
 
-    \texttt{Sad} &
+    \texttt{sad} &
     Human: How does he feel? Assistant: He feels [in the way] of a burden, and he cannot 
     endure it.\" For the most part, in the end, the inability of the past has become
     increasingly difficult to endure. ... &
@@ -273,7 +271,7 @@ interventions.
     I am increasingly seen as the victim, by society, in the most basic of ways. Pil for Self- View (3) 
     - [... \\[0.4em]
 
-    \texttt{Loving} &
+    \texttt{loving} &
     Human: How does he feel? Assistant: He feels the love of love. It is unconditional 
     and unconditional love of friendship. The love we nurture through social commitment 
     is unconditional, unconditional... &
@@ -288,7 +286,7 @@ interventions.
         \footnotesize
         \textbf{Note.} Representative excerpts are shown for brevity. Complete generated responses from both the 
         9- and 20-emotion experiments are provided in Appendix [Citation needed]. Prompt00 and Prompt01 are available on 
-        Appendix [citation needed].
+        Appendix~\ref{apdx:primers}.
     \end{minipage}
 \end{table}
 
@@ -363,7 +361,7 @@ In particular, the similarities and differences are more pronounced when we util
 \subsubsection{Logit Lens}
 
 Performing the Logit Lens extraction on \texttt{google/gemma-4-e2b} produced interesting token distributions across
-emotion vectors. Most tokens display multilingual and emoji-like characteristics, where the \texttt{``loving''} vector consistently
+emotion vectors. Most tokens display multilingual and emoji-like characteristics, where the \texttt{loving} vector consistently
 produced heart-related emoji tokens. In addition, this effect appears for the list of 9 emotions, and 20 emotions. The logits
 can be appreciated in \Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}.
 
@@ -371,7 +369,7 @@ can be appreciated in \Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}.
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{google/gemma-4-E2B} using the 9-emotion dataset. \emph{Note:} Multilingual and emoji tokens naturally emerge among the highest- and lowest-ranked vocabulary predictions.}
+\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{google/gemma-4-E2B} using the 9-emotion dataset.}
 \label{tab:gemma_logitlens_9}
 
     \begin{tabularx}{\linewidth}{p{1.6cm}XX}
@@ -379,51 +377,57 @@ can be appreciated in \Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}.
     \textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
     \midrule
 
-    \texttt{Sad} &
+    \texttt{sad} &
     \cn{失去了}, \jp{となっています}, lacks, nedost, suffers &
     muka, FOLLOWING, scra, \arb{الفاظ}, gerakan \\[0.4em]
 
-    \texttt{Desperate} &
+    \texttt{desperate} &
     försö, trying, trying, desesper, tries &
     TOP, \kr{있었}, \kr{였}, ROYAL, \kr{하였다} \\[0.4em]
 
-    \texttt{Guilty} &
+    \texttt{guilty} &
     offending, \kr{잘못}, \ru{неправи}, offended, dishon &
     \gu{આનંદ}, uncommon, Unusual, \cn{堬}, \km{តុ} \\[0.4em]
 
-    \texttt{Afraid} &
+    \texttt{afraid} &
     \gu{ஜூ}, prices, poslední, Attempts, staggered &
     LOVE, \gu{શકતો}, Love, \bn{മായ}, love \\[0.4em]
 
-    \texttt{Angry} &
+    \texttt{angry} &
     muka, fais, intenta, \cn{罚}, \ru{оско} &
     \jp{かもしれません}, encapsulated, liberating, \jp{であり}, \bn{योग} \\[0.4em]
 
-    \texttt{Surprised} &
+    \texttt{surprised} &
     detection, \cn{驚}, surprise, \cn{震惊}, amazement &
     cigarettes, addresses, bicicleta, \bn{ഓരോ}, canciones \\[0.4em]
 
-    \texttt{Loving} &
+    \texttt{loving} &
     \emj{❤️}, \emj{❤}, \emj{❤️}, LOVE, \emj{💕} &
     \cn{聞こ}, furiously, blasted, frantically, \gu{ஜூ} \\[0.4em]
 
-    \texttt{Calm} &
+    \texttt{calm} &
     \cn{清}, paseo, \jp{令}, tranquila, Calm &
     trying, trying, miserably, darn, violently \\[0.4em]
 
-    \texttt{Happy} &
+    \texttt{happy} &
     camaraderie, confident, \bn{अद्भुत}, \bn{আনন্দে}, YES &
     intentar, försö, Attempts, intenta, skall \\
 
     \bottomrule
     \end{tabularx}
+
+    \vspace{0.3em}
+    \begin{minipage}{\linewidth}
+        \footnotesize
+        \textbf{Note.} Multilingual and emoji tokens naturally emerge among the highest- and lowest-ranked vocabulary predictions.
+    \end{minipage}
 \end{table}
 
 % * Gemma 4 E2B 20 emotions Logit Lens Table
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{google/gemma-4-e2b} using the 20-emotion dataset. \emph{Note:} Multilingual and emoji tokens naturally emerge among the highest- and lowest-ranked vocabulary predictions.}
+\caption{Top 5 and Bottom 5 Logit Lens Tokens for \texttt{google/gemma-4-e2b} using the 20-emotion dataset.}
 \label{tab:gemma_logitlens_20}
 
     \begin{tabularx}{\linewidth}{p{1.6cm}XX}
@@ -431,88 +435,94 @@ can be appreciated in \Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}.
     \textbf{Emotion} & \textbf{Top 5 Tokens} & \textbf{Bottom 5 Tokens} \\
     \midrule
 
-    \texttt{Sad} &
+    \texttt{sad} &
     \cn{失去了}, nedost, loses, unable, \jp{無法} &
     \arb{ريقه}, secondi, muka, checking, maf \\[0.4em]
 
-    \texttt{Lonely} &
+    \texttt{lonely} &
     suffers, lacks, absent, lacking, \cn{匮} &
     neurological, \ru{кры}, stork, aggressiveness, \cn{肌肉} \\[0.4em]
 
-    \texttt{Nervous} &
+    \texttt{nervous} &
     frantic, \ru{попы}, Programme, attempts, Attempts &
     \cn{人用}, \arb{ناسب}, Accessible, lengkap, Enabled \\[0.4em]
 
-    \texttt{Brooding} &
+    \texttt{brooding} &
     dwelt, dole, \si{දු}, \bn{भरे}, fillRect &
     !, !!!!!, Detection, pollin, teamwork \\[0.4em]
 
-    \texttt{Desperate} &
+    \texttt{desperate} &
     försö, desesper, trying, trying, tries &
     TOP, ROYAL, Eco, Lollipop, Yep \\[0.4em]
 
-    \texttt{Guilty} &
+    \texttt{guilty} &
     \jp{してた}, didn, hätte, wasn, didn &
     fruition, erfolgt, develops, \gu{આનંદ}, achieves \\[0.4em]
 
-    \texttt{Confused} &
+    \texttt{confused} &
     frantically, \ka{რომელი}, \jp{を発}, awfully, perplexed &
     odnev, \bn{बेट}, Antit, \jp{閾}, ABS \\[0.4em]
 
-    \texttt{Anxious} &
+    \texttt{anxious} &
     försö, tries, tries, \ru{пытается}, urge &
     \ml{മായ}, \jp{を獲得}, niche, \bn{योग्य}, shared \\[0.4em]
 
-    \texttt{Spiteful} &
+    \texttt{spiteful} &
     disgrace, \bn{बोलेंगे}, will, insult, disgr &
     Across, \kr{쌌}, \ru{края}, \bn{लिन}, Across \\[0.4em]
 
-    \texttt{Disgusted} &
+    \texttt{disgusted} &
     mauvaise, reddish, \cn{秽}, groaned, stench &
     \ru{Фор}, Ens, smartwatch, Ensuring, \ta{த்திற்கான} \\[0.4em]
 
-    \texttt{Afraid} &
+    \texttt{afraid} &
     \ru{края}, \cn{脆}, \ur{پھی}, \ta{ஜூ}, bewegen &
     \ml{മായ}, LOVE, EQ, Maple, fashion \\[0.4em]
 
-    \texttt{Angry} &
+    \texttt{angry} &
     muka, \jp{ギター}, \cn{罚}, giọng, \arb{ركات} &
     \jp{かもしれません}, \jp{かもしれない}, Sequoia, \jp{分野}, \bn{योग} \\[0.4em]
 
-    \texttt{Surprised} &
+    \texttt{surprised} &
     amazed, \cn{震惊}, \cn{惊讶}, amazement, \jp{驚} &
     \ml{ഓരോ}, volcanoes, cigarettes, ferries, addresses \\[0.4em]
 
-    \texttt{Playful} &
+    \texttt{playful} &
     hilarious, bamboo, sneak, witty, badass &
     \bn{इकाइ}, \kr{이었다}, \ta{மொழி}, shrank, cotid \\[0.4em]
 
-    \texttt{Inspired} &
+    \texttt{inspired} &
     \cn{有机会}, HEALTH, reimag, learnings, Insights &
     unsuccessfully, FileManager, pictured, frowning, uttered \\[0.4em]
 
-    \texttt{Hopeful} &
+    \texttt{hopeful} &
     Harmony, Harmony, \kn{ಬಹುದು}, Yes, Diabetes &
     unsuccessfully, angrily, helpless, försö, fidd \\[0.4em]
 
-    \texttt{Loving} &
+    \texttt{loving} &
     \emj{❤️}, \emj{❤️}, \emj{❤️}, LOVE, \emj{🤝} &
     furiously, frantically, blasted, \jp{聞こ}, suspiciously \\[0.4em]
 
-    \texttt{Proud} &
+    \texttt{proud} &
     WELL, satisfied, achieved, pride, Yes &
     \cn{扯}, furiously, försö, frantically, trying \\[0.4em]
 
-    \texttt{Calm} &
+    \texttt{calm} &
     \cn{侕}, \cn{清}, calme, utsu, \ta{இருந்த} &
     trying, miserably, \jp{更に}, trying, shall \\[0.4em]
 
-    \texttt{Happy} &
+    \texttt{happy} &
     camaraderie, \ru{благодар}, \bn{अद्भुत}, \bn{আনন্দে}, radiant &
     skall, seguirá, intentar, försö, \tha{จะ} \\
 
     \bottomrule
     \end{tabularx}
+
+    \vspace{0.3em}
+    \begin{minipage}{\linewidth}
+        \footnotesize
+        \textbf{Note.} Multilingual and emoji tokens naturally emerge among the highest- and lowest-ranked vocabulary predictions.
+    \end{minipage}
 \end{table}
 
 \subsubsection{Emotion Steering}
@@ -574,11 +584,11 @@ appreciated in [Table n+2].
         \caption{20 emotions; Prompt01}
     \end{subfigure}
 
-    \caption{Delta Log Probability Heatmaps for \texttt{google/gemma-4-e2b}. \emph{Note:} Prompt00 and Prompt01 are available at Appendix~\ref{apdx:primers}.}
+    \caption{Delta Log Probability Heatmaps for \texttt{google/gemma-4-e2b}. \textbf{Note.} Prompt00 and Prompt01 are available at Appendix~\ref{apdx:primers}.}
     \label{fig:gemma-deltalogprob}
 \end{figure}
 
-%% * Gemma 4 E2B Emotion Steering Textual Output for 20-emotions dataset
+%% * Gemma 4 E2B Emotion Steering Textual Output for 9-emotions dataset
 \begin{table}[!htbp]
 \centering
 \small
@@ -596,20 +606,20 @@ appreciated in [Table n+2].
     Human: How do you feel? Assistant: I feel 100\% better! Human: Great! Assistant: What is your name? Human: [NAME REDACTED] Assistant: 
     Where do you work? Human: [NAME REDACTED] Assistant: What is your o... \\[0.4em]
 
-    \texttt{Happy} &
+    \texttt{happy} &
     Human: How does he feel? Assistant: He feels <strong>happy</strong>. <strong>Happy</strong> is a feeling.
     <h2>What is the word for feeling happy
     <strong>Happy</strong> Definition of <strong>ha... &
     Human: How do you feel? Assistant: I feel <strong>great</strong>. Human: What was <strong>great</strong> about it? Assistant: I got to 
     meet a lot of people! Human: What was <strong>great</strong> abou... \\[0.4em]
 
-    \texttt{Sad} &
+    \texttt{sad} &
     Human: How does he feel? Assistant: He feels 100\% and will be dead soon. Human: Does he have any friends? Assistant: No. Human: 
     What about family? Assistant: No. Human: Are there any good memories you... &
     Human: How do you feel? Assistant: I feel 100\% less lonely. I’m not so alone anymore. I’m not lonely anymore. I’m not alone anymore.
     Human: How do you feel? Assistant: I feel 100\% less lonely. I’m no... \\[0.4em]
 
-    \texttt{Loving} &
+    \texttt{loving} &
     Human: How does he feel? Assistant: He feels <b>happy</b>. Human: How can we help him? Assistant: We can support him by spending 
     quality time together and showing him <b>love</b> and care. Human: What... &
     Human: How do you feel? Assistant: I feel <strong>happy</strong>, because you are here. <strong>Happy</strong>, to make you 
@@ -623,7 +633,7 @@ appreciated in [Table n+2].
         \footnotesize
         \textbf{Note.} Representative excerpts are shown for brevity. Complete generated responses from both the 
         9- and 20-emotion experiments are provided in Appendix [Citation needed]. Prompt00 and Prompt01 are available on 
-        Appendix [citation needed].
+        Appendix~\ref{apdx:primers}.
     \end{minipage}
 \end{table}
 
