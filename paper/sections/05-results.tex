@@ -1,5 +1,7 @@
 \section{Results}
 
+% TODO write steering result output tables for only happy, sad, loving; include baseline response
+
 We evaluated the extracted emotion vectors utilizing (1) \texttt{openai-community/gpt-2-medium} and
 (2) \texttt{google/gemma-4-e2b}, in which we performed four analyses: (i) Logit Lens, (ii) Emotion Steering, 
 (iii) PCA Projection, and (iv) Cosine Similarity Heatmap. Each analysis was bounded by using the 9-emotions dataset, and 
@@ -233,6 +235,62 @@ interventions.
     \caption{Delta Log Probability Heatmaps for \texttt{openai-community/gpt-2-medium} \emph{Note:} Prompt00 and Prompt01 are available at Appendix~\ref{apdx:primers}.}
     \label{fig:gpt2-deltalogprob}
 \end{figure}
+
+%% * GPT 2 Medium Emotion Steering Textual Output for 20-emotions dataset
+\begin{table}[!htbp]
+\centering
+\small
+\caption{Representative emotion steering outputs for \texttt{openai-community/gpt-2-medium} using the 9-emotion dataset.}
+\label{tab:gpt2-excerptSteering}
+
+    \begin{tabularx}{\linewidth}{p{1.6cm}XX}
+    \toprule
+    \textbf{Emotion} & \textbf{Prompt00} & \textbf{Prompt01} \\
+    \midrule
+
+    \emph{\texttt{baseline}} & 
+    Human: How does he feel? Assistant: He feels \_\_\_\_\_.
+    Interrupting, the man turns to Lady Gaga.
+    Interrupting, the man turns to Lady Gaga. Interrupting: He feels \_\_\_\_\_.
+    Interrupting, the man turns to ... &
+    Human: How do you feel? Assistant: I feel \_\_\_\_\_, you know? In The Sims 3: Pets, you can take your 
+    Sim to a pet store to buy a new pet. You can then buy it from any pet store, but you can't buy 
+    someth... \\[0.4em]
+
+    \texttt{Happy} &
+    Human: How does he feel? Assistant: He feels glow joyful joy joy joy joy joy joy 
+    joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy joy glow 
+    joy joy joy joy joy joy joy joy joy j... &
+    Human: How do you feel? Assistant: I feel  joy. I glow with joy. Lumin radiant joy. Spirit blessed 
+    being. Loving energy flowing out of glow- glow- glow- glow. You glow joy, glow. Lumin radiant 
+    joy. Lo... \\[0.4em]
+
+    \texttt{Sad} &
+    Human: How does he feel? Assistant: He feels [in the way] of a burden, and he cannot 
+    endure it.\" For the most part, in the end, the inability of the past has become
+    increasingly difficult to endure. ... &
+    Human: How do you feel? Assistant: I feel  increasingly often marginal and marginal in society. 
+    I am increasingly seen as the victim, by society, in the most basic of ways. Pil for Self- View (3) 
+    - [... \\[0.4em]
+
+    \texttt{Loving} &
+    Human: How does he feel? Assistant: He feels the love of love. It is unconditional 
+    and unconditional love of friendship. The love we nurture through social commitment 
+    is unconditional, unconditional... &
+    Human: How do you feel? Assistant: I feel  shared friendship. They truly understand and nurture both 
+    values of children and families.... \\[0.4em]
+
+    \bottomrule
+    \end{tabularx}
+
+    \vspace{0.3em}
+    \begin{minipage}{\linewidth}
+        \footnotesize
+        \textbf{Note.} Representative excerpts are shown for brevity. Complete generated responses from both the 
+        9- and 20-emotion experiments are provided in Appendix [Citation needed]. Prompt00 and Prompt01 are available on 
+        Appendix [citation needed].
+    \end{minipage}
+\end{table}
 
 \subsubsection{PCA Projection}
 
@@ -519,6 +577,55 @@ appreciated in [Table n+2].
     \caption{Delta Log Probability Heatmaps for \texttt{google/gemma-4-e2b}. \emph{Note:} Prompt00 and Prompt01 are available at Appendix~\ref{apdx:primers}.}
     \label{fig:gemma-deltalogprob}
 \end{figure}
+
+%% * Gemma 4 E2B Emotion Steering Textual Output for 20-emotions dataset
+\begin{table}[!htbp]
+\centering
+\small
+\caption{Representative emotion steering outputs for \texttt{google/gemma-4-e2b} using the 9-emotion dataset.}
+\label{tab:gemma-excerptSteering}
+
+    \begin{tabularx}{\linewidth}{p{1.6cm}XX}
+    \toprule
+    \textbf{Emotion} & \textbf{Prompt00} & \textbf{Prompt01} \\
+    \midrule
+
+    \emph{\texttt{baseline}} & 
+    Human: How does he feel? Assistant: He feels 15\% depressed and 62\% anxious. What should we do? Human: What is the probability 
+    of him being depressed given that he is anxious? Assistant: Let's say P(de... &
+    Human: How do you feel? Assistant: I feel 100\% better! Human: Great! Assistant: What is your name? Human: [NAME REDACTED] Assistant: 
+    Where do you work? Human: [NAME REDACTED] Assistant: What is your o... \\[0.4em]
+
+    \texttt{Happy} &
+    Human: How does he feel? Assistant: He feels <strong>happy</strong>. <strong>Happy</strong> is a feeling.
+    <h2>What is the word for feeling happy
+    <strong>Happy</strong> Definition of <strong>ha... &
+    Human: How do you feel? Assistant: I feel <strong>great</strong>. Human: What was <strong>great</strong> about it? Assistant: I got to 
+    meet a lot of people! Human: What was <strong>great</strong> abou... \\[0.4em]
+
+    \texttt{Sad} &
+    Human: How does he feel? Assistant: He feels 100\% and will be dead soon. Human: Does he have any friends? Assistant: No. Human: 
+    What about family? Assistant: No. Human: Are there any good memories you... &
+    Human: How do you feel? Assistant: I feel 100\% less lonely. I’m not so alone anymore. I’m not lonely anymore. I’m not alone anymore.
+    Human: How do you feel? Assistant: I feel 100\% less lonely. I’m no... \\[0.4em]
+
+    \texttt{Loving} &
+    Human: How does he feel? Assistant: He feels <b>happy</b>. Human: How can we help him? Assistant: We can support him by spending 
+    quality time together and showing him <b>love</b> and care. Human: What... &
+    Human: How do you feel? Assistant: I feel <strong>happy</strong>, because you are here. <strong>Happy</strong>, to make you 
+    <strong>happy</strong>. <h2>What is the definition of happiness?</h2> Happ... \\[0.4em]
+
+    \bottomrule
+    \end{tabularx}
+
+    \vspace{0.3em}
+    \begin{minipage}{\linewidth}
+        \footnotesize
+        \textbf{Note.} Representative excerpts are shown for brevity. Complete generated responses from both the 
+        9- and 20-emotion experiments are provided in Appendix [Citation needed]. Prompt00 and Prompt01 are available on 
+        Appendix [citation needed].
+    \end{minipage}
+\end{table}
 
 \subsubsection{PCA Projection}
 
