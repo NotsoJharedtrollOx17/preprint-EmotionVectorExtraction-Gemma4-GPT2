@@ -13,36 +13,55 @@ lorem ipsum dolor
 \subsubsection{Hidden Representation Extraction}
 
 lorem ipsum dolor
-\[\mathbf{h}_i^{(l)} = f_\theta^{(l)}(x_i)\]
+\begin{equation}
+    \mathbf{h}_i^{(l)} = f_\theta^{(l)}(x_i)
+    \label{eqtn:hidden-representation}
+\end{equation}
+
 where lorem ipsum dolor
 
 \subsubsection{Token Aggregation}
 
 lorem ipsum dolor
-\[\mathbf{\bar{h}}_i=\frac{1}{T_i}\sum_{t=t_0}^{T_i}\mathbf{h}_{i,t}^{(l)}\]
+\begin{equation}
+    \mathbf{\bar{h}}_i=\frac{1}{T_i}\sum_{t=t_0}^{T_i}\mathbf{h}_{i,t}^{(l)}
+    \label{eqtn:token-aggr}
+\end{equation}
 where lorem ipsum dolor
 
 \subsubsection{Prototype Computation}
 
 lorem ipsum dolor
-\[\boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\mathcal{S}_{\mathtt{emotion}}}\sum_{i=1}^{\mathcal{S}_\mathtt{emotion}}\mathbf{\bar{h}}_{\mathtt{emotion},i}\]
+\begin{equation}
+    \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\mathcal{S}_{\mathtt{emotion}}}\sum_{i=1}^{\mathcal{S}_\mathtt{emotion}}\mathbf{\bar{h}}_{\mathtt{emotion},i}
+    \label{eqtn:prototype-comp}
+\end{equation}
 where lorem ipsum dolor
 
 \subsubsection{Global Mean Centering}
 
 lorem ipsum dolor
-\[\boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}\]
+\begin{equation}
+    \boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}
+    \label{eqtn:global-mean}
+\end{equation}
 where lorem ipsum dolor.
 
 
 Then lorem ipsum dolor,
-\[\mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}\]
+\begin{equation}
+    \mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}
+    \label{eqtn:emotion-vector}
+\end{equation}
 where lorem ipsum dolor
 
 \subsubsection{Vector Normalization}
 
 lorem ipsum dolor
-\[\mathbf{\hat{v}}_{\mathtt{emotion}}=\frac{\mathbf{v}_{\mathtt{emotion}}}{\lVert \mathbf{v}_{\mathtt{emotion}} \rVert_2}\]
+\begin{equation}
+    \mathbf{\hat{v}}_{\mathtt{emotion}}=\frac{\mathbf{v}_{\mathtt{emotion}}}{\lVert \mathbf{v}_{\mathtt{emotion}} \rVert_2}
+    \label{eqtn:normalized-emotion}
+\end{equation}
 where lorem ipsum dolor
 
 \subsection{Logit Lens Extraction}
@@ -52,67 +71,109 @@ lorem ipsum dolor
 \subsubsection{Initial Projection}
 
 lorem ipsum dolor
-\[\mathbf{z}_{\mathtt{emotion}}=W_U\mathbf{\hat{v}}_{\mathtt{emotion}}+\mathbf{b}\]
+\begin{equation}
+    \mathbf{z}_{\mathtt{emotion}}=W_U\mathbf{\hat{v}}_{\mathtt{emotion}}+\mathbf{b}
+    \label{eqtn:initial-projection}
+\end{equation}
 where lorem ipsum dolor
 
 Expanding,
-\[\mathbf{z}_{\mathtt{emotion}}=[z_1,z_2,\dots,z_{|V|}]\]
+\begin{equation}
+    \mathbf{z}_{\mathtt{emotion}}=[z_1,z_2,\dots,z_{|V|}]
+    \label{eqtn:logits-set}
+\end{equation}
 where lorem ipsum dolor
 
 \subsubsection{Conditional Vocabulary Distribution}
 
 lorem ipsum dolor
-\[p(t\:|\:{\mathtt{emotion}})=\frac{\exp(z_t)}{\sum_{j\in V}^{}\exp(z_j)}\]
+\begin{equation}
+    p(t\:|\:{\mathtt{emotion}})=\frac{\exp(z_t)}{\sum_{j\in V}^{}\exp(z_j)}
+    \label{eqtn:cond-vocab-distribution}
+\end{equation}
 where lorem ipsum dolor
 
 \subsubsection{Vocabulary Standarization}
 
 lorem ipsum dolor
-\[\mu_z=\frac{1}{|V|}\sum_{t\in V}^{} z_t\]
+\begin{equation}
+    \mu_z=\frac{1}{|V|}\sum_{t\in V}^{} z_t
+    \label{eqtn:mean-logits}
+\end{equation}
 where lorem ipsum dolor
 
 Next, we lorem ipsum dolor
-\[\sigma_z=\sqrt{\frac{1}{|V|}\sum_{i\in V}^{}\left(z_t-\mu_z\right)^2}\]
+\begin{equation}
+    \sigma_z=\sqrt{\frac{1}{|V|}\sum_{i\in V}^{}\left(z_t-\mu_z\right)^2}
+    \label{eqtn:stddev-logits}
+\end{equation}
 where lorem ipsum dolor
 
 Finally,
-\[\tilde{z}_t=\frac{z_t-\mu_z}{\sigma_z}\]
+\begin{equation}
+    \tilde{z}_t=\frac{z_t-\mu_z}{\sigma_z}
+    \label{eqtn:bell-logits}
+\end{equation}
 where lorem ipsum dolor
 
 \subsubsection{Top- and Bottom-k Vocabulary Extraction}
 
 lorem ipsum dolor
-\[\mathcal{T}_k=\text{TopK}(\tilde{\mathbf{z}}, k)\]
+\begin{equation}
+    \mathcal{T}_k=\text{TopK}(\tilde{\mathbf{z}}, k)
+    \label{eqtn:topk-vocabs}
+\end{equation}
 and
-\[\mathcal{B}_k=\text{BottomK}(\tilde{\mathbf{z}}, k)\]
+\begin{equation}
+    \mathcal{B}_k=\text{BottomK}(\tilde{\mathbf{z}}, k)
+    \label{eqtn:bottomk-vocabs}
+\end{equation}
 where lorem ipsum dolor
 
 \subsection{Emotion Probe Steering}
 
 lorem ipsum dolor
-\[\tilde{\mathbf{h}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_{\mathtt{emotion}}\]
+\begin{equation}
+    \tilde{\mathbf{h}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_{\mathtt{emotion}}
+    \label{eqtn:emotion-steering}
+\end{equation}
 where lorem ipsum dolor
 
 \subsection{Delta Log Probability}
 
 lorem ipsum dolor
-\[\Delta=\log p_\text{steered}-\log p_\text{baseline}\]
+\begin{equation}
+    \Delta=\log p_\text{steered}-\log p_\text{baseline}
+    \label{eqtn:deltalog-prob}
+\end{equation}
 where lorem ipsum dolor
 
 \subsection{PCA Projection}
-
+% TODO write the correct mathematical formula
 lorem ipsum dolor
-\[\]
+\begin{equation}
+    \text{lorem ipsum dolor}
+    \label{eqtn:pca-proj}
+\end{equation}
 where lorem ipsum dolor
 
 \subsection{Cosine Similarity}
 
 lorem ipsum dolor
-\[S_{i,j}=\frac{\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}}{\lVert \mathbf{\hat{v}}_i \rVert \lVert \mathbf{\hat{v}}_j \rVert}\]
+\begin{equation}
+    S_{i,j}=\frac{\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}}{\lVert \mathbf{\hat{v}}_i \rVert \lVert \mathbf{\hat{v}}_j \rVert}
+    \label{eqtn:cos-similarity}
+\end{equation}
 where lorem ipsum dolor
 
 Because lorem ipsum dolor,
-\[\lVert \mathbf{\hat{v}}_i \rVert=\lVert \mathbf{\hat{v}}_j \rVert=1\]
+\begin{equation}
+    \lVert \mathbf{\hat{v}}_i \rVert=\lVert \mathbf{\hat{v}}_j \rVert=1    
+    \label{eqtn:norm-identity}
+\end{equation}
 the expression simplifies to
-\[S_{i,j}=\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}\]
+\begin{equation}
+    S_{i,j}=\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}
+    \label{eqtn:cos-sim-reduced}
+\end{equation}
 because lorem ipsum dolor
