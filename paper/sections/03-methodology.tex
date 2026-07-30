@@ -25,24 +25,24 @@ where lorem ipsum dolor
 \subsubsection{Prototype Computation}
 
 lorem ipsum dolor
-\[\boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{N_{\mathtt{emotion}}}\sum_{i=1}^{N_\mathtt{emotion}}\mathbf{\bar{h}}_{\mathtt{emotion},i}\]
+\[\boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\mathcal{S}_{\mathtt{emotion}}}\sum_{i=1}^{\mathcal{S}_\mathtt{emotion}}\mathbf{\bar{h}}_{\mathtt{emotion},i}\]
 where lorem ipsum dolor
 
 \subsubsection{Global Mean Centering}
 
 lorem ipsum dolor
-\[\boldsymbol{\mu}=\frac{1}{M}\sum_{e=1}^{M}\boldsymbol{\mu}_e\]
+\[\boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}\]
 where lorem ipsum dolor.
 
 
 Then lorem ipsum dolor,
-\[\mathbf{v}_e=\boldsymbol{\mu}_e-\boldsymbol{\mu}\]
+\[\mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}\]
 where lorem ipsum dolor
 
 \subsubsection{Vector Normalization}
 
 lorem ipsum dolor
-\[\mathbf{\hat{v}}_e=\frac{\mathbf{v}_e}{\lVert \mathbf{v}_e \rVert_2}\]
+\[\mathbf{\hat{v}}_{\mathtt{emotion}}=\frac{\mathbf{v}_{\mathtt{emotion}}}{\lVert \mathbf{v}_{\mathtt{emotion}} \rVert_2}\]
 where lorem ipsum dolor
 
 \subsection{Logit Lens Extraction}
@@ -52,17 +52,17 @@ lorem ipsum dolor
 \subsubsection{Initial Projection}
 
 lorem ipsum dolor
-\[\mathbf{z}_e=W_U\mathbf{\hat{v}}_e+\mathbf{b}\]
+\[\mathbf{z}_{\mathtt{emotion}}=W_U\mathbf{\hat{v}}_{\mathtt{emotion}}+\mathbf{b}\]
 where lorem ipsum dolor
 
 Expanding,
-\[\mathbf{z}_e=[z_1,z_2,\dots,z_{|V|}]\]
+\[\mathbf{z}_{\mathtt{emotion}}=[z_1,z_2,\dots,z_{|V|}]\]
 where lorem ipsum dolor
 
 \subsubsection{Conditional Vocabulary Distribution}
 
 lorem ipsum dolor
-\[p(t|e)=\frac{\exp(z_t)}{\sum_{j\in V}^{}\exp(z_j)}\]
+\[p(t\:|\:{\mathtt{emotion}})=\frac{\exp(z_t)}{\sum_{j\in V}^{}\exp(z_j)}\]
 where lorem ipsum dolor
 
 \subsubsection{Vocabulary Standarization}
@@ -90,7 +90,7 @@ where lorem ipsum dolor
 \subsection{Emotion Probe Steering}
 
 lorem ipsum dolor
-\[\tilde{\mathbf{h}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_e\]
+\[\tilde{\mathbf{h}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_{\mathtt{emotion}}\]
 where lorem ipsum dolor
 
 \subsection{Delta Log Probability}
