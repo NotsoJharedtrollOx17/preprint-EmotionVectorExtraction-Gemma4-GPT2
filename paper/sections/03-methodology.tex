@@ -1,3 +1,118 @@
 \section{Methodology}
 
 Lorem ipsum dolor.
+
+\subsection{Story Generation}
+
+lorem ipsum dolor
+
+\subsection{Emotion Vector Extraction}
+
+lorem ipsum dolor
+
+\subsubsection{Hidden Representation Extraction}
+
+lorem ipsum dolor
+\[\mathbf{h}_i^{(l)} = f_\theta^{(l)}(x_i)\]
+where lorem ipsum dolor
+
+\subsubsection{Token Aggregation}
+
+lorem ipsum dolor
+\[\mathbf{\bar{h}}_i=\frac{1}{T_i}\sum_{t=t_0}^{T_i}\mathbf{h}_{i,t}^{(l)}\]
+where lorem ipsum dolor
+
+\subsubsection{Prototype Computation}
+
+lorem ipsum dolor
+\[\boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{N_{\mathtt{emotion}}}\sum_{i=1}^{N_\mathtt{emotion}}\mathbf{\bar{h}}_{\mathtt{emotion},i}\]
+where lorem ipsum dolor
+
+\subsubsection{Global Mean Centering}
+
+lorem ipsum dolor
+\[\boldsymbol{\mu}=\frac{1}{M}\sum_{e=1}^{M}\boldsymbol{\mu}_e\]
+where lorem ipsum dolor.
+
+
+Then lorem ipsum dolor,
+\[\mathbf{v}_e=\boldsymbol{\mu}_e-\boldsymbol{\mu}\]
+where lorem ipsum dolor
+
+\subsubsection{Vector Normalization}
+
+lorem ipsum dolor
+\[\mathbf{\hat{v}}_e=\frac{\mathbf{v}_e}{\lVert \mathbf{v}_e \rVert_2}\]
+where lorem ipsum dolor
+
+\subsection{Logit Lens Extraction}
+
+lorem ipsum dolor
+
+\subsubsection{Initial Projection}
+
+lorem ipsum dolor
+\[\mathbf{z}_e=W_U\mathbf{\hat{v}}_e+\mathbf{b}\]
+where lorem ipsum dolor
+
+Expanding,
+\[\mathbf{z}_e=[z_1,z_2,\dots,z_{|V|}]\]
+where lorem ipsum dolor
+
+\subsubsection{Conditional Vocabulary Distribution}
+
+lorem ipsum dolor
+\[p(t|e)=\frac{\exp(z_t)}{\sum_{j\in V}^{}\exp(z_j)}\]
+where lorem ipsum dolor
+
+\subsubsection{Vocabulary Standarization}
+
+lorem ipsum dolor
+\[\mu_z=\frac{1}{|V|}\sum_{t\in V}^{} z_t\]
+where lorem ipsum dolor
+
+Next, we lorem ipsum dolor
+\[\sigma_z=\sqrt{\frac{1}{|V|}\sum_{i\in V}^{}\left(z_t-\mu_z\right)^2}\]
+where lorem ipsum dolor
+
+Finally,
+\[\tilde{z}_t=\frac{z_t-\mu_z}{\sigma_z}\]
+where lorem ipsum dolor
+
+\subsubsection{Top- and Bottom-k Vocabulary Extraction}
+
+lorem ipsum dolor
+\[\mathcal{T}_k=\text{TopK}(\tilde{\mathbf{z}}, k)\]
+and
+\[\mathcal{B}_k=\text{BottomK}(\tilde{\mathbf{z}}, k)\]
+where lorem ipsum dolor
+
+\subsection{Emotion Probe Steering}
+
+lorem ipsum dolor
+\[\tilde{\mathbf{h}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_e\]
+where lorem ipsum dolor
+
+\subsection{Delta Log Probability}
+
+lorem ipsum dolor
+\[\Delta=\log p_\text{steered}-\log p_\text{baseline}\]
+where lorem ipsum dolor
+
+\subsection{PCA Projection}
+
+lorem ipsum dolor
+\[\]
+where lorem ipsum dolor
+
+\subsection{Cosine Similarity}
+
+lorem ipsum dolor
+\[S_{i,j}=\frac{\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}}{\lVert \mathbf{\hat{v}}_i \rVert \lVert \mathbf{\hat{v}}_j \rVert}\]
+where lorem ipsum dolor
+
+Because lorem ipsum dolor,
+\[\lVert \mathbf{\hat{v}}_i \rVert=\lVert \mathbf{\hat{v}}_j \rVert=1\]
+the expression simplifies to
+\[S_{i,j}=\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}\]
+because lorem ipsum dolor
