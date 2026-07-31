@@ -28,12 +28,17 @@ is the set of generated emotional stories that convey the emotional tone of \tex
 
 \subsubsection{Token Aggregation}
 
-lorem ipsum dolor
+Since every generate story has a different length, the token representations previously extracted are averaged.
+This averaging follows the equation
+
 \begin{equation}
-    \mathbf{\bar{h}}_i=\frac{1}{T_i}\sum_{t=t_0}^{T_i}\mathbf{h}_{i,t}^{(l)}
+    \mathbf{\overline{h}}_i=\frac{1}{T_i}\sum_{t=t_0}^{T_i}\mathbf{h}_{i,t}^{(l)}
     \label{eqtn:token-aggr}
 \end{equation}
-where lorem ipsum dolor
+
+where $\mathbf{\overline{h}}_i$ is the mean hidden representation of the complete story $i$, while $\mathbf{h}_{i,t}^{(l)}$
+represents the hidden representation of each token $t$ inside $i$. Finally, $T_i$ is the number of generated tokens
+from story $i$. 
 
 \subsubsection{Prototype Computation}
 
