@@ -12,13 +12,19 @@ lorem ipsum dolor
 
 \subsubsection{Hidden Representation Extraction}
 
-lorem ipsum dolor
+Each generated emotional story is first propagated through the frozen language model state to obtain the hidden activation of a selected 
+transformer layer. This is computed with the following equation:
+
 \begin{equation}
     \mathbf{h}_i^{(l)} = f_\theta^{(l)}(x_i)
     \label{eqtn:hidden-representation}
 \end{equation}
 
-where lorem ipsum dolor
+where $\mathbf{h}_i^{(l)}$ is the hidden state activation obtained from story $x_i\in\mathcal{S}_\mathtt{emotion}$ inside the forward computation
+$f_\theta^{(l)}$ on layer $l$, where $l$ is considered to be $\sim\nicefrac{2}{3}$ layer depth for each LLM. This is calculated on each 
+$\mathtt{emotion}\in\mathcal{E}$, for each emotion story inside the story dataset $\mathcal{S}_\mathtt{emotion}$. Furthermore, $\mathcal{E}$ 
+can be either the 9-emotion, or 20-emotion, dataset list available on Appendix~\ref{apdx:full-emotion-list}. Finally, $\mathcal{S}_\mathtt{emotion}$ 
+is the set of generated emotional stories that convey the emotional tone of \texttt{emotion}.
 
 \subsubsection{Token Aggregation}
 
@@ -33,7 +39,7 @@ where lorem ipsum dolor
 
 lorem ipsum dolor
 \begin{equation}
-    \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\mathcal{S}_{\mathtt{emotion}}}\sum_{i=1}^{\mathcal{S}_\mathtt{emotion}}\mathbf{\bar{h}}_{\mathtt{emotion},i}
+    \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\left|\mathcal{S}_{\mathtt{emotion}}\right|}\sum_{i=1}^{\left|\mathcal{S}_\mathtt{emotion}\right|}\mathbf{\bar{h}}_{\mathtt{emotion},i}
     \label{eqtn:prototype-comp}
 \end{equation}
 where lorem ipsum dolor
