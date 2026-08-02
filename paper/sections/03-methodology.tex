@@ -28,7 +28,7 @@ is the set of generated emotional stories that convey the emotional tone of \tex
 
 \subsubsection{Token Aggregation}
 
-Since every generate story has a different length, the token representations previously extracted are averaged.
+Since every generated story has a different length, the token representations previously extracted are averaged.
 This averaging follows the equation
 
 \begin{equation}
@@ -42,12 +42,18 @@ from story $i$.
 
 \subsubsection{Prototype Computation}
 
-lorem ipsum dolor
+Stories belonging to the same emotion are averaged to better represent the overarching emotion. 
+Said calculation follows the equation:
+
 \begin{equation}
     \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\left|\mathcal{S}_{\mathtt{emotion}}\right|}\sum_{i=1}^{\left|\mathcal{S}_\mathtt{emotion}\right|}\mathbf{\bar{h}}_{\mathtt{emotion},i}
     \label{eqtn:prototype-comp}
 \end{equation}
-where lorem ipsum dolor
+
+where $\boldsymbol{\mu}_{\mathtt{emotion}}$ is the mean hidden activation of all stories $i$ conveying 
+the tone of \texttt{emotion}. On a similar vein, $\mathbf{\bar{h}}_{\mathtt{emotion},i}$ represents the individual activation 
+for story $i$ for \texttt{emotion}. From what was stated on a previous paragraph, $\left|\mathcal{S}_{\mathtt{emotion}}\right|$
+can either be 9, or 20, depending on the current emotion dataset utilized.
 
 \subsubsection{Global Mean Centering}
 
