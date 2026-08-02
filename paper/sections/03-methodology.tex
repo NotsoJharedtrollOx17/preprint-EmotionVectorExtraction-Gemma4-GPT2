@@ -156,12 +156,14 @@ $\tilde{\mathbf{z}}$.
 
 \subsection{Emotion Probe Steering}
 
-lorem ipsum dolor
+To perform the causal steering experiments, we utilize the following equation:
 \begin{equation}
-    \tilde{\mathbf{h}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_{\mathtt{emotion}}
+    \tilde{\mathbf{h}}_{\mathtt{emotion}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_{\mathtt{emotion}}
     \label{eqtn:emotion-steering}
 \end{equation}
-where lorem ipsum dolor
+where $\tilde{\mathbf{h}}_{\mathtt{emotion}}^{(l)}$ is the extracted \emph{emotion-steered} hidden activation 
+at layer $l$. Furthermore, $\alpha$ is considered as the steering factor, which we set to the number +0.5 
+throughout the experiments.
 
 \subsection{Delta Log Probability}
 
