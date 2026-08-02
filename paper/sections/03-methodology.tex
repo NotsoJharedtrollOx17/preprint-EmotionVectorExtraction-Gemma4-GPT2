@@ -114,26 +114,29 @@ vocabulary $V$.
 
 \subsubsection{Vocabulary Standarization}
 
-lorem ipsum dolor
+To facilitate the logit lens interpretation, we translate the raw logit scores into standardized
+z-scores. This tells us which logits are unlikely to be near the mean of the distribution, and 
+henceforth representative of \texttt{emotion}.
 \begin{equation}
     \mu_z=\frac{1}{|V|}\sum_{t\in V}^{} z_t
     \label{eqtn:mean-logits}
 \end{equation}
-where lorem ipsum dolor
+where $\mu_z$ is the mean of the raw logit scores $z_t$, where $t$ is a token of the vocabulary $V$.
+Finally, $|V|$ is the total number of tokens in the vocabulary.
 
-Next, we lorem ipsum dolor
+Next, we compute the standard deviation of the raw logit scores with the following formula:
 \begin{equation}
-    \sigma_z=\sqrt{\frac{1}{|V|}\sum_{i\in V}^{}\left(z_t-\mu_z\right)^2}
+    \sigma_z=\sqrt{\frac{1}{|V|}\sum_{t\in V}^{}\left(z_t-\mu_z\right)^2}
     \label{eqtn:stddev-logits}
 \end{equation}
-where lorem ipsum dolor
+where $\sigma_z$ is the standard deviation of the list of raw logit scores $z_t$.
 
-Finally,
+Finally, we compute the z-score of each vocabulary token $t$ with:
 \begin{equation}
     \tilde{z}_t=\frac{z_t-\mu_z}{\sigma_z}
     \label{eqtn:bell-logits}
 \end{equation}
-where lorem ipsum dolor
+where $\tilde{z}_t$ is the z-score of token $t$.
 
 \subsubsection{Top- and Bottom-k Vocabulary Extraction}
 
