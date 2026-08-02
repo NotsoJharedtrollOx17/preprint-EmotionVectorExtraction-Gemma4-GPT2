@@ -167,12 +167,15 @@ throughout the experiments.
 
 \subsection{Delta Log Probability}
 
-lorem ipsum dolor
+To determine the strength of the steering intervention, we calculate the logit lens for both the baseline
+response and the steered response, we then apply the $\log$ operation to both results, and finally calculate
+the difference of the steered response and the baseline response.
 \begin{equation}
     \Delta=\log p_\text{steered}-\log p_\text{baseline}
     \label{eqtn:deltalog-prob}
 \end{equation}
-where lorem ipsum dolor
+where $\Delta$ is the result of the difference. $\log p_\text{steered}$ is the log-scaled logit score of 
+the steered response and $\log p_\text{baseline}$ is the log-scaled logit score of the baseline response.
 
 \subsection{PCA Projection}
 % TODO write the correct mathematical formula
