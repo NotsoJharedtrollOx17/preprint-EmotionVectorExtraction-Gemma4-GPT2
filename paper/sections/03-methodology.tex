@@ -74,12 +74,14 @@ where $\mathbf{v}_{\mathtt{emotion}}$ is the result of subtracting $\boldsymbol{
 
 \subsubsection{Vector Normalization}
 
-lorem ipsum dolor
+Finally, for computational convenience and numerical stability, we normalize the emotion vector by performing the following
+computation:
 \begin{equation}
     \mathbf{\hat{v}}_{\mathtt{emotion}}=\frac{\mathbf{v}_{\mathtt{emotion}}}{\lVert \mathbf{v}_{\mathtt{emotion}} \rVert_2}
     \label{eqtn:normalized-emotion}
 \end{equation}
-where lorem ipsum dolor
+where $\mathbf{\hat{v}}_{\mathtt{emotion}}$ is the normalized emotion vector and $\lVert \mathbf{v}_{\mathtt{emotion}} \rVert_2$ is the Euclidean
+(L2) norm of $\mathbf{\hat{v}}_{\mathtt{emotion}}$.
 
 \subsection{Logit Lens Extraction}
 
