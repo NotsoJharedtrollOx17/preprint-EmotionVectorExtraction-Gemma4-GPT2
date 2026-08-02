@@ -188,21 +188,18 @@ where lorem ipsum dolor
 
 \subsection{Cosine Similarity}
 
-lorem ipsum dolor
+Our final experiment, cosine similarity, is performed to calculate similarities, and differences, between
+emotion vectors. The computed scores are further illustrated inside a heatmap which visualizes emotion 
+clusters. To calculate this, we utilize the following equation:
 \begin{equation}
     S_{i,j}=\frac{\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}}{\lVert \mathbf{\hat{v}}_i \rVert \lVert \mathbf{\hat{v}}_j \rVert}
     \label{eqtn:cos-similarity}
 \end{equation}
-where lorem ipsum dolor
+where $S_{i,j}$ is the cosine similarity score between emotion vectors $\mathbf{\hat{v}}_i$ and $\mathbf{\hat{v}}_j$.
 
-Because lorem ipsum dolor,
-\begin{equation}
-    \lVert \mathbf{\hat{v}}_i \rVert=\lVert \mathbf{\hat{v}}_j \rVert=1    
-    \label{eqtn:norm-identity}
-\end{equation}
-the expression simplifies to
+Because our emotion vectors are normalized, we note that $\lVert \mathbf{\hat{v}}_i \rVert=\lVert \mathbf{\hat{v}}_j \rVert=1$. 
+Therefore $S_{i,j}$ can be simplified to the following expression:
 \begin{equation}
     S_{i,j}=\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}
     \label{eqtn:cos-sim-reduced}
 \end{equation}
-because lorem ipsum dolor
