@@ -4,7 +4,7 @@
 
 Following the prompting strategy proposed by [anthropic], we employed a slightly modified prompt template (Appendix ~\ref{apdx:story-context})
 to generate emotionally expressive narratives. For each emotion category, Google's Gemini language model was instructed to 
-produce batches of 10 short stories of one paragraph formatted as a JSON array, facilitating their organization into 
+produce batches of 5 short stories following one of 10 story topics as a JSON array, facilitating their organization into 
 emotion-specific datasets. In addition, a separate neutral prompt template (Appendix ~\ref{apdx:neutral-prompt}) was used to generate a 
 collection of emotionally neutral commands and requests, which served as the reference corpus for constructing the neutral 
 representation described throughout the rest of this section.
@@ -47,26 +47,26 @@ Stories belonging to the same emotion are averaged to better represent the overa
 Said calculation follows the equation:
 
 \begin{equation}
-    \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\left|\mathcal{S}_{\mathtt{emotion}}\right|}\sum_{i=1}^{\left|\mathcal{S}_\mathtt{emotion}\right|}\mathbf{\bar{h}}_{\mathtt{emotion},i}
+    \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\left|\mathcal{S}_{\mathtt{emotion}}\right|}\sum_{i=1}^{\left|\mathcal{S}_\mathtt{emotion}\right|}\mathbf{\overline{h}}_{\mathtt{emotion},i}
     \label{eqtn:prototype-comp}
 \end{equation}
 
 where $\boldsymbol{\mu}_{\mathtt{emotion}}$ is the mean hidden activation of all stories $i$ conveying 
-the tone of \texttt{emotion}. On a similar vein, $\mathbf{\bar{h}}_{\mathtt{emotion},i}$ represents the individual activation 
-for story $i$ for \texttt{emotion}. From what was stated on a previous paragraph, $\left|\mathcal{S}_{\mathtt{emotion}}\right|$
-can either be 9, or 20, depending on the current emotion dataset utilized.
+the tone of \texttt{emotion}. On a similar vein, $\mathbf{\overline{h}}_{\mathtt{emotion},i}$ represents the mean individual activation 
+for story $i$ belonging to \texttt{emotion}. Finally, $\left|\mathcal{S}_{\mathtt{emotion}}\right|$ is the total number of emotionally
+expressive stories for \texttt{emotion}.
 
 \subsubsection{Mean Neutral Statements}
 
 To enhance our centering procedures, we compute the mean neutral statements from the hidden activations
-obtained from the neutral statements dataset (Appendix ~\ref{apdx:neutral-prompt}):
+obtained from the neutral statements dataset:
 \begin{equation}
-    \boldsymbol{\mu}_{\mathtt{neutral}}=\frac{1}{\left|\mathcal{N}\right|}\sum_{i=1}^{\left|\mathcal{N}\right|}\mathbf{\bar{h}}_{\mathtt{neutral},i}
+    \boldsymbol{\mu}_{\mathtt{neutral}}=\frac{1}{\left|\mathcal{N}\right|}\sum_{i=1}^{\left|\mathcal{N}\right|}\mathbf{\overline{h}}_{\mathtt{neutral},i}
     \label{eqtn:neutral-mean}
 \end{equation}
 
 where $\boldsymbol{\mu}_{\mathtt{neutral}}$ is the mean neutral statements value. $\left|\mathcal{N}\right|$ is total number of neutral prompts, and
-$\mathbf{\bar{h}}_{\mathtt{neutral},i}$ is the mean hidden representations of the individual neutral prompt $i$.
+$\mathbf{\overline{h}}_{\mathtt{neutral},i}$ is the mean hidden representations of the individual neutral prompt $i$.
 
 \subsubsection{Global Mean Centering}
 
@@ -76,9 +76,9 @@ subtracting the global emotional average. To obtain the global emotional average
     \boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}
     \label{eqtn:global-mean}
 \end{equation}
-where $\boldsymbol{\mu}$ is the global mean of the calculated prototype emotion $\boldsymbol{\mu}_{\mathtt{emotion}}$.
+where $\boldsymbol{\mu}$ is the global mean of the calculated prototype emotion $\boldsymbol{\mu}_{\mathtt{emotion}}$. 
 
-Then, we calculate the centered emotion vector:
+Afterwards, we calculate the centered emotion vector as follows:
 \begin{equation}
     \mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}_{\mathtt{neutral}}-\boldsymbol{\mu}
     \label{eqtn:emotion-vector}
@@ -100,7 +100,7 @@ where $\mathbf{\hat{v}}_{\mathtt{emotion}}$ is the normalized emotion vector and
 \subsection{Logit Lens Extraction}
 
 Taking inspiration from the replication attempt by [Hsien; HuggingFace], the following equations
-illustrate the extraction of the vocabulary tokens, also known as logit lents [lesswrong] in the 
+illustrate the extraction of the vocabulary tokens, also known as logit lents in the 
 realms of Mechanistic Interpretability.
 
 \subsubsection{Initial Projection}
