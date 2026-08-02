@@ -55,10 +55,22 @@ the tone of \texttt{emotion}. On a similar vein, $\mathbf{\bar{h}}_{\mathtt{emot
 for story $i$ for \texttt{emotion}. From what was stated on a previous paragraph, $\left|\mathcal{S}_{\mathtt{emotion}}\right|$
 can either be 9, or 20, depending on the current emotion dataset utilized.
 
+\subsubsection{Mean Neutral Statements}
+
+To enhance our centering procedures, we compute the mean neutral statements from the hidden activations
+obtained from the neutral statements dataset (Appendix ~\ref{apdx:neutral-prompt}):
+\begin{equation}
+    \boldsymbol{\mu}_{\mathtt{neutral}}=\frac{1}{\left|\mathcal{N}\right|}\sum_{i=1}^{\left|\mathcal{N}\right|}\mathbf{\bar{h}}_{\mathtt{neutral},i}
+    \label{eqtn:neutral-mean}
+\end{equation}
+
+where $\boldsymbol{\mu}_{\mathtt{neutral}}$ is the mean neutral statements value. $\left|\mathcal{N}\right|$ is total number of neutral prompts, and
+$\mathbf{\bar{h}}_{\mathtt{neutral},i}$ is the mean hidden representations of the individual neutral prompt $i$.
+
 \subsubsection{Global Mean Centering}
 
 To calculate the individual contribution of each vector on the semantical understanding of the model, we center each vector by
-subtracting the global emotional average:
+subtracting the global emotional average. To obtain the global emotional average, we utilize the following equation:
 \begin{equation}
     \boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}
     \label{eqtn:global-mean}
@@ -67,10 +79,11 @@ where $\boldsymbol{\mu}$ is the global mean of the calculated prototype emotion 
 
 Then, we calculate the centered emotion vector:
 \begin{equation}
-    \mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}
+    \mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}_{\mathtt{neutral}}-\boldsymbol{\mu}
     \label{eqtn:emotion-vector}
 \end{equation}
-where $\mathbf{v}_{\mathtt{emotion}}$ is the result of subtracting $\boldsymbol{\mu}$ from $\boldsymbol{\mu}_{\mathtt{emotion}}$.
+where $\mathbf{v}_{\mathtt{emotion}}$ is the result of subtracting $\boldsymbol{\mu}_{\mathtt{neutral}}$ and $\boldsymbol{\mu}$ from 
+$\boldsymbol{\mu}_{\mathtt{emotion}}$.
 
 \subsubsection{Vector Normalization}
 
