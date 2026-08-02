@@ -140,7 +140,7 @@ where $\tilde{z}_t$ is the z-score of token $t$.
 
 \subsubsection{Top- and Bottom-k Vocabulary Extraction}
 
-lorem ipsum dolor
+As a selection criterion for the extraction process, we utilize:
 \begin{equation}
     \mathcal{T}_k=\text{TopK}(\tilde{\mathbf{z}}, k)
     \label{eqtn:topk-vocabs}
@@ -150,7 +150,9 @@ and
     \mathcal{B}_k=\text{BottomK}(\tilde{\mathbf{z}}, k)
     \label{eqtn:bottomk-vocabs}
 \end{equation}
-where lorem ipsum dolor
+where $\mathcal{T}_k$ is the set of top $k$ z-scored tokens, $\mathcal{B}_k$ is the set of 
+bottom $k$ z-scored tokens, and $k$ is the number of tokens to extract from the set 
+$\tilde{\mathbf{z}}$.
 
 \subsection{Emotion Probe Steering}
 
