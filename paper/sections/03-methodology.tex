@@ -11,66 +11,53 @@ representation described throughout the rest of this section.
 
 \subsection{Emotion Vector Extraction}
 
-\subsubsection{Hidden Representation Extraction}
-
-Each generated emotional story is first propagated through the frozen language model state to obtain the hidden activation of a selected 
+%\subsubsection{Hidden Representation Extraction}
+\paragraph{Hidden Representation Extraction} Each generated emotional story is first propagated through the frozen language model state to obtain the hidden activation of a selected 
 transformer layer. This is computed with the following equation:
-
 \begin{equation}
     \mathbf{h}_i^{(l)} = f_\theta^{(l)}(x_i)
     \label{eqtn:hidden-representation}
 \end{equation}
-
 where $\mathbf{h}_i^{(l)}$ is the hidden state activation obtained from story $x_i\in\mathcal{S}_\mathtt{emotion}$ inside the forward computation
 $f_\theta^{(l)}$ on layer $l$, where $l$ is considered to be $\sim\nicefrac{2}{3}$ layer depth for each LLM. This is calculated on each 
 $\mathtt{emotion}\in\mathcal{E}$, for each emotion story inside the story dataset $\mathcal{S}_\mathtt{emotion}$. Furthermore, $\mathcal{E}$ 
 can be either the 9-emotion, or 20-emotion, dataset list available on Appendix~\ref{apdx:full-emotion-list}. Finally, $\mathcal{S}_\mathtt{emotion}$ 
 is the set of generated emotional stories that convey the emotional tone of \texttt{emotion}.
 
-\subsubsection{Token Aggregation}
-
-Since every generated story has a different length, the token representations previously extracted are averaged.
-This averaging follows the equation
-
+%\subsubsection{Token Aggregation}
+\paragraph{Token Aggregation} Since every generated story has a different length, the token representations previously extracted are averaged.
+This averaging follows the equation:
 \begin{equation}
     \mathbf{\overline{h}}_i=\frac{1}{T_i}\sum_{t=t_0}^{T_i}\mathbf{h}_{i,t}^{(l)}
     \label{eqtn:token-aggr}
 \end{equation}
-
 where $\mathbf{\overline{h}}_i$ is the mean hidden representation of the complete story $i$, while $\mathbf{h}_{i,t}^{(l)}$
 represents the hidden representation of each token $t$ inside $i$. Finally, $T_i$ is the number of generated tokens
 from story $i$. 
 
-\subsubsection{Prototype Computation}
-
-Stories belonging to the same emotion are averaged to better represent the overarching emotion. 
-Said calculation follows the equation:
-
+%\subsubsection{Prototype Computation}
+\paragraph{Prototype Computation} Stories belonging to the same emotion are averaged to better represent the overarching emotion. Said calculation follows the equation:
 \begin{equation}
     \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\left|\mathcal{S}_{\mathtt{emotion}}\right|}\sum_{i=1}^{\left|\mathcal{S}_\mathtt{emotion}\right|}\mathbf{\overline{h}}_{\mathtt{emotion},i}
     \label{eqtn:prototype-comp}
 \end{equation}
-
 where $\boldsymbol{\mu}_{\mathtt{emotion}}$ is the mean hidden activation of all stories $i$ conveying 
 the tone of \texttt{emotion}. On a similar vein, $\mathbf{\overline{h}}_{\mathtt{emotion},i}$ represents the mean individual activation 
 for story $i$ belonging to \texttt{emotion}. Finally, $\left|\mathcal{S}_{\mathtt{emotion}}\right|$ is the total number of emotionally
 expressive stories for \texttt{emotion}.
 
-\subsubsection{Mean Neutral Statements}
-
-To enhance our centering procedures, we compute the mean neutral statements from the hidden activations
+%\subsubsection{Mean Neutral Statements}
+\paragraph{Mean Neutral Statements} To enhance our centering procedures, we compute the mean neutral statements from the hidden activations
 obtained from the neutral statements dataset:
 \begin{equation}
     \boldsymbol{\mu}_{\mathtt{neutral}}=\frac{1}{\left|\mathcal{N}\right|}\sum_{i=1}^{\left|\mathcal{N}\right|}\mathbf{\overline{h}}_{\mathtt{neutral},i}
     \label{eqtn:neutral-mean}
 \end{equation}
-
 where $\boldsymbol{\mu}_{\mathtt{neutral}}$ is the mean neutral statements value. $\left|\mathcal{N}\right|$ is total number of neutral prompts, and
 $\mathbf{\overline{h}}_{\mathtt{neutral},i}$ is the mean hidden representations of the individual neutral prompt $i$.
 
-\subsubsection{Global Mean Centering}
-
-To calculate the individual contribution of each vector on the semantical understanding of the model, we center each vector by
+%\subsubsection{Global Mean Centering}
+\paragraph{Global Mean Centering} To calculate the individual contribution of each vector on the semantical understanding of the model, we center each vector by
 subtracting the global emotional average. To obtain the global emotional average, we utilize the following equation:
 \begin{equation}
     \boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}
@@ -86,9 +73,8 @@ Afterwards, we calculate the centered emotion vector as follows:
 where $\mathbf{v}_{\mathtt{emotion}}$ is the result of subtracting $\boldsymbol{\mu}_{\mathtt{neutral}}$ and $\boldsymbol{\mu}$ from 
 $\boldsymbol{\mu}_{\mathtt{emotion}}$.
 
-\subsubsection{Vector Normalization}
-
-Finally, for computational convenience and numerical stability, we normalize the emotion vector by performing the following
+%\subsubsection{Vector Normalization}
+\paragraph{Vector Normalization} Finally, for computational convenience and numerical stability, we normalize the emotion vector by performing the following
 computation:
 \begin{equation}
     \mathbf{\hat{v}}_{\mathtt{emotion}}=\frac{\mathbf{v}_{\mathtt{emotion}}}{\lVert \mathbf{v}_{\mathtt{emotion}} \rVert_2}
@@ -103,15 +89,13 @@ Taking inspiration from the replication attempt by [Hsien; HuggingFace], the fol
 illustrate the extraction of the vocabulary tokens, also known as logit lents in the 
 realms of Mechanistic Interpretability.
 
-\subsubsection{Initial Projection}
-
-First and foremost, we extract the list of raw logit values from the emotion vector $\mathbf{\hat{v}}_{\mathtt{emotion}}$ 
+%\subsubsection{Initial Projection}
+\paragraph{Initial Projection} First and foremost, we extract the list of raw logit values from the emotion vector $\mathbf{\hat{v}}_{\mathtt{emotion}}$ 
 with the following equation:
 \begin{equation}
     \mathbf{z}_{\mathtt{emotion}}=W_U\mathbf{\hat{v}}_{\mathtt{emotion}}+\mathbf{b}
     \label{eqtn:initial-projection}
 \end{equation}
-
 where $\mathbf{z}_{\mathtt{emotion}}$ is the list of raw logit values for $\mathtt{emotion}$. $W_U$ 
 is the weight matrix of the unembedding layer of the transformer, which captures the search space 
 of representative tokens. Finally, $\mathbf{b}$ is the bias vector coming from a forward pass of 
@@ -122,13 +106,11 @@ Expanding the results, $\mathbf{z}_{\mathtt{emotion}}$ contains the following li
     \mathbf{z}_{\mathtt{emotion}}=[z_1,z_2,\dots,z_{|V|}]
     \label{eqtn:logits-set}
 \end{equation}
-
 where $z_t$ is the raw logit value of token $t$, while $|V|$ is the total number of tokens in 
 vocabulary $V$.
 
-\subsubsection{Vocabulary Standarization}
-
-To facilitate the logit lens interpretation, we translate the raw logit scores into standardized
+%\subsubsection{Vocabulary Standarization}
+\paragraph{Vocabulary Standarization} To facilitate the logit lens interpretation, we translate the raw logit scores into standardized
 z-scores. This tells us which logits are unlikely to be near the mean of the distribution, and 
 henceforth representative of \texttt{emotion}.
 \begin{equation}
@@ -152,9 +134,8 @@ Finally, we compute the z-score of each vocabulary token $t$ with:
 \end{equation}
 where $\tilde{z}_t$ is the z-score of token $t$.
 
-\subsubsection{Top- and Bottom-k Vocabulary Extraction}
-
-As a selection criterion for the extraction process, we utilize:
+%\subsubsection{Top- and Bottom-k Vocabulary Extraction}
+\paragraph{Top- and Bottom-k Vocabulary Extraction} As a selection criterion for the extraction process, we utilize:
 \begin{equation}
     \mathcal{T}_k=\text{TopK}(\tilde{\mathbf{z}}, k)
     \label{eqtn:topk-vocabs}
@@ -196,9 +177,8 @@ logit score of the baseline response tokens $\mathbf{z}$.
 To project the Valence-Arousal PCA plot, we compute PCA with the \texttt{scikit-learn} library, which performs 
 the following calculations.
 
-\subsubsection{Emotion Matrix}
-
-First and foremost, we construct the matrix containing the normalized emotion vectors,
+%\subsubsection{Emotion Matrix}
+\paragraph{Emotion Matrix} First and foremost, we construct the matrix containing the normalized emotion vectors,
 \begin{equation}
     X=
     \begin{bmatrix}
@@ -212,9 +192,8 @@ First and foremost, we construct the matrix containing the normalized emotion ve
 where $X$ is the matrix whose rows are normalized emotion vectors. $|\mathcal{E}|$ is total number of emotions
 utilized, which can either be 9 emotions, or 20 emotions total.
 
-\subsubsection{Matrix Centering}
-
-Before the actual decomposition, we center every feature by subtracting the global mean of all vectors:
+%\subsubsection{Matrix Centering}
+\paragraph{Matrix Centering} Before the actual decomposition, we center every feature by subtracting the global mean of all vectors:
 \begin{equation}
     X_c = X - \bar{X}
     \label{eqtn:pca-centering}
@@ -222,9 +201,8 @@ Before the actual decomposition, we center every feature by subtracting the glob
 where $X_c$ is the centered emotion matrix used internally during the PCA computation and $\bar{X}$ is the 
 aforementioned global mean vector.
 
-\subsubsection{Singular Value Decomposition}
-
-Now, the singular value decomposition is computed by decomposing $X_c$ into the following expressions:
+%\subsubsection{Singular Value Decomposition}
+\paragraph{Singular Value Decomposition} Now, the singular value decomposition is computed by decomposing $X_c$ into the following expressions:
 \begin{equation}
     X_c=U\Sigma V^{\top}
     \label{eqtn:pca-svd}
@@ -232,9 +210,8 @@ Now, the singular value decomposition is computed by decomposing $X_c$ into the 
 where $U$ are the left singular vectors describing each emotion sample. $\Sigma$ is the diagonal matrix containing 
 singular values. Finally, $V^{\top}$ represents the principal components in the original hidden-state space.
 
-\subsubsection{Projection of 2D Coordinates}
-
-Finally, we perform the projection onto the first two principal components of the previously extracted $V^{\top}$:
+%\subsubsection{Projection of 2D Coordinates}
+\paragraph{Projection of 2D Coordinates} Finally, we perform the projection onto the first two principal components of the previously extracted $V^{\top}$:
 \begin{equation}
     Y = X_c V_{1:2}
     \label{eqtn:pca-proj}
