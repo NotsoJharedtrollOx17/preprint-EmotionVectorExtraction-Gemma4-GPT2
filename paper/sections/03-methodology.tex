@@ -57,20 +57,20 @@ can either be 9, or 20, depending on the current emotion dataset utilized.
 
 \subsubsection{Global Mean Centering}
 
-lorem ipsum dolor
+To calculate the individual contribution of each vector on the semantical understanding of the model, we center each vector by
+subtracting the global emotional average:
 \begin{equation}
     \boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}
     \label{eqtn:global-mean}
 \end{equation}
-where lorem ipsum dolor.
+where $\boldsymbol{\mu}$ is the global mean of the calculated prototype emotion $\boldsymbol{\mu}_{\mathtt{emotion}}$.
 
-
-Then lorem ipsum dolor,
+Then, we calculate the centered emotion vector:
 \begin{equation}
     \mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}
     \label{eqtn:emotion-vector}
 \end{equation}
-where lorem ipsum dolor
+where $\mathbf{v}_{\mathtt{emotion}}$ is the result of subtracting $\boldsymbol{\mu}$ from $\boldsymbol{\mu}_{\mathtt{emotion}}$.
 
 \subsubsection{Vector Normalization}
 
