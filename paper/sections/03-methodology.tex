@@ -85,23 +85,32 @@ where $\mathbf{\hat{v}}_{\mathtt{emotion}}$ is the normalized emotion vector and
 
 \subsection{Logit Lens Extraction}
 
-lorem ipsum dolor
+Taking inspiration from the replication attempt by [Hsien; HuggingFace], the following equations
+illustrate the extraction of the vocabulary tokens, also known as logit lents [lesswrong] in the 
+realms of Mechanistic Interpretability.
 
 \subsubsection{Initial Projection}
 
-lorem ipsum dolor
+First and foremost, we extract the list of raw logit values from the emotion vector $\mathbf{\hat{v}}_{\mathtt{emotion}}$ 
+with the following equation:
 \begin{equation}
     \mathbf{z}_{\mathtt{emotion}}=W_U\mathbf{\hat{v}}_{\mathtt{emotion}}+\mathbf{b}
     \label{eqtn:initial-projection}
 \end{equation}
-where lorem ipsum dolor
 
-Expanding,
+where $\mathbf{z}_{\mathtt{emotion}}$ is the list of raw logit values for $\mathtt{emotion}$. $W_U$ 
+is the weight matrix of the unembedding layer of the transformer, which captures the search space 
+of representative tokens. Finally, $\mathbf{b}$ is the bias vector coming from a forward pass of 
+random noise from previous layers of the model.
+
+Expanding the results, $\mathbf{z}_{\mathtt{emotion}}$ contains the following list of values:
 \begin{equation}
     \mathbf{z}_{\mathtt{emotion}}=[z_1,z_2,\dots,z_{|V|}]
     \label{eqtn:logits-set}
 \end{equation}
-where lorem ipsum dolor
+
+where $z_t$ is the raw logit value of token $t$, while $|V|$ is the total number of tokens in 
+vocabulary $V$.
 
 \subsubsection{Vocabulary Standarization}
 
