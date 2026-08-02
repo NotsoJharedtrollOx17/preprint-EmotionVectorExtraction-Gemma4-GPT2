@@ -178,13 +178,54 @@ where $\Delta$ is the result of the difference. $\log p_\text{steered}$ is the l
 the steered response and $\log p_\text{baseline}$ is the log-scaled logit score of the baseline response.
 
 \subsection{PCA Projection}
-% TODO write the correct mathematical formula
-lorem ipsum dolor
+To project the Valence-Arousal PCA plot, we compute PCA with the \texttt{scikit-learn} library, which performs 
+the following calculations.
+
+\subsubsection{Emotion Matrix}
+
+First and foremost, we construct the matrix containing the normalized emotion vectors,
 \begin{equation}
-    \text{lorem ipsum dolor}
+    X=
+    \begin{bmatrix}
+        \mathbf{\hat{v}}_1 \\
+        \mathbf{\hat{v}}_2 \\
+        \vdots \\
+        \mathbf{\hat{v}}_{|\mathcal{E}|}
+    \end{bmatrix}
+    \label{eqtn:pca-emotionMatrix}
+\end{equation}
+where $X$ is the matrix whose rows are normalized emotion vectors. $|\mathcal{E}|$ is total number of emotions
+utilized, which can either be 9 emotions, or 20 emotions total.
+
+\subsubsection{Matrix Centering}
+
+Before the actual decomposition, we center every feature by subtracting the global mean of all vectors:
+\begin{equation}
+    X_c = X - \bar{X}
+    \label{eqtn:pca-centering}
+\end{equation}
+where $X_c$ is the centered emotion matrix used internally during the PCA computation and $\bar{X}$ is the 
+aforementioned global mean vector.
+
+\subsubsection{Singular Value Decomposition}
+
+Now, the singular value decomposition is computed by decomposing $X_c$ into the following expressions:
+\begin{equation}
+    X_c=U\Sigma V^{\top}
+    \label{eqtn:pca-svd}
+\end{equation}
+where $U$ are the left singular vectors describing each emotion sample. $\Sigma$ is the diagonal matrix containing 
+singular values. Finally, $V^{\top}$ represents the principal components in the original hidden-state space.
+
+\subsubsection{Projection of 2D Coordinates}
+
+Finally, we perform the projection onto the first two principal components of the previously extracted $V^{\top}$:
+\begin{equation}
+    Y = X_c V_{1:2}
     \label{eqtn:pca-proj}
 \end{equation}
-where lorem ipsum dolor
+where $Y$ is the two-dimensional PCA coordinates utilized in the PCA plot, and $V_{1:2}$ is the matrix formed by the
+\emph{first two directions} of the principal components.
 
 \subsection{Cosine Similarity}
 
