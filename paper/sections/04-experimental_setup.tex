@@ -1,3 +1,203 @@
 \section{Experimental Setup}
 
-Lorem ipsum dolor
+The proposed methodology was evaluated on two open-weight transformer language models using emotion
+datasets containing either 9 or 20 emotion categories. All experiments follow the same activation 
+extraction, steering, and evaluation pipeline described in Section [section citation]. The implementation
+was developed in Python via Google Colab notebooks, using the PyTorch, HuggingFace Transformers, and 
+scikit-learn libraries.
+
+\subsection{Models}
+% TODO review writing of this section
+Two language models were evaluated:
+\begin{itemize}
+    \item \texttt{openai-community/gpt-2-medium}, a 
+    \item \texttt{google/gemma-4-e2b}, a recently-released open-weight language model from Google [gemma 4 card].
+\end{itemize}
+
+These models were selected to evaluate whether the proposed methodology generalizes across models 
+differing in architecture, scale, tokenizer, and multilingual capabilities. In particular for 
+\texttt{openai-community/gpt-2-medium}, it allows us to verify the generalization in an 
+antiquated model for modern industry standards, and henceforth, their underlying existence on models
+developed years prior.
+
+\subsection{Emotion Datasets}
+
+The proposed methodology was evaluated using two emotion datasets derived from a common emotion-story corpus. The 
+first corresponds to the publicly available nine-emotion list adopted by [Hsien; HuggingFace], providing a reproducible
+baseline for comparison. Building upon this benchmark, we additionally construct an extended dataset containing twenty
+emotion categories to evaluate the proposed methodology under a broader and finer-grained affective space.
+
+Unlike [Anthropic], which investigated 171 emotional concepts, this work intentionally focuses on smaller
+emotion datasets that are practical to analyze and compare while remaining computationally reproducible inside free-tier
+computing hosts. The twenty-emotion dataset extends the original nine emotions with semantically related affective states, 
+resulting in increased emotional granularity and greater overlap between neighboring representations. To ensure a controlled 
+comparison, the nine-emotion experiments were conducted using the corresponding subset of the twenty-emotion emotional stories,
+allowing differences between both settings to be primarily attributed to the number of modeled emotions categories 
+\emph{rather than variations in dataset generation or preprocessing.}
+
+\subsection{Extraction Configuration}
+
+All experiments were conducted using a common extraction configuration across both evaluated language models. Emotion Vectors
+were extracted from the residual stream representations described in [Section 3], followed by normalization, Logit Lens vocabulary
+analysis, principal component visualization, and causal steering evaluation. Identical extraction settings were maintained for the 
+9-emotion and 20-emotion story datasets to ensure that observed differences originated solely from the evaluated emotion dataset 
+rather than changes in the experimental parameters. Table ~\ref{tab:extraction-config} summarizes the configuration employed 
+throughout the experiments.
+
+\begin{table}[t]
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+
+\caption{Extraction Configuration Summary}
+\label{tab:extraction-config}
+
+\begin{tabularx}{0.75\linewidth}{
+    >{\arraybackslash}p{4.3cm}
+    @{\hspace{2cm}}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+
+Stories per emotion & 50 \\
+Neutral texts & 50 \\
+Hidden layer & 16* and 23** \\
+Hidden-state aggregation & Mean pooling \\
+Emotion vector normalization & L2 normalization \\
+Logit Lens standardization & $z$-score \\
+Top-$k$ tokens & 5 \\
+Bottom-$k$ tokens & 5 \\
+PCA components & 2 \\
+
+\bottomrule
+\end{tabularx}
+
+\vspace{0.4em}
+
+\begin{minipage}{0.75\linewidth}
+\footnotesize
+\textbf{Note.}
+* \texttt{openai-community/gpt-2-medium} uses hidden layer 16 ($\sim\nicefrac{2}{3}$ of layer depth). ** \texttt{google/gemma-4-e2b} uses hidden layer 23 ($\sim\nicefrac{2}{3}$ of layer depth).
+\end{minipage}
+
+\end{table}
+
+\subsection{Steering Configuration}
+
+The causal steering experiments followed the evaluation protocol proposed by Anthropic. Two neutral prompt templates (Prompt00 and Prompt01) were
+employed to elicit unconstrained text continuations before and after applying emotion vector steering. By minimizing the emotional content of 
+the initial prompt, the resulting generations provide a controlled setting for observing the causal influence of the injected emotion vectors on
+the semantic, lexical, and stylistic characteristics of the generated text output. Throughout all steering experiments, a fixed steering coefficient
+of $\alpha=+0.5$ was used. Text was generated using stochastic sampling with a temperature of 0.7 and a maximum generation length of 100 new tokens.
+Both prompt templates were evaluated independently for the 9-emotion and 20-emotion datasets across \texttt{openai-community/gpt-2-medium} and 
+\texttt{google/gemma-4-e2b}, thereby ensuring identical text generation conditions and allowing direct qualitative comparisons of the emotional
+steering behavior induced by each extracted emotion vector. Table ~\ref{tab:steering-config} summarizes the configuration employed throughout 
+the experiments.
+
+
+\begin{table}[t]
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+
+\caption{Steering Configuration Summary}
+\label{tab:steering-config}
+
+\begin{tabularx}{0.75\linewidth}{
+    >{\arraybackslash}p{4.3cm}
+    @{\hspace{2cm}}
+    >{\raggedright\arraybackslash}X
+}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+
+Steering coefficient $\alpha$ & +0.5 \\
+Prompt templates & Prompt00 and Prompt01 \\
+Maximum generated tokens & 100 \\
+Temperature & 0.7 \\
+Sampling & True \\
+
+\bottomrule
+\end{tabularx}
+
+\vspace{0.4em}
+
+\begin{minipage}{0.75\linewidth}
+\footnotesize
+\textbf{Note.} Both Prompt00 and Prompt01 are available on Appendix ~\ref{apdx:primers}.
+\end{minipage}
+
+\end{table}
+
+\subsection{Evaluation Pipeline}
+
+The evaluation followed a fixed pipeline for both \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b}. For each
+model, emotion vectors were first extracted independently from the 9-emotion and 20-emotion datasets using the extraction 
+configuration described previously. The resulting emotion libraries were then evaluated through four complementary analyses. First,
+Logit Lens extraction was performed to identify the vocabulary tokens most strongly associated with each extracted emotion vector. Second,
+causal steering experiments were conducted by injecting each emotion vector into the selected transformer layer while generating 
+continuations from Prompt00 and Prompt01. The semantic effects of the steering intervention were quantified and visualized through Delta
+Log Probability heatmaps, while representative generated excerpts were qualitatively examined to assess whether the steered text outputs
+consistently reflected the intended emotional concepts. Furthermore, Principal Component Analysis (PCA) was applied to visualize the global
+organization of the learned emotional representation space. Finally, Cosine Similarity heatmaps were plotted to understand the strength of
+the similarities and differences of the evaluated emotions.
+
+\subsection{Implementation Details}
+
+All experiments were implemented in Python using Google Colab notebooks. Model inference was performed with the HuggingFace 
+\emph{Transformers} library and PyTorch, while activation extraction, residual stream steering, and Logit Lens analyses were
+implemented using custom Python scripts. Principal Component Analysis (PCA) was performed with scikit-learn, and quantitative
+analyses were conducted using NumPy and Pandas. Visualizations, including PCA projections, Cosine Similarity Heatmaps, and Delta 
+Log Probability heatmaps, were generated using Matplotlib and Plotly. To reduce redundant computation, extracted emotion vectors
+were cached and reused throughout the evaluation pipeline. Finally, all experiments were executed using the free-tier Google Colab
+environment equipped with NVIDIA T4 GPUs.
+
+\subsection{Computational Resources}
+
+Unlike the large-scale infrastructure available to Anthropic, the experiments presented in this work were intentionally
+designed to operate within free-tier commodity compute environments. Table ~\ref{tab:experimental-scope} below summarizes the principal 
+differences in computational scope.
+
+\begin{table}[!htbp]
+\centering
+\small
+\caption{Experimental Scope Comparison of Anthropic versus Current Manuscript}
+\label{tab:experimental-scope}
+
+    \begin{tabularx}{\linewidth}{>{\bfseries}p{2.8cm}XX}
+    \toprule
+    \textbf{Aspect} & \textbf{Anthropic} & \textbf{Current Manuscript} \\
+    \midrule
+
+    \textbf{Models} &
+    Claude Sonnet 4.5 &
+    GPT 2 Medium and Gemma 4 E2B \\[0.4em]
+
+    \textbf{Emotions} &
+    171 &
+    9 and 20 \\[0.4em]
+
+    \textbf{Stories Generated} &
+    20500 &
+    1000 \\[0.4em]
+
+    \textbf{Researchers} &
+    16 &
+    1 \\[0.4em]
+
+    \textbf{Hardware} &
+    Internal compute cluster &
+    2 Google Colab Notebooks with Free-Tier T4 NVIDIA GPUs \\
+
+    \bottomrule
+    \end{tabularx}
+
+    \vspace{0.3em}
+    \begin{minipage}{\linewidth}
+        \footnotesize
+        \textbf{Note.} Inspired by a similar table found on [Hsien; HuggingDace].
+    \end{minipage}
+\end{table}
