@@ -2,7 +2,7 @@
 
 \subsection{Story Generation}
 
-Following the prompting strategy proposed by [anthropic], we employed a slightly modified prompt template (Appendix ~\ref{apdx:story-context})
+Following the prompting strategy proposed by \cite{sofroniew_emotion_2026}, we employed a slightly modified prompt template (Appendix ~\ref{apdx:story-context})
 to generate emotionally expressive narratives. For each emotion category, Google's Gemini language model was instructed to 
 produce batches of 5 short stories following one of 10 story topics as a JSON array, facilitating their organization into 
 emotion-specific datasets. In addition, a separate neutral prompt template (Appendix ~\ref{apdx:neutral-prompt}) was used to generate a 
@@ -85,7 +85,7 @@ where $\mathbf{\hat{v}}_{\mathtt{emotion}}$ is the normalized emotion vector and
 
 \subsection{Logit Lens Extraction}
 
-Taking inspiration from the replication attempt by [Hsien; HuggingFace], the following equations
+Taking inspiration from the replication attempt by \cite{hsieh_replicating_2026}, the following equations
 illustrate the extraction of the vocabulary tokens, also known as logit lents in the 
 realms of Mechanistic Interpretability.
 

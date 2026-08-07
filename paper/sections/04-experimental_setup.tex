@@ -10,8 +10,8 @@ scikit-learn libraries.
 Two language models were evaluated:
 
 \begin{itemize}
-    \item \texttt{openai-community/gpt-2-medium}, a publicly available 355-million-parameter autoregressive Transformer model released by OpenAI, serving as a reproducible baseline representative of early large language models [openAI].
-    \item \texttt{google/gemma-4-e2b}, a recently released open-weight language model from Google designed for instruction-following and multilingual reasoning [Gemma 4].
+    \item \texttt{openai-community/gpt-2-medium}, a publicly available 355-million-parameter autoregressive Transformer model released by OpenAI, serving as a reproducible baseline representative of early large language models \cite{radford_language_2019}.
+    \item \texttt{google/gemma-4-e2b}, a recently released open-weight language model from Google designed for instruction-following and multilingual reasoning \cite{team_gemma_2026}.
 \end{itemize}
 
 These models were selected to evaluate whether the proposed methodology generalizes across language models differing substantially in architecture, scale, tokenizer, training corpus, and multilingual capabilities. In particular, 
@@ -21,11 +21,11 @@ Observing consistent behavior across both models would suggest that the extracte
 \subsection{Emotion Datasets}
 
 The proposed methodology was evaluated using two emotion datasets derived from a common emotion-story corpus. The 
-first corresponds to the publicly available nine-emotion list adopted by [Hsien; HuggingFace], providing a reproducible
+first corresponds to the publicly available nine-emotion list adopted by \cite{hsieh_replicating_2026}, providing a reproducible
 baseline for comparison. Building upon this benchmark, we additionally construct an extended dataset containing twenty
 emotion categories to evaluate the proposed methodology under a broader and finer-grained affective space.
 
-Unlike [Anthropic], which investigated 171 emotional concepts, this work intentionally focuses on smaller
+Unlike \cite{sofroniew_emotion_2026}, which investigated 171 emotional concepts, this work intentionally focuses on smaller
 emotion datasets that are practical to analyze and compare while remaining computationally reproducible inside free-tier
 computing hosts. The twenty-emotion dataset extends the original nine emotions with semantically related affective states, 
 resulting in increased emotional granularity and greater overlap between neighboring representations. To ensure a controlled 
@@ -36,7 +36,7 @@ allowing differences between both settings to be primarily attributed to the num
 \subsection{Extraction Configuration}
 
 All experiments were conducted using a common extraction configuration across both evaluated language models. Emotion Vectors
-were extracted from the residual stream representations described in [Section 3], followed by normalization, Logit Lens vocabulary
+were extracted from the residual stream representations described in the previous section, followed by normalization, Logit Lens vocabulary
 analysis, principal component visualization, and causal steering evaluation. Identical extraction settings were maintained for the 
 9-emotion and 20-emotion story datasets to ensure that observed differences originated solely from the evaluated emotion dataset 
 rather than changes in the experimental parameters. Table ~\ref{tab:extraction-config} summarizes the configuration employed 
@@ -196,6 +196,6 @@ differences in computational scope.
     \vspace{0.3em}
     \begin{minipage}{\linewidth}
         \footnotesize
-        \textbf{Note.} Inspired by a similar table found on [Hsien; HuggingDace].
+        \textbf{Note.} Inspired by a similar table found on \cite{hsieh_replicating_2026}.
     \end{minipage}
 \end{table}
