@@ -4,10 +4,10 @@
 \usepackage[preprint, nonatbib]{neurips_2026} % ! THE TEMPLATE
 %\usepackage[utf8]{inputenc} % allow utf-8 input
 %\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
-\usepackage{fontenc}        % for LuaLaTeX ONLY
-\usepackage{fontspec}       % general font specifications
-\usepackage{babel}          % multilingual font support
+\usepackage{fontspec}       % Unicode font support for LuaLaTeX and XeLaTeX
+\usepackage{babel}          % multilingual language and direction support
 \usepackage{hyperref}       % hyperlinks
+\usepackage{orcidlink}      % author ORCID iD
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{amsfonts}       % blackboard math symbols
@@ -28,92 +28,60 @@
     pdfsubject={Partial replication of emotion-vector extraction and steering experiments}
 }
 
-% * Font style for multilingual chars
-    % * for japanese
+% * Portable multilingual fonts. Font filenames are supplied by TeX Live 2025
+%   on arXiv or bundled in fonts/ under the SIL Open Font License.
 \babelprovide[import]{japanese}
-\babelfont[japanese]{rm}{Yu Gothic}
-    % * for korean
 \babelprovide[import]{korean}
-\babelfont[korean]{rm}{Malgun Gothic}
-    % * for arabic
 \babelprovide[import]{arabic}
-\babelfont[arabic]{rm}{Segoe UI}
-    % * for hindi
 \babelprovide[import]{hindi}
-\babelfont[hindi]{rm}{Segoe UI}
-    % * for chinese
 \babelprovide[import]{chinese}
-\babelfont[chinese]{rm}{Microsoft YaHei}
-    % * for russian
 \babelprovide[import]{russian}
-\babelfont[russian]{rm}{Segoe UI}
-    % * for burmese
 \babelprovide[import]{khmer}
-\babelfont[khmer]{rm}{Leelawadee UI}
-    % * for bengali
 \babelprovide[import]{bengali}
-\babelfont[bengali]{rm}{Nirmala UI}
-    % * for gujarati
 \babelprovide[import]{gujarati}
-\babelfont[gujarati]{rm}{Nirmala UI}
-    % * for Georgian
 \babelprovide[import]{georgian}
-\babelfont[georgian]{rm}{Sylfaen}
-    % * for Tamil
 \babelprovide[import]{tamil}
-\babelfont[tamil]{rm}{Nirmala UI}
-    % * for Malayalam
 \babelprovide[import]{malayalam}
-\babelfont[malayalam]{rm}{Nirmala UI}
-    % * for Kannada
 \babelprovide[import]{kannada}
-\babelfont[kannada]{rm}{Nirmala UI}
-    % * for Sinhala
 \babelprovide[import]{sinhala}
-\babelfont[sinhala]{rm}{Nirmala UI}
-    % * for Thai
 \babelprovide[import]{thai}
-\babelfont[thai]{rm}{Leelawadee UI}
-    % * for Urdu
 \babelprovide[import]{urdu}
-\babelfont[urdu]{rm}{Segoe UI}
-    % * for emojis
-\newfontfamily\emoji{Segoe UI Emoji}
 
-% * Custom commands for easier wrapup of foreign language text
-    % * for japanese
-\newcommand{\jp}[1]{\foreignlanguage{japanese}{#1}}
-    % * for korean
-\newcommand{\kr}[1]{\foreignlanguage{korean}{#1}}
-    % * for arabic
-\newcommand{\arb}[1]{\foreignlanguage{arabic}{#1}}
-    % * for hindi
-\newcommand{\hi}[1]{\foreignlanguage{hindi}{#1}}
-    % * for chinese
-\newcommand{\cn}[1]{\foreignlanguage{chinese}{#1}}
-    % * for russian
-\newcommand{\ru}[1]{\foreignlanguage{russian}{#1}}
-    % * for burmese (khmer)
-\newcommand{\km}[1]{\foreignlanguage{khmer}{#1}}
-    % * for bengali
-\newcommand{\bn}[1]{\foreignlanguage{bengali}{#1}}
-    % * for gujarati
-\newcommand{\gu}[1]{\foreignlanguage{gujarati}{#1}}
-    % * for Georgian
-\newcommand{\ka}[1]{\foreignlanguage{georgian}{#1}}
-    % * for Tamil
-\newcommand{\ta}[1]{\foreignlanguage{tamil}{#1}}
-    % * for Malayalam
-\newcommand{\ml}[1]{\foreignlanguage{malayalam}{#1}}
-    % * for Kannada
-\newcommand{\kn}[1]{\foreignlanguage{kannada}{#1}}
-    % * for Sinhala
-\newcommand{\si}[1]{\foreignlanguage{sinhala}{#1}}
-    % * for Thai
-\newcommand{\tha}[1]{\foreignlanguage{thai}{#1}}
-    % * for Urdu
-\newcommand{\ur}[1]{\foreignlanguage{urdu}{#1}}
-    % * for emojis
+\newfontfamily\jpfont{HaranoAjiGothic-Regular.otf}
+\newfontfamily\krfont{UnBatang.ttf}
+\newfontfamily\arbfont{Amiri-Regular.ttf}
+\newfontfamily\hifont{Mukta-Regular.ttf}
+\newfontfamily\cnfont{FandolSong-Regular.otf}
+\newfontfamily\rufont{NotoSerif-Regular.ttf}
+\newfontfamily\kmfont[Path=fonts/]{NotoSansKhmer-Regular.ttf}
+\newfontfamily\bnfont{fontkalpurush.ttf}
+\newfontfamily\gufont[Path=fonts/]{NotoSansGujarati-Regular.ttf}
+\newfontfamily\kafont[Path=fonts/]{NotoSansGeorgian-Regular.ttf}
+\newfontfamily\tafont{HindMadurai-Regular.otf}
+\newfontfamily\mlfont[Path=fonts/]{NotoSansMalayalam-Regular.ttf}
+\newfontfamily\knfont[Path=fonts/]{NotoSansKannada-Regular.ttf}
+\newfontfamily\sifont[Path=fonts/]{NotoSansSinhala-Regular.ttf}
+\newfontfamily\thafont{Norasi.otf}
+\newfontfamily\urfont{Amiri-Regular.ttf}
+\newfontfamily\emoji{NotoEmoji-Regular.ttf}
+
+% * Custom commands for script-aware token rendering
+\newcommand{\jp}[1]{{\jpfont\foreignlanguage{japanese}{#1}}}
+\newcommand{\kr}[1]{{\krfont\foreignlanguage{korean}{#1}}}
+\newcommand{\arb}[1]{{\arbfont\foreignlanguage{arabic}{#1}}}
+\newcommand{\hi}[1]{{\hifont\foreignlanguage{hindi}{#1}}}
+\newcommand{\cn}[1]{{\cnfont\foreignlanguage{chinese}{#1}}}
+\newcommand{\ru}[1]{{\rufont\foreignlanguage{russian}{#1}}}
+\newcommand{\km}[1]{{\kmfont\foreignlanguage{khmer}{#1}}}
+\newcommand{\bn}[1]{{\bnfont\foreignlanguage{bengali}{#1}}}
+\newcommand{\gu}[1]{{\gufont\foreignlanguage{gujarati}{#1}}}
+\newcommand{\ka}[1]{{\kafont\foreignlanguage{georgian}{#1}}}
+\newcommand{\ta}[1]{{\tafont\foreignlanguage{tamil}{#1}}}
+\newcommand{\ml}[1]{{\mlfont\foreignlanguage{malayalam}{#1}}}
+\newcommand{\kn}[1]{{\knfont\foreignlanguage{kannada}{#1}}}
+\newcommand{\si}[1]{{\sifont\foreignlanguage{sinhala}{#1}}}
+\newcommand{\tha}[1]{{\thafont\foreignlanguage{thai}{#1}}}
+\newcommand{\ur}[1]{{\urfont\foreignlanguage{urdu}{#1}}}
 \newcommand{\emj}[1]{{\emoji #1}}
 
 % * To update between-rows spacing on tabular environments
@@ -138,7 +106,7 @@
 \title{Partial Replication of Anthropic's Emotion Vectors Using Gemma 4 E2B and GPT 2 Medium Inside a Google Colab T4 Notebook}
     %% * Author information
 \author{
-    Abraham Jhared Flores Azcona            \\
+    Abraham Jhared Flores Azcona\,\orcidlink{0009-0000-3068-3509}\thanks{ORCID iD: \url{https://orcid.org/0009-0000-3068-3509}} \\
     Independent Researcher                  \\
     Tijuana, Baja California, Mexico        \\
     \texttt{abrahamjhared.flores@gmail.com}
@@ -175,14 +143,17 @@
 %% * Conclusion
 \input{sections/07-conclusion.tex}
 
+%% * Code and Data Availability
+\input{sections/08-code.tex}
+
 %% * Acknowledgement of AI Usage
-\input{sections/08-ai_acknowledgement.tex}
+\input{sections/09-ai_acknowledgement.tex}
 
 %% * References
 \bibliographystyle{unsrt}
 \bibliography{references.bib}
 
 %% * Appendix
-\input{sections/09-appendix.tex}
+\input{sections/10-appendix.tex}
 
 \end{document}
