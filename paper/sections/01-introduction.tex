@@ -21,24 +21,30 @@ generality question: are comparable affective directions a property of one
 frontier, proprietary model, or can they also be recovered in independently
 available Transformer language models?
 
-This work provides a partial, resource-constrained replication of three parts
-of that investigation in \texttt{openai-community/gpt-2-medium} and
+This work provides a first-pass, resource-constrained partial replication of
+selected analyses from that investigation in
+\texttt{openai-community/gpt-2-medium} and
 \texttt{google/gemma-4-e2b}.  We construct emotion prototypes from generated
-stories and a neutral reference corpus, extract normalized contrast vectors at
-an intermediate residual-stream layer, and assess them with (i) Logit Lens
-vocabulary projections, (ii) PCA and pairwise cosine-similarity analyses, and
-(iii) activation steering on two neutral prompts.  We evaluate both a
-nine-emotion set and a 20-emotion extension, allowing us to examine whether
-the qualitative findings persist as nearby affective categories are added.
+stories, extract normalized and globally centered directions at a fixed
+mid-late residual-stream depth, and assess them with (i) Logit Lens vocabulary
+projections, (ii) PCA and pairwise cosine-similarity analyses, and (iii)
+activation steering on two neutral prompts.  We evaluate both a nine-emotion
+set and a 20-emotion extension.  The purpose is not to reproduce every
+behavioral and safety claim from the Claude study, but to add two inexpensive,
+independently available model cases to the emerging comparison literature.
 
 Our contribution is deliberately narrower than a full replication of
-Sofroniew et al.  We do not test the original study's behavioral or alignment
-evaluations, search across layers, or estimate correlations with external
-human valence--arousal ratings.  Instead, we ask whether this lightweight
-pipeline recovers interpretable, structured, and behaviorally consequential
-directions in two models with substantially different age, scale, and training
-regimes.  In our experiments, both models yield emotion vectors with a
-valence-like separation and semantically meaningful similarity structure;
-steering visibly changes token probabilities and continuations, with stronger
-effects in GPT-2 Medium.  These observations are evidence for portability of
-the procedure, not evidence that either model experiences emotion.
+Sofroniew et al.  We do not test the original study's alignment-relevant
+behaviors, search across layers, estimate correlations with external human
+valence--arousal ratings, or compare against random and shuffled-label
+directions.  We instead ask which qualitative patterns recur under one fixed,
+low-cost pipeline and which appear model- or corpus-specific.  Convergence is
+assessed through repeated local geometry and vocabulary associations; newer
+observations include the behavior of an earlier GPT-2 model, the instability
+of a simple PC2-as-arousal interpretation, and differences in token projections
+and generated-text quality between the two models.  Steering provides a causal
+intervention on the model computation, but the present diagnostics do not by
+themselves establish that the resulting behavioral changes are specific to
+emotion.  Accordingly, we use \emph{emotion vector} as a procedural label for
+the extracted affect-associated direction, not as a claim about subjective
+experience or a universal internal mechanism.

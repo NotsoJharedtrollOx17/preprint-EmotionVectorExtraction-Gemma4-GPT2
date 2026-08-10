@@ -1,8 +1,8 @@
 \section{Experimental Setup}
 
-The proposed methodology was evaluated on two open-weight transformer language models using emotion
-datasets containing either 9 or 20 emotion categories. All experiments follow the same activation 
-extraction, steering, and evaluation pipeline described in Section [section citation]. The implementation
+The proposed methodology was evaluated on two publicly available transformer language models using emotion
+datasets containing either 9 or 20 emotion categories. All experiments follow the activation 
+extraction, steering, and evaluation pipeline described in Section~\ref{sec:methodology}. The implementation
 was developed in Python via Google Colab notebooks, using the PyTorch, HuggingFace Transformers, and 
 scikit-learn libraries.
 
@@ -14,9 +14,7 @@ Two language models were evaluated:
     \item \texttt{google/gemma-4-e2b}, a recently released open-weight language model from Google designed for instruction-following and multilingual reasoning \cite{team_gemma_2026}.
 \end{itemize}
 
-These models were selected to evaluate whether the proposed methodology generalizes across language models differing substantially in architecture, scale, tokenizer, training corpus, and multilingual capabilities. In particular, 
-GPT-2 Medium serves as a historical baseline to investigate whether interpretable emotion representations emerge in earlier-generation Transformer models, whereas Gemma-4 E2B enables evaluation on a modern instruction-tuned architecture. 
-Observing consistent behavior across both models would suggest that the extracted emotion vectors reflect general properties of Transformer representations rather than model-specific characteristics.
+These models provide contrasting cases in architecture, scale, tokenizer, training corpus, and multilingual capability. GPT-2 Medium serves as an earlier-generation baseline, whereas Gemma 4 E2B provides a modern instruction-tuned case. Recurring patterns across the two models are treated as qualitative convergence under the shared pipeline, not as sufficient evidence of a general property of all Transformer representations.
 
 \subsection{Emotion Datasets}
 
@@ -28,10 +26,9 @@ emotion categories to evaluate the proposed methodology under a broader and fine
 Unlike \cite{sofroniew_emotion_2026}, which investigated 171 emotional concepts, this work intentionally focuses on smaller
 emotion datasets that are practical to analyze and compare while remaining computationally reproducible inside free-tier
 computing hosts. The twenty-emotion dataset extends the original nine emotions with semantically related affective states, 
-resulting in increased emotional granularity and greater overlap between neighboring representations. To ensure a controlled 
+allowing us to inspect how the qualitative geometry changes with a more granular label set. To maintain a consistent 
 comparison, the nine-emotion experiments were conducted using the corresponding subset of the twenty-emotion emotional stories,
-allowing differences between both settings to be primarily attributed to the number of modeled emotions categories 
-\emph{rather than variations in dataset generation or preprocessing.}
+so that the two settings differ in label-set size rather than in the generation procedure used for their shared categories.
 
 Stories were used as generated, without manual rewriting or post-hoc quality filtering. This was an intentional first-pass design decision that keeps the corpus-construction procedure simple and reproducible, but it also bounds interpretation: the resulting plots and interventions describe the behavior of the present generated corpus and extraction pipeline, rather than a corpus-independent property of either model.
 
@@ -39,9 +36,8 @@ Stories were used as generated, without manual rewriting or post-hoc quality fil
 
 All experiments were conducted using a common extraction configuration across both evaluated language models. Emotion Vectors
 were extracted from the residual stream representations described in the previous section, followed by normalization, Logit Lens vocabulary
-analysis, principal component visualization, and causal steering evaluation. Identical extraction settings were maintained for the 
-9-emotion and 20-emotion story datasets to ensure that observed differences originated solely from the evaluated emotion dataset 
-rather than changes in the experimental parameters. Table ~\ref{tab:extraction-config} summarizes the configuration employed 
+analysis, principal component visualization, and activation-intervention diagnostics. Identical extraction settings were maintained for the 
+9-emotion and 20-emotion story datasets, reducing configuration changes as an explanation for differences between the two label sets. Table~\ref{tab:extraction-config} summarizes the configuration employed 
 throughout the experiments. The extraction layer was selected as the layer closest to two-thirds of each model's depth, following the mid-late-layer convention used by \cite{sofroniew_emotion_2026}; we did not conduct a layer sweep or select the layer using the reported outcomes.
 
 \begin{table}[t]
@@ -90,9 +86,8 @@ The steering experiments were adapted from the evaluation setting used by Anthro
 employed to elicit unconstrained text continuations before and after applying emotion vector steering. By minimizing the emotional content of 
 the initial prompt, the resulting generations provide a common prompt context for descriptive comparisons of the injected directions' effects on
 the generated text. Throughout all steering experiments, a fixed steering coefficient of $\alpha=+0.5$ was used because the source study presents steering results at that strength. In this implementation, the intervention is scaled by the current token's residual norm; therefore, this value is a source-informed operating point, not a claim of optimality or a directly comparable absolute strength across models. Text was generated using stochastic sampling with a temperature of 0.7 and a maximum generation length of 100 new tokens.
-Both prompt templates were evaluated independently for the 9-emotion and 20-emotion datasets across \texttt{openai-community/gpt-2-medium} and 
-\texttt{google/gemma-4-e2b}, thereby ensuring identical text generation conditions and allowing direct qualitative comparisons of the emotional
-steering behavior induced by each extracted emotion vector. Table ~\ref{tab:steering-config} summarizes the configuration employed throughout 
+Both prompt templates were evaluated for the 9-emotion and 20-emotion datasets across \texttt{openai-community/gpt-2-medium} and 
+\texttt{google/gemma-4-e2b}. The generation hyperparameters were held constant, although individual sampled continuations remain stochastic. Table~\ref{tab:steering-config} summarizes the configuration employed throughout 
 the experiments.
 
 
@@ -136,13 +131,12 @@ Sampling & True \\
 The evaluation followed a fixed pipeline for both \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b}. For each
 model, emotion vectors were first extracted independently from the 9-emotion and 20-emotion datasets using the extraction 
 configuration described previously. The resulting emotion libraries were then evaluated through four complementary analyses. First,
-Logit Lens extraction was performed to identify the vocabulary tokens most strongly associated with each extracted emotion vector. Second,
-causal steering experiments were conducted by injecting each emotion vector into the selected transformer layer while generating 
-continuations from Prompt00 and Prompt01. The semantic effects of the steering intervention were quantified and visualized through Delta
-Log Probability heatmaps, while representative generated excerpts were qualitatively examined to assess whether the steered text outputs
-consistently reflected the intended emotional concepts. Furthermore, Principal Component Analysis (PCA) was applied to visualize the global
-organization of the learned emotional representation space. Finally, Cosine Similarity heatmaps were plotted to understand the strength of
-the similarities and differences of the evaluated emotions.
+Logit Lens extraction identified the vocabulary tokens most strongly aligned with each extracted direction. Second,
+each direction was injected at the selected transformer block while generating continuations from Prompt00 and Prompt01. Changes in
+next-token probabilities for the vector-derived target-token sets were visualized through delta-log-probability heatmaps, and representative
+sampled continuations were inspected qualitatively. Third, PCA visualized the leading variance directions without prespecifying valence or
+arousal axes. Finally, cosine-similarity heatmaps summarized pairwise directional alignment. Together these analyses provide complementary
+descriptions of the extracted vectors; none serves as an independent semantic ground truth.
 
 \subsection{Implementation Details}
 
@@ -180,8 +174,8 @@ differences in computational scope.
     9 and 20 \\[0.4em]
 
     \textbf{Emotion stories available} &
-    20500 &
-    2000 \\[0.4em]
+    205,200 &
+    2,000 \\[0.4em]
 
     \textbf{Researchers} &
     16 &

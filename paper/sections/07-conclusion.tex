@@ -1,11 +1,5 @@
 \section{Conclusion}
 
-\textbf{The described findings findings suggest that emotion vectors can be extracted from \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b}, and can
-    causally influence their generated responses if steered with the aforementioned vectors.} This is supported by other replications accomplished by the online enthusiast community. 
-Albeit antiquated for modern standards, \texttt{openai-community/gpt-2-medium} displays an emergence of the described vectors and strong steering effects when intervened with them. 
-In contrast, \texttt{google/gemma-4-e2b} has moderate steering strength. In conclusion, we can ascertain that emotion vectors are presents on models not related to the Claude family, 
-and the results found for Claude Sonnet 4.5 can be replicated with noticeable similarity.
+This first-pass partial replication extracted affect-associated residual-stream directions from GPT-2 Medium and Gemma 4 E2B using a fixed, low-cost pipeline. Across both models, the directions showed several label-consistent vocabulary associations, repeated local cosine-similarity families, and a partial valence-like PC1 separation. Activation addition changed next-token probabilities and sampled continuations, although the changes were not uniformly specific or fluent. PC2 did not consistently support an arousal interpretation.
 
-
-\textbf{We argue that emotion vectors may be a fundamental property of large language models, and their causal steering effects might facilitate the understanding of their decision-making process.}
-We encourage academics, professionals, and hobbyists alike to advance this line of research to further uncover additional properties besides the ones documented on the current writing.
+These findings add qualitative agreement to prior Claude and Gemma 4 E4B reports while identifying meaningful model- and corpus-dependent differences. They demonstrate the portability of this extraction-and-intervention procedure to two additional models, not the universality or psychological completeness of emotion vectors. Stronger conclusions require independent semantic evaluations, control directions, exact layer alignment, external affect ratings, and repeated generation trials. As a reproducible first attempt, the present study provides evidence and artifacts that can support those more controlled comparisons.
