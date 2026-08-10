@@ -307,7 +307,9 @@ whose signs may reverse, rather than a demonstrated valence--arousal coordinate 
         \centering
         \includegraphics[
             width=\linewidth,
-            height=\textwidth
+            height=\textwidth,
+            trim=0 20pt 0 0,
+            clip
             ]{figures/PCAGPT2Medium-9emotions-layer16.pdf}
         \caption{9 emotions}
     \end{subfigure}
@@ -317,7 +319,9 @@ whose signs may reverse, rather than a demonstrated valence--arousal coordinate 
         \centering
         \includegraphics[
             width=\linewidth,
-            height=\textwidth
+            height=\textwidth,
+            trim=0 20pt 0 0,
+            clip
             ]{figures/PCAGPT2Medium-20emotions-layer16.pdf}
         \caption{20 emotions}
     \end{subfigure}
@@ -331,15 +335,20 @@ whose signs may reverse, rather than a demonstrated valence--arousal coordinate 
 The GPT-2 Medium cosine matrices show several repeated local relationships. In the nine-emotion set, \texttt{afraid}--\texttt{angry} has 
 a cosine similarity of 0.76, while \texttt{loving}--\texttt{afraid} has a cosine similarity of -0.78 and \texttt{happy}--\texttt{desperate} 
 has a cosine similarity of -0.57. In the 20-emotion set, \texttt{anxious}--\texttt{afraid}, \texttt{afraid}--\texttt{angry}, and \texttt{hopeful}--\texttt{inspired} 
-have cosine similarities of 0.92, 0.82, and 0.85, respectively, forming visible high-similarity pairs. Several pairs across these 
-groups have negative cosine similarities. These are descriptive directional alignments; they do not establish a human affect taxonomy or 
+have cosine similarities of 0.92, 0.82, and 0.85, respectively. Together, these pairs form local high-similarity clusters among the 
+\texttt{anxious}/\texttt{afraid}/\texttt{angry} and \texttt{hopeful}/\texttt{inspired} vectors. Other pairs across the 20-emotion set 
+have negative cosine similarities. These are descriptive directional alignments; they do not establish a human affect taxonomy or 
 a one-to-one semantic representation (\Cref{fig:gpt2-cos-sim9,fig:gpt2-cos-sim20}).
 
 
 % * Cosine Similarity  for GPT 2 Medium with 9 emotions
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\linewidth]{figures/CosineHeatmapGPT2Medium-9emotions-layer16.pdf}
+    \includegraphics[
+        width=\linewidth,
+        trim=0 40pt 0 20pt,
+        clip
+    ]{figures/CosineHeatmapGPT2Medium-9emotions-layer16.pdf}
     \caption{Cosine Similarity Heatmaps for 9 emotions with \texttt{openai-community/gpt-2-medium}.}
     \label{fig:gpt2-cos-sim9}
 \end{figure}
@@ -351,6 +360,8 @@ a one-to-one semantic representation (\Cref{fig:gpt2-cos-sim9,fig:gpt2-cos-sim20
     \includegraphics[
         width=\linewidth,
         height=0.98\textwidth,
+        trim=0 40pt 0 20pt,
+        clip,
         ]{figures/CosineHeatmapGPT2Medium-20emotions-layer16.pdf}
     \caption{Cosine Similarity Heatmaps for 20 emotions with \texttt{openai-community/gpt-2-medium}.}
     \label{fig:gpt2-cos-sim20}
@@ -672,7 +683,9 @@ The quadrant descriptions above are therefore visual diagnostics of the displaye
         \centering
         \includegraphics[
             width=\linewidth,
-            height=\textwidth
+            height=\textwidth,
+            trim=0 20pt 0 0,
+            clip
             ]{figures/PCAGemma4E2B-9emotions-layer23.pdf}
         \caption{9 emotions}
     \end{subfigure}
@@ -682,7 +695,9 @@ The quadrant descriptions above are therefore visual diagnostics of the displaye
         \centering
         \includegraphics[
             width=\linewidth,
-            height=\textwidth
+            height=\textwidth,
+            trim=0 20pt 0 0,
+            clip
             ]{figures/PCAGemma4E2B-20emotions-layer23.pdf}
         \caption{20 emotions}
     \end{subfigure}
@@ -696,8 +711,9 @@ The quadrant descriptions above are therefore visual diagnostics of the displaye
 Gemma 4 E2B's cosine matrices show the same broad pattern of local alignments and oppositions. In the nine-emotion set, 
 \texttt{happy}--\texttt{calm} is 0.48, \texttt{afraid}--\texttt{angry} is 0.62, and \texttt{loving}--\texttt{afraid} 
 is -0.66. In the 20-emotion set, \texttt{hopeful}--\texttt{inspired} is 0.82, \texttt{anxious}--\texttt{afraid} 
-is 0.88, \texttt{afraid}--\texttt{angry} is 0.70, and \texttt{happy}--\texttt{calm} is 0.57. Lower absolute cosine 
-similarity indicates weaker directional alignment, not greater representational overlap. The heatmaps therefore support 
+is 0.88, \texttt{afraid}--\texttt{angry} is 0.70, and \texttt{happy}--\texttt{calm} is 0.57. These values form local clusters around the 
+\texttt{happy}/\texttt{calm}, \texttt{afraid}/\texttt{angry}, and \texttt{hopeful}/\texttt{inspired} pairs. Lower absolute cosine similarity 
+indicates weaker directional alignment, not greater representational overlap. The heatmaps therefore support 
 descriptive clustering among several related labels, while substantial mixed and near-zero entries show that the geometry 
 is not exhausted by a single affective partition (\Cref{fig:gemma-cos-sim9,fig:gemma-cos-sim20}).
 
@@ -706,7 +722,9 @@ is not exhausted by a single affective partition (\Cref{fig:gemma-cos-sim9,fig:g
     \centering
     \includegraphics[
         width=\linewidth,
-        height=0.7\textwidth
+        height=0.7\textwidth,
+        trim=0 40pt 0 40pt,
+        clip
         ]{figures/CosineHeatmapGemma4E2B-9emotions-layer23.pdf}
     \caption{Cosine Similarity Heatmaps for 9 emotions with \texttt{google/gemma-4-e2b}.}
     \label{fig:gemma-cos-sim9}
@@ -719,6 +737,8 @@ is not exhausted by a single affective partition (\Cref{fig:gemma-cos-sim9,fig:g
     \includegraphics[
         width=\linewidth,
         height=0.98\textwidth,
+        trim=0 40pt 0 40pt,
+        clip,
         ]{figures/CosineHeatmapGemma4E2B-20emotions-layer23.pdf}
     \caption{Cosine Similarity Heatmaps for 20 emotions with \texttt{google/gemma-4-e2b}.}
     \label{fig:gemma-cos-sim20}

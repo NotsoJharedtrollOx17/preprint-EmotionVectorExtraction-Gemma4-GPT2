@@ -159,16 +159,16 @@ cross-model-comparable setting.
 
 \subsection{Delta Log Probability}
 
-For a fixed prompt $q$, we compare baseline and steered next-token log probabilities. For steering direction $e$, coefficient
-$\alpha$, and target token $w$, the change is:
+For a fixed prompt $q$, we compare baseline and steered next-token log probabilities. For steering direction $\mathtt{emotion}$, coefficient
+$\alpha$, and target token $t$, the change is:
 \begin{equation}
-    \Delta_e(w\mid q,\alpha)=\log p_{e,\alpha}(w\mid q)-\log p_0(w\mid q)
+    \Delta_{\mathtt{emotion}}(t\mid q,\alpha)=\log p_{\mathtt{emotion},\alpha}(t\mid q)-\log p_0(t\mid q)
     \label{eqtn:deltalog-prob}
 \end{equation}
-where $p_0$ and $p_{e,\alpha}$ are the softmax distributions at the final prompt position without and with steering. Let $\mathcal{T}_j$ be 
+where $p_0$ and $p_{\mathtt{emotion},\alpha}$ are the softmax distributions at the final prompt position without and with steering. Let $\mathcal{T}_j$ be 
 the five top Logit-Lens tokens for target emotion $j$. The plotted heatmap entry is
 \begin{equation}
-    H_{e,j}(q,\alpha)=\frac{1}{|\mathcal{T}_j|}\sum_{w\in\mathcal{T}_j}\Delta_e(w\mid q,\alpha),
+    H_{\mathtt{emotion},j}(q,\alpha)=\frac{1}{|\mathcal{T}_j|}\sum_{t\in\mathcal{T}_j}\Delta_{\mathtt{emotion}}(t\mid q,\alpha),
     \label{eqtn:deltalog-heatmap}
 \end{equation}
 evaluated at $\alpha=0.5$. Because $\mathcal{T}_j$ is derived from the same vectors used for steering, this is a direction-consistency 
