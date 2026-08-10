@@ -21,11 +21,34 @@ are qualitative tests in this tradition; they do not estimate an external
 valence--arousal correlation and therefore should not be interpreted as a
 quantitative validation of either model.
 
+Studies of \emph{emotion inference} provide complementary but distinct
+mechanistic evidence.  Tak et al.\ \cite{tak_emotion_inference_2025} locate
+emotion-inference representations in autoregressive LLMs and use causal
+interventions on appraisal concepts, while Shu et al.\ \cite{shu_syntax_emotion_2026}
+use sparse autoencoders and causal tracing to distinguish shared from
+emotion-specific features.  These papers investigate how a model recognizes
+emotion in text, rather than whether an extracted direction acts as a broad
+emotion concept during free generation.  The distinction motivates treating
+our results as evidence about a particular representation-and-intervention
+pipeline, not as a general account of emotion processing.
+
 \subsection{Activation steering and interpretation}
 
 Activation steering modifies an internal activation by adding a direction
 associated with a desired property, then measures the resulting change in
-output.  It is a causal intervention on the model computation, but a successful
+output.  Early work showed that steering vectors can be extracted from frozen
+language models and used for sentiment transfer \cite{subramani_latent_2022};
+representation engineering subsequently framed such population-level
+directions as a route to monitoring and controlling high-level properties
+\cite{zou_representation_2023}.  ActAdd and contrastive activation addition
+make the connection to our pipeline especially direct: both form an
+intervention from differences between contrastive activations, with the latter
+explicitly averaging residual-stream differences over positive--negative
+examples \cite{turner_activation_2023,panickssery_caa_2023}.  Related
+inference-time interventions also show that behavioral effects depend on the
+intervention site and strength \cite{li_inference_2023}.
+
+Steering is a causal intervention on the model computation, but a successful
 intervention alone does not establish that the direction is a unique or
 complete representation of the named concept.  This distinction matters
 because steering vectors can fall outside the distribution on which common
@@ -35,7 +58,11 @@ also compatible with work showing that Transformer components combine
 interpretable patterns through residual connections before producing output
 distributions \cite{geva_transformer_2021}.  We use Logit Lens projections and
 steered generations as complementary diagnostic evidence, rather than treating
-either one as a semantic ground truth.
+either one as a semantic ground truth.  In particular, the original Logit Lens
+uses the final unembedding to inspect intermediate states
+\cite{nostalgebraist_interpreting_2020}; the Tuned Lens shows that this direct
+projection can be brittle, so our vocabulary lists are diagnostic rather than
+faithful reconstructions of intermediate predictions \cite{belrose_tuned_2023}.
 
 \subsection{Emotion vectors in language models}
 
