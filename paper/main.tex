@@ -21,6 +21,13 @@
 \usepackage{subcaption} % for multiplots' captions
 \usepackage{pdflscape} % to rotate certain sections into landscape view
 
+% arXiv and accessibility metadata
+\hypersetup{
+    pdftitle={Partial Replication of Anthropic's Emotion Vectors Using Gemma 4 E2B and GPT-2 Medium},
+    pdfauthor={Abraham Jhared Flores Azcona},
+    pdfsubject={Partial replication of emotion-vector extraction and steering experiments}
+}
+
 % * Font style for multilingual chars
     % * for japanese
 \babelprovide[import]{japanese}
@@ -136,9 +143,8 @@
     Tijuana, Baja California, Mexico        \\
     \texttt{abrahamjhared.flores@gmail.com}
 }
-    %% * Upload Date 
-\date{\today}
-%%\date{July 31, 2026}
+%% * arXiv supplies the submission date; do not use \today, which changes on rebuilds.
+\date{}
 
 \begin{document}
 

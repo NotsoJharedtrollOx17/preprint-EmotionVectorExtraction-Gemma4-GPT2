@@ -1,0 +1,13 @@
+{
+  "spec_version": 1,
+  "texlive_version": 2025,
+  "process": {
+    "compiler": "xelatex"
+  },
+  "sources": [
+    {
+      "filename": "main.tex",
+      "usage": "toplevel"
+    }
+  ]
+}

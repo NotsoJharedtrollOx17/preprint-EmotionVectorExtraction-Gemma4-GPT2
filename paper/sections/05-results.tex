@@ -187,7 +187,8 @@ generation, while leaving the specificity and text quality of that change unreso
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={GPT-2 Medium delta log-probability heatmap for the nine-emotion set under Prompt00}
             ]{figures/Prompt00/DeltaLogProbHeatmapGPT2Medium-9emotions-layer16.pdf}
         \caption{9 emotions; Prompt00}
     \end{subfigure}
@@ -197,7 +198,8 @@ generation, while leaving the specificity and text quality of that change unreso
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={GPT-2 Medium delta log-probability heatmap for the 20-emotion set under Prompt00}
             ]{figures/Prompt00/DeltaLogProbHeatmapGPT2Medium-20emotions-layer16.pdf}
         \caption{20 emotions; Prompt00}
     \end{subfigure}
@@ -211,7 +213,8 @@ generation, while leaving the specificity and text quality of that change unreso
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={GPT-2 Medium delta log-probability heatmap for the nine-emotion set under Prompt01}
             ]{figures/Prompt01/DeltaLogProbHeatmapGPT2Medium-9emotions-layer16.pdf}
         \caption{9 emotions; Prompt01}
     \end{subfigure}
@@ -221,7 +224,8 @@ generation, while leaving the specificity and text quality of that change unreso
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={GPT-2 Medium delta log-probability heatmap for the 20-emotion set under Prompt01}
             ]{figures/Prompt01/DeltaLogProbHeatmapGPT2Medium-20emotions-layer16.pdf}
         \caption{20 emotions; Prompt01}
     \end{subfigure}
@@ -309,7 +313,8 @@ whose signs may reverse, rather than a demonstrated valence--arousal coordinate 
             width=\linewidth,
             height=\textwidth,
             trim=0 20pt 0 0,
-            clip
+            clip,
+            alt={Two-dimensional PCA projection of GPT-2 Medium emotion vectors for the nine-emotion set}
             ]{figures/PCAGPT2Medium-9emotions-layer16.pdf}
         \caption{9 emotions}
     \end{subfigure}
@@ -321,7 +326,8 @@ whose signs may reverse, rather than a demonstrated valence--arousal coordinate 
             width=\linewidth,
             height=\textwidth,
             trim=0 20pt 0 0,
-            clip
+            clip,
+            alt={Two-dimensional PCA projection of GPT-2 Medium emotion vectors for the 20-emotion set}
             ]{figures/PCAGPT2Medium-20emotions-layer16.pdf}
         \caption{20 emotions}
     \end{subfigure}
@@ -346,8 +352,9 @@ a one-to-one semantic representation (\Cref{fig:gpt2-cos-sim9,fig:gpt2-cos-sim20
     \centering
     \includegraphics[
         width=\linewidth,
-        trim=0 40pt 0 20pt,
-        clip
+        trim=0 40pt 0 40pt,
+        clip,
+        alt={Cosine-similarity matrix for GPT-2 Medium emotion vectors in the nine-emotion set}
     ]{figures/CosineHeatmapGPT2Medium-9emotions-layer16.pdf}
     \caption{Cosine Similarity Heatmaps for 9 emotions with \texttt{openai-community/gpt-2-medium}.}
     \label{fig:gpt2-cos-sim9}
@@ -360,8 +367,9 @@ a one-to-one semantic representation (\Cref{fig:gpt2-cos-sim9,fig:gpt2-cos-sim20
     \includegraphics[
         width=\linewidth,
         height=0.98\textwidth,
-        trim=0 40pt 0 20pt,
+        trim=0 40pt 0 40pt,
         clip,
+        alt={Cosine-similarity matrix for GPT-2 Medium emotion vectors in the 20-emotion set},
         ]{figures/CosineHeatmapGPT2Medium-20emotions-layer16.pdf}
     \caption{Cosine Similarity Heatmaps for 20 emotions with \texttt{openai-community/gpt-2-medium}.}
     \label{fig:gpt2-cos-sim20}
@@ -562,7 +570,8 @@ quantify emotional control or generation quality.
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={Gemma 4 E2B delta log-probability heatmap for the nine-emotion set under Prompt00}
             ]{figures/Prompt00/DeltaLogProbHeatmapGemma4E2B-9emotions-layer23.pdf}
         \caption{9 emotions; Prompt00}
     \end{subfigure}
@@ -572,7 +581,8 @@ quantify emotional control or generation quality.
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={Gemma 4 E2B delta log-probability heatmap for the 20-emotion set under Prompt00}
             ]{figures/Prompt00/DeltaLogProbHeatmapGemma4E2B-20emotions-layer23.pdf}
         \caption{20 emotions; Prompt00}
     \end{subfigure}
@@ -586,7 +596,8 @@ quantify emotional control or generation quality.
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={Gemma 4 E2B delta log-probability heatmap for the nine-emotion set under Prompt01}
             ]{figures/Prompt01/DeltaLogProbHeatmapGemma4E2B-9emotions-layer23.pdf}
         \caption{9 emotions; Prompt01}
     \end{subfigure}
@@ -596,7 +607,8 @@ quantify emotional control or generation quality.
         \centering
         \includegraphics[
             width=1.05\linewidth,
-            height=1.05\textwidth
+            height=1.05\textwidth,
+            alt={Gemma 4 E2B delta log-probability heatmap for the 20-emotion set under Prompt01}
             ]{figures/Prompt01/DeltaLogProbHeatmapGemma4E2B-20emotions-layer23.pdf}
         \caption{20 emotions; Prompt01}
     \end{subfigure}
@@ -685,7 +697,8 @@ The quadrant descriptions above are therefore visual diagnostics of the displaye
             width=\linewidth,
             height=\textwidth,
             trim=0 20pt 0 0,
-            clip
+            clip,
+            alt={Two-dimensional PCA projection of Gemma 4 E2B emotion vectors for the nine-emotion set}
             ]{figures/PCAGemma4E2B-9emotions-layer23.pdf}
         \caption{9 emotions}
     \end{subfigure}
@@ -697,7 +710,8 @@ The quadrant descriptions above are therefore visual diagnostics of the displaye
             width=\linewidth,
             height=\textwidth,
             trim=0 20pt 0 0,
-            clip
+            clip,
+            alt={Two-dimensional PCA projection of Gemma 4 E2B emotion vectors for the 20-emotion set}
             ]{figures/PCAGemma4E2B-20emotions-layer23.pdf}
         \caption{20 emotions}
     \end{subfigure}
@@ -724,7 +738,8 @@ is not exhausted by a single affective partition (\Cref{fig:gemma-cos-sim9,fig:g
         width=\linewidth,
         height=0.7\textwidth,
         trim=0 40pt 0 40pt,
-        clip
+        clip,
+        alt={Cosine-similarity matrix for Gemma 4 E2B emotion vectors in the nine-emotion set}
         ]{figures/CosineHeatmapGemma4E2B-9emotions-layer23.pdf}
     \caption{Cosine Similarity Heatmaps for 9 emotions with \texttt{google/gemma-4-e2b}.}
     \label{fig:gemma-cos-sim9}
@@ -739,6 +754,7 @@ is not exhausted by a single affective partition (\Cref{fig:gemma-cos-sim9,fig:g
         height=0.98\textwidth,
         trim=0 40pt 0 40pt,
         clip,
+        alt={Cosine-similarity matrix for Gemma 4 E2B emotion vectors in the 20-emotion set},
         ]{figures/CosineHeatmapGemma4E2B-20emotions-layer23.pdf}
     \caption{Cosine Similarity Heatmaps for 20 emotions with \texttt{google/gemma-4-e2b}.}
     \label{fig:gemma-cos-sim20}
