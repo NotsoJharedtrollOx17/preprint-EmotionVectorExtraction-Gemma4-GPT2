@@ -5,8 +5,8 @@
 Following the prompting strategy proposed by \cite{sofroniew_emotion_2026}, we employed a slightly modified prompt template (Appendix ~\ref{apdx:story-context})
 to generate emotionally expressive narratives. For each emotion category, Google's Gemini language model was instructed to 
 produce batches of 5 short stories following one of 10 story topics as a JSON array, facilitating their organization into 
-emotion-specific datasets. In addition, a separate neutral prompt template (Appendix ~\ref{apdx:neutral-prompt}) was used to generate a 
-collection of emotionally neutral commands and requests, which served as the reference corpus for the intermediate neutral-centering step described below.
+emotion-specific datasets. We retained the generated stories as produced, without manual rewriting or post-hoc quality filtering, as a deliberately simple first-pass corpus for this partial replication. In addition, a separate neutral prompt template (Appendix ~\ref{apdx:neutral-prompt}) was used to generate a 
+collection of emotionally neutral commands and requests, which served as the reference corpus for the intermediate neutral-centering step described below. Consequently, the reported plots and steering measurements characterize this corpus-and-pipeline combination; they are not evidence that the observed structure is independent of corpus artifacts.
 
 \subsection{Emotion Vector Extraction}
 
@@ -18,7 +18,7 @@ transformer layer. This is computed with the following equation:
     \label{eqtn:hidden-representation}
 \end{equation}
 where $\mathbf{h}_i^{(l)}$ is the hidden state activation obtained from story $x_i\in\mathcal{S}_\mathtt{emotion}$ inside the forward computation
-$f_\theta^{(l)}$ on layer $l$, where $l$ is considered to be $\sim\nicefrac{2}{3}$ layer depth for each LLM. This is calculated on each 
+$f_\theta^{(l)}$ on layer $l$. We use the layer closest to two-thirds of each model's depth, following the mid-late-layer convention reported by \cite{sofroniew_emotion_2026}. This fixed rule selects layer 16 for GPT-2 Medium and layer 23 for Gemma 4 E2B; it is a source-informed transfer choice, not a claim that these layers are optimal for either model. This is calculated on each 
 $\mathtt{emotion}\in\mathcal{E}$, for each emotion story inside the story dataset $\mathcal{S}_\mathtt{emotion}$. Furthermore, $\mathcal{E}$ 
 can be either the 9-emotion, or 20-emotion, dataset list available on Appendix~\ref{apdx:full-emotion-list}. Finally, $\mathcal{S}_\mathtt{emotion}$ 
 is the set of generated emotional stories that convey the emotional tone of \texttt{emotion}.
@@ -151,14 +151,12 @@ $\tilde{\mathbf{z}}$.
 
 \subsection{Emotion Probe Steering}
 
-To perform the causal steering experiments, we utilize the following equation:
+To perform the steering experiments, we modify the hooked block output at each token position using:
 \begin{equation}
-    \tilde{\mathbf{h}}_{\mathtt{emotion}}^{(l)}=\mathbf{h}^{(l)}+\alpha\cdot\mathbf{\hat{v}}_{\mathtt{emotion}}
+    \tilde{\mathbf{h}}_{t,\mathtt{emotion}}^{(l)}=\mathbf{h}_{t}^{(l)}+\alpha\left\lVert\mathbf{h}_{t}^{(l)}\right\rVert_2\mathbf{\hat{v}}_{\mathtt{emotion}}
     \label{eqtn:emotion-steering}
 \end{equation}
-where $\tilde{\mathbf{h}}_{\mathtt{emotion}}^{(l)}$ is the extracted \emph{emotion-steered} hidden activation 
-at layer $l$. Furthermore, $\alpha$ is considered as the steering factor, which we set to the number +0.5 
-throughout the experiments.
+where $\tilde{\mathbf{h}}_{t,\mathtt{emotion}}^{(l)}$ is the emotion-steered hidden activation at token position $t$ and layer $l$, and $\alpha$ is the steering coefficient. We set $\alpha=+0.5$ because \cite{sofroniew_emotion_2026} reports steering results at strength 0.5. Anthropic defines that strength relative to an average residual-stream norm over a large dataset; our implementation instead scales each intervention by the current token's residual norm. Thus, $\alpha=0.5$ is a source-informed operating point rather than a numerically identical reproduction of Anthropic's intervention strength, and we do not interpret it as an optimized or cross-model-comparable setting.
 
 \subsection{Delta Log Probability}
 

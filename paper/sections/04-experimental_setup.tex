@@ -33,6 +33,8 @@ comparison, the nine-emotion experiments were conducted using the corresponding 
 allowing differences between both settings to be primarily attributed to the number of modeled emotions categories 
 \emph{rather than variations in dataset generation or preprocessing.}
 
+Stories were used as generated, without manual rewriting or post-hoc quality filtering. This was an intentional first-pass design decision that keeps the corpus-construction procedure simple and reproducible, but it also bounds interpretation: the resulting plots and interventions describe the behavior of the present generated corpus and extraction pipeline, rather than a corpus-independent property of either model.
+
 \subsection{Extraction Configuration}
 
 All experiments were conducted using a common extraction configuration across both evaluated language models. Emotion Vectors
@@ -40,7 +42,7 @@ were extracted from the residual stream representations described in the previou
 analysis, principal component visualization, and causal steering evaluation. Identical extraction settings were maintained for the 
 9-emotion and 20-emotion story datasets to ensure that observed differences originated solely from the evaluated emotion dataset 
 rather than changes in the experimental parameters. Table ~\ref{tab:extraction-config} summarizes the configuration employed 
-throughout the experiments.
+throughout the experiments. The extraction layer was selected as the layer closest to two-thirds of each model's depth, following the mid-late-layer convention used by \cite{sofroniew_emotion_2026}; we did not conduct a layer sweep or select the layer using the reported outcomes.
 
 \begin{table}[t]
 \centering
@@ -59,7 +61,7 @@ throughout the experiments.
 \textbf{Parameter} & \textbf{Value} \\
 \midrule
 
-Stories per emotion & 50 \\
+Stories per emotion & 100 \\
 Neutral texts & 50 \\
 Hidden layer & 16* and 23** \\
 Hidden-state aggregation & Mean pooling \\
@@ -84,11 +86,10 @@ PCA components & 2 \\
 
 \subsection{Steering Configuration}
 
-The causal steering experiments followed the evaluation protocol proposed by Anthropic. Two neutral prompt templates (Prompt00 and Prompt01) were
+The steering experiments were adapted from the evaluation setting used by Anthropic \cite{sofroniew_emotion_2026}. Two neutral prompt templates (Prompt00 and Prompt01) were
 employed to elicit unconstrained text continuations before and after applying emotion vector steering. By minimizing the emotional content of 
-the initial prompt, the resulting generations provide a controlled setting for observing the causal influence of the injected emotion vectors on
-the semantic, lexical, and stylistic characteristics of the generated text output. Throughout all steering experiments, a fixed steering coefficient
-of $\alpha=+0.5$ was used. Text was generated using stochastic sampling with a temperature of 0.7 and a maximum generation length of 100 new tokens.
+the initial prompt, the resulting generations provide a common prompt context for descriptive comparisons of the injected directions' effects on
+the generated text. Throughout all steering experiments, a fixed steering coefficient of $\alpha=+0.5$ was used because the source study presents steering results at that strength. In this implementation, the intervention is scaled by the current token's residual norm; therefore, this value is a source-informed operating point, not a claim of optimality or a directly comparable absolute strength across models. Text was generated using stochastic sampling with a temperature of 0.7 and a maximum generation length of 100 new tokens.
 Both prompt templates were evaluated independently for the 9-emotion and 20-emotion datasets across \texttt{openai-community/gpt-2-medium} and 
 \texttt{google/gemma-4-e2b}, thereby ensuring identical text generation conditions and allowing direct qualitative comparisons of the emotional
 steering behavior induced by each extracted emotion vector. Table ~\ref{tab:steering-config} summarizes the configuration employed throughout 
@@ -178,9 +179,9 @@ differences in computational scope.
     171 &
     9 and 20 \\[0.4em]
 
-    \textbf{Stories Generated} &
+    \textbf{Emotion stories available} &
     20500 &
-    1000 \\[0.4em]
+    2000 \\[0.4em]
 
     \textbf{Researchers} &
     16 &
