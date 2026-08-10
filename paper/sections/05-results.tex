@@ -15,7 +15,7 @@ For GPT-2 Medium, several projected token lists align directly with their labels
 \texttt{loving}, \texttt{angry}, and \texttt{desperate} vectors rank tokens such as \emph{joyful}, \emph{relaxation}, 
 \emph{nurturing}, \emph{angrily}, and \emph{frantically}, respectively. These patterns persist in the 20-emotion set, 
 where additional examples include \texttt{lonely} (\emph{solitude}, \emph{lonely}) and \texttt{brooding} (\emph{haunted}, 
-\emph{melancholy}); see \Cref{tab:gpt2_logitlens_9,tab:gpt2_logitlens_20}. Other rows are less direct---for instance, 
+\emph{melancholy}); see \Cref{tab:gpt2_logitlens_9,tab:gpt2_logitlens_20}. Other rows are less direct; for instance, 
 \texttt{surprised} is associated with technical and fragmentary tokens. The Logit Lens tables therefore provide a diagnostic 
 of directions in vocabulary space, not an independent validation that every vector uniquely encodes its label.
 
@@ -173,7 +173,7 @@ The GPT-2 Medium steering heatmaps show that the intervention changes next-token
 and emotion-set sizes (\Cref{fig:gpt2-deltalogprob}). Each cell is the mean change for the target emotion's five Logit-Lens-derived 
 tokens; consequently, the diagonal and related blocks are a direction-consistent diagnostic rather than an independent semantic 
 evaluation. The representative continuations show corresponding lexical changes, but they also exhibit frequent repetition and 
-degraded fluency---for example, repeated \emph{joy} under \texttt{happy} steering and repeated phrasing under \texttt{loving} 
+degraded fluency. For example, repeated \emph{joy} appears under \texttt{happy} steering, and repeated phrasing appears under \texttt{loving} 
 steering (\Cref{tab:gpt2-excerptSteering}). These outputs establish that the fixed intervention changes GPT-2 Medium's 
 generation, while leaving the specificity and text quality of that change unresolved.
 
@@ -651,7 +651,7 @@ Up to the arbitrary sign of PC1, \texttt{happy}, \texttt{calm}, and \texttt{lovi
 or exception cases. In the displayed coordinate system, \texttt{calm} and \texttt{happy} occupy the upper-left quadrant, \texttt{loving}, 
 \texttt{sad}, and \texttt{surprised} the lower-left, \texttt{afraid} and \texttt{angry} the upper-right, and \texttt{guilty} with 
 near-horizontal \texttt{desperate} the lower-right. The 20-emotion projection explains 48.4\% in its first two components (32.0\% and 16.4\%), with several 
-positive-labeled vectors---including \texttt{hopeful}, \texttt{inspired}, \texttt{proud}, \texttt{happy}, and \texttt{loving}---
+positive-labeled vectors, including \texttt{hopeful}, \texttt{inspired}, \texttt{proud}, \texttt{happy}, and \texttt{loving},
 separated from a group containing \texttt{anxious}, \texttt{afraid}, and \texttt{angry}. \texttt{sad}, \texttt{brooding}, and 
 \texttt{lonely} do not form a simple ordering. Its displayed upper-left quadrant contains \texttt{playful}, \texttt{spiteful}, and 
 \texttt{surprised}; the lower-left contains \texttt{loving}, \texttt{happy}, and \texttt{calm}; and the right-hand quadrants mix the 
