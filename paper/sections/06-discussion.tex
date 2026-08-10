@@ -1,37 +1,93 @@
 \section{Discussion}
 
-This study asked whether a lightweight adaptation of the emotion-vector pipeline would recover related qualitative patterns in two models not analyzed in the original Claude study: GPT-2 Medium and Gemma 4 E2B. The answer is mixed but informative. Several results recur across models and label-set sizes: some Logit Lens projections contain label-related vocabulary, the cosine matrices contain coherent local families, PC1 partially separates positive-labeled directions from fear-, anger-, and anxiety-related directions, and activation addition changes next-token probabilities and sampled text. At the same time, these patterns are incomplete. Some projected tokens are fragmentary or unrelated, multiple emotions violate a simple valence ordering, PC2 does not consistently resemble arousal, and steered generations frequently exhibit repetition or other degradation. The resulting picture is therefore one of partial convergence rather than a full reproduction of Anthropic's findings.
+This study asked whether a lightweight adaptation of the emotion-vector pipeline would recover related qualitative patterns in two 
+models not analyzed in the original Claude study: GPT-2 Medium and Gemma 4 E2B. The answer is mixed but informative. Several results 
+recur across models and label-set sizes: some Logit Lens projections contain label-related vocabulary, the cosine matrices contain 
+coherent local families, PC1 partially separates positive-labeled directions from fear-, anger-, and anxiety-related directions, 
+and activation addition changes next-token probabilities and sampled text. At the same time, these patterns are incomplete. 
+Some projected tokens are fragmentary or unrelated, multiple emotions violate a simple valence ordering, PC2 does not consistently 
+resemble arousal, and steered generations frequently exhibit repetition or other degradation. The resulting picture is therefore one 
+of partial convergence rather than a full reproduction of Anthropic's findings.
 
 \subsection{Convergence with prior emotion-vector studies}
 
-The strongest cross-study convergence concerns local geometry. Sofroniew et al.\ \cite{sofroniew_emotion_2026} report emotion concepts organized partly by valence and arousal in Claude Sonnet 4.5, and Hsieh \cite{hsieh_replicating_2026} reports a valence-like PC1 and related cosine structure in Gemma 4 E4B. In our nine-emotion projections, both GPT-2 Medium and Gemma 4 E2B place \texttt{happy}, \texttt{calm}, and \texttt{loving} toward one PC1 end and several negative high-intensity labels toward the other, up to the arbitrary sign of PCA. The cosine matrices reinforce this observation without depending on a two-dimensional projection: fear/anxiety/anger and hope/inspiration form high-similarity groups, while several positive--negative pairs point in opposing directions. The recurrence of these motifs across Claude, Gemma 4 E4B, Gemma 4 E2B, and GPT-2 Medium contributes evidence that affect-associated corpora can yield similarly organized residual-stream directions across model families.
+The strongest cross-study convergence concerns local geometry. Sofroniew et al.\ \cite{sofroniew_emotion_2026} report emotion concepts 
+organized partly by valence and arousal in Claude Sonnet 4.5, and Hsieh \cite{hsieh_replicating_2026} reports a valence-like PC1 
+and related cosine structure in Gemma 4 E4B. In our nine-emotion projections, both GPT-2 Medium and Gemma 4 E2B place 
+\texttt{happy}, \texttt{calm}, and \texttt{loving} toward one PC1 end and several negative high-intensity labels toward the 
+other, up to the arbitrary sign of PCA. The cosine matrices reinforce this observation without depending on a two-dimensional 
+projection: fear/anxiety/anger and hope/inspiration form high-similarity groups, while several positive--negative pairs point in 
+opposing directions. The recurrence of these motifs across Claude, Gemma 4 E4B, Gemma 4 E2B, and GPT-2 Medium contributes evidence 
+that affect-associated corpora can yield similarly organized residual-stream directions across model families.
 
-That agreement should not be overstated. Our PCA does not use external valence or arousal ratings, and several labels do not follow a single valence ordering. PC2 is especially unstable across models and label sets. This differs from treating the first two PCs as a recovered affective circumplex: the present evidence supports a partial valence-like tendency, while an arousal correspondence remains unresolved. This model dependence is compatible with the open-weight results of van der Ben et al.\ \cite{ben_where_2026}, who find that layer, model, and corpus choices affect the apparent geometry. It also explains why the cosine heatmaps are more informative here than quadrant membership alone: they expose repeated local relationships without requiring PC1 and PC2 to reproduce a prespecified psychological coordinate system.
+That agreement should not be overstated. Our PCA does not use external valence or arousal ratings, and several labels do not follow a 
+single valence ordering. PC2 is especially unstable across models and label sets. This differs from treating the first two PCs as a 
+recovered affective circumplex: the present evidence supports a partial valence-like tendency, while an arousal correspondence 
+remains unresolved. This model dependence is compatible with the open-weight results of van der Ben et al.\ \cite{ben_where_2026}, who 
+find that layer, model, and corpus choices affect the apparent geometry. It also explains why the cosine heatmaps are more informative
+here than quadrant membership alone: they expose repeated local relationships without requiring PC1 and PC2 to reproduce a prespecified 
+psychological coordinate system.
 
 \subsection{Model-specific observations}
 
-GPT-2 Medium provides the clearest new comparison case because it predates modern instruction tuning and is substantially smaller than the models emphasized in recent emotion-vector work. Its affect-associated directions nevertheless produce several direct English vocabulary associations and strong local cosine pairs. Gemma 4 E2B produces more multilingual, emoji, and subword outputs through its unembedding, including heart symbols for \texttt{loving} and multilingual terms for several labels. This difference is consistent with the models' tokenizers and training regimes, but the present experiments do not isolate its cause.
+GPT-2 Medium provides the clearest new comparison case because it predates modern instruction tuning and is substantially smaller than
+the models emphasized in recent emotion-vector work. Its affect-associated directions nevertheless produce several direct English 
+vocabulary associations and strong local cosine pairs. Gemma 4 E2B produces more multilingual, emoji, and subword outputs through 
+its unembedding, including heart symbols for \texttt{loving} and multilingual terms for several labels. This difference is consistent 
+with the models' tokenizers and training regimes, but the present experiments do not isolate its cause.
 
-The intervention outputs also differ qualitatively. GPT-2 Medium often repeats label-associated words or stems, whereas Gemma 4 E2B sometimes produces HTML-like markup, repeated dialogue, or indirect associations. Both behaviors show that the intervention changes generation, but neither is equivalent to clean emotional control. We therefore do not rank one model as more emotionally sensitive. The residual norms, tokenizers, baseline probabilities, and generation distributions differ, and the local norm-scaled intervention makes raw delta-log-probability magnitudes unsuitable as a direct cross-model effect-size comparison.
+The intervention outputs also differ qualitatively. GPT-2 Medium often repeats label-associated words or stems, whereas Gemma 4 E2B 
+sometimes produces HTML-like markup, repeated dialogue, or indirect associations. Both behaviors show that the intervention changes 
+generation, but neither is equivalent to clean emotional control. We therefore do not rank one model as more emotionally sensitive. 
+The residual norms, tokenizers, baseline probabilities, and generation distributions differ, and the local norm-scaled intervention 
+makes raw delta-log-probability magnitudes unsuitable as a direct cross-model effect-size comparison.
 
 \subsection{What the steering results establish}
 
-Activation addition is causal in the limited computational sense that the hooked residual-stream intervention precedes and changes model outputs. The delta-log-probability heatmaps and sampled continuations therefore establish intervention sensitivity for the implemented directions. They do not, however, establish that the effect is uniquely emotional. The heatmap target sets are the top tokens obtained from the same direction's Logit Lens projection, making the evaluation internally coupled to the vectors under test. In addition, no random-direction, shuffled-label, or matched-norm control is included. A causal claim about computation is therefore warranted; a broader claim about specific functional emotions is not yet supported by this evaluation.
+Activation addition is causal in the limited computational sense that the hooked residual-stream intervention precedes and changes 
+model outputs. The delta-log-probability heatmaps and sampled continuations therefore establish intervention sensitivity for the 
+implemented directions. They do not, however, establish that the effect is uniquely emotional. The heatmap target sets are the 
+top tokens obtained from the same direction's Logit Lens projection, making the evaluation internally coupled to the vectors under 
+test. In addition, no random-direction, shuffled-label, or matched-norm control is included. A causal claim about computation is 
+therefore warranted; a broader claim about specific functional emotions is not yet supported by this evaluation.
 
 \subsection{Limitations}
 
-Several limitations define the intended first-attempt scope. First, the stories were retained as generated rather than manually curated, and some contain explicit target labels or other generation artifacts. This preserves a simple and reproducible pipeline but allows lexical leakage and topic structure to influence the extracted directions. The nine-emotion set is also a subset of the 20-emotion corpus, so comparison across set sizes is descriptive rather than an independent replication.
+Several limitations define the intended first-attempt scope. First, the stories were retained as generated rather than manually 
+curated, and some contain explicit target labels or other generation artifacts. This preserves a simple and reproducible pipeline 
+but allows lexical leakage and topic structure to influence the extracted directions. The nine-emotion set is also a subset of 
+the 20-emotion corpus, so comparison across set sizes is descriptive rather than an independent replication.
 
-Second, the vector construction differs from Anthropic's neutral-control procedure. Subtracting the same neutral mean from every emotion prototype before global emotion centering causes the neutral term to cancel algebraically. The final vectors therefore depend on global emotion centering, and the implementation does not project out neutral-corpus principal components. This difference prevents a direct procedural equivalence claim.
+Second, the vector construction differs from Anthropic's neutral-control procedure. Subtracting the same neutral mean from every 
+emotion prototype before global emotion centering causes the neutral term to cancel algebraically. The final vectors therefore 
+depend on global emotion centering, and the implementation does not project out neutral-corpus principal components. This 
+difference prevents a direct procedural equivalence claim.
 
-This reconstruction problem is also noted by van der Ben et al., who write that ``the original study (Sofroniew et al., 2026) did not release code, so our implementation is reconstructed from the methods they described'' \cite{ben_where_2026}. In the present context, the absence of the original implementation and fully specified mathematical expressions means that our neutral-centering equation should be read as a source-informed interpretation, not as a verified transcription of Anthropic's internal pipeline.
+This reconstruction problem is also noted by van der Ben et al., who write that ``the original study (Sofroniew et al., 2026) 
+did not release code, so our implementation is reconstructed from the methods they described'' \cite{ben_where_2026}. In the 
+present context, the absence of the original implementation and fully specified mathematical expressions means that our neutral-
+centering equation should be read as a source-informed interpretation, not as a verified transcription of Anthropic's internal pipeline.
 
-Third, layer depth and steering strength were transferred from source-informed conventions rather than optimized for these models. No layer sweep or independent $\alpha$ sweep is reported. Moreover, extraction uses a Hugging Face hidden-state index while steering hooks the transformer block with the same numeric index; because hidden-state tuples include the embedding output, a one-block alignment offset is possible. These choices do not erase the observed results, but they limit conclusions about where the directions are represented and which intervention settings are most effective.
+Third, layer depth and steering strength were transferred from source-informed conventions rather than optimized for these models. 
+No layer sweep or independent $\alpha$ sweep is reported. Moreover, extraction uses a Hugging Face hidden-state index while 
+steering hooks the transformer block with the same numeric index; because hidden-state tuples include the embedding output, 
+a one-block alignment offset is possible. These choices do not erase the observed results, but they limit conclusions about 
+where the directions are represented and which intervention settings are most effective.
 
-Fourth, the evaluation is primarily descriptive. PCA signs are arbitrary, no external human affect ratings are correlated with the components, and no permutation or uncertainty analysis is provided. Multi-token target strings are scored with a same-position log-probability approximation rather than an autoregressive sequence probability. Finally, sampled generations were not repeated across a prespecified set of random seeds, so individual continuation differences cannot be separated cleanly from sampling variability.
+Fourth, the evaluation is primarily descriptive. PCA signs are arbitrary, no external human affect ratings are correlated with 
+the components, and no permutation or uncertainty analysis is provided. Multi-token target strings are scored with a same-position 
+log-probability approximation rather than an autoregressive sequence probability. Finally, sampled generations were not repeated 
+across a prespecified set of random seeds, so individual continuation differences cannot be separated cleanly from sampling variability.
 
 \subsection{Implications and next steps}
 
-Within these bounds, the manuscript contributes a useful first-attempt data point to an emerging consensus: affect-labeled text can produce residual-stream directions with recurring local structure in multiple model families, including GPT-2 Medium. It also adds a cautionary observation: a partial valence-like PC1 can recur even when PC2, token projections, and steering quality remain strongly model- and corpus-dependent. This combination of convergence and disagreement is more informative than treating every visually plausible PCA quadrant as a successful circumplex replication.
+Within these bounds, the manuscript contributes a useful first-attempt data point to an emerging consensus: affect-labeled text 
+can produce residual-stream directions with recurring local structure in multiple model families, including GPT-2 Medium. It also adds 
+a cautionary observation: a partial valence-like PC1 can recur even when PC2, token projections, and steering quality remain 
+strongly model- and corpus-dependent. This combination of convergence and disagreement is more informative than treating every 
+visually plausible PCA quadrant as a successful circumplex replication.
 
-The highest-value next steps are to align extraction and steering locations exactly; implement and compare Anthropic's neutral-PC projection; introduce held-out stories, shuffled labels, and matched random directions; evaluate correlations with external valence/arousal ratings; and repeat generations across fixed seeds with a text-quality measure. These additions would turn the current descriptive comparison into a stronger test of semantic specificity, robustness, and cross-model consensus.
+The highest-value next steps are to align extraction and steering locations exactly; implement and compare Anthropic's neutral-PC 
+projection; introduce held-out stories, shuffled labels, and matched random directions; evaluate correlations with external 
+valence/arousal ratings; and repeat generations across fixed seeds with a text-quality measure. These additions would turn the 
+current descriptive comparison into a stronger test of semantic specificity, robustness, and cross-model consensus.

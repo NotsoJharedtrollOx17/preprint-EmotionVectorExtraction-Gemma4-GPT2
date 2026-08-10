@@ -1,5 +1,16 @@
 \begin{abstract}
 
-We report a first-pass, resource-constrained partial replication of selected analyses from Anthropic's study of emotion concepts in Claude Sonnet 4.5. Using generated emotion-story corpora, we extract affect-associated residual-stream directions from \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b} and examine them with Logit Lens projections, principal component analysis (PCA), cosine similarity, and activation steering. Across nine- and 20-emotion sets, both models exhibit several label-consistent vocabulary projections and local cosine-similarity families. Their PCA plots show a partial valence-like separation along PC1, but PC2 does not consistently support an arousal interpretation. Steering at the source-informed coefficient $\alpha=0.5$ changes next-token probabilities and sampled continuations, although the generations also contain repetition, markup, and unrelated content. These observations qualitatively converge with prior Claude and Gemma 4 E4B reports on some geometric patterns, while revealing model- and corpus-dependent structure in two additional models. Because the corpus is generated and uncurated, the evaluation reuses vector-derived target tokens, and no external affect ratings or control directions are included, the findings characterize this extraction-and-intervention pipeline rather than establish universal or uniquely emotional representations.
+We report a first-pass, resource-constrained partial replication of selected analyses from Anthropic's study of emotion 
+concepts in Claude Sonnet 4.5. Using generated emotion-story corpora, we extract affect-associated residual-stream 
+directions from \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b} and examine them with Logit 
+Lens projections, principal component analysis (PCA), cosine similarity, and activation steering. Across nine- and 
+20-emotion sets, both models exhibit several label-consistent vocabulary projections and local cosine-similarity families. 
+Their PCA plots show a partial valence-like separation along PC1, but PC2 does not consistently support an arousal interpretation. 
+Steering at the source-informed coefficient $\alpha=0.5$ changes next-token probabilities and sampled continuations, although the 
+generations also contain repetition, markup, and unrelated content. These observations qualitatively converge with prior Claude 
+and Gemma 4 E4B reports on some geometric patterns, while revealing model- and corpus-dependent structure in two additional 
+models. Because the corpus is generated and uncurated, the evaluation reuses vector-derived target tokens, and no external 
+affect ratings or control directions are included, the findings characterize this extraction-and-intervention pipeline rather 
+than establish universal or uniquely emotional representations.
 
 \end{abstract}
