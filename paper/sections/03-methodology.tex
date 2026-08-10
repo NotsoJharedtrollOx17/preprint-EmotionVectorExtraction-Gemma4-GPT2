@@ -3,33 +3,31 @@
 
 \subsection{Story Generation}
 
-Following the prompting strategy proposed by \cite{sofroniew_emotion_2026}, we employed a slightly modified prompt template 
-(Appendix ~\ref{apdx:story-context}) to generate emotionally expressive narratives. For each emotion category, Google's Gemini 
-language model was instructed to produce batches of 5 short stories following one of 10 story topics as a JSON array, facilitating
-their organization into emotion-specific datasets. We retained the generated stories as produced, without manual rewriting or 
-post-hoc quality filtering, as a deliberately simple first-pass corpus for this partial replication. In addition, a separate 
-neutral prompt template (Appendix ~\ref{apdx:neutral-prompt}) was used to generate a collection of emotionally neutral commands
-and requests, which served as the reference corpus for the intermediate neutral-centering step described below. Consequently, the
-reported plots and steering measurements characterize this corpus-and-pipeline combination; they are not evidence that the 
-observed structure is independent of corpus artifacts.
+Following the prompting strategy of \cite{sofroniew_emotion_2026}, we used a modified template
+(Appendix~\ref{apdx:story-context}) to generate emotionally expressive narratives. For each category, Google's Gemini model
+produced batches of five short stories for each of ten topics in JSON format, allowing the outputs to be organized by emotion.
+We retained the stories as generated, without manual rewriting or post-hoc quality filtering, to preserve a simple first-pass
+corpus for this partial replication. A separate template (Appendix~\ref{apdx:neutral-prompt}) produced emotionally neutral
+commands and statements for the intermediate neutral-centering calculation described below. The reported analyses therefore
+characterize this corpus-and-pipeline combination and do not establish independence from corpus artifacts.
 
 \subsection{Emotion Vector Extraction}
 
-\paragraph{Hidden Representation Extraction} Each generated emotional story is first propagated through the frozen language model 
-state to obtain the hidden activation of a selected transformer layer. This is computed with the following equation:
+\paragraph{Hidden Representation Extraction} Each story is passed through the frozen language model to obtain the hidden
+activations at a selected Transformer depth:
 \begin{equation}
     \mathbf{h}_i^{(l)} = f_\theta^{(l)}(x_i)
     \label{eqtn:hidden-representation}
 \end{equation}
-where $\mathbf{h}_i^{(l)}$ is the hidden state activation obtained from story $x_i\in\mathcal{S}_\mathtt{emotion}$ inside the forward computation
-$f_\theta^{(l)}$ on layer $l$. We use the layer closest to two-thirds of each model's depth, following the mid-late-layer convention reported 
+where $\mathbf{h}_i^{(l)}$ denotes the layer-$l$ hidden-state sequence for story $x_i\in\mathcal{S}_\mathtt{emotion}$ under
+the forward computation $f_\theta^{(l)}$. We use the layer closest to two-thirds of each model's depth, following the mid-late-layer convention reported 
 by \cite{sofroniew_emotion_2026}. This fixed rule selects numeric index 16 for GPT-2 Medium and index 23 for Gemma 4 E2B; it is a source-informed 
 transfer choice, not a claim that these locations are optimal for either model. In the implementation, extraction uses \texttt{outputs.hidden\_states[$l$]}, 
 whereas steering hooks the transformer block at index $l$. Because the Hugging Face hidden-state tuple includes the embedding output at index zero, 
-these two interfaces may refer to adjacent residual-stream locations; we retain this implemented indexing convention and treat it as a limitation. This 
-is calculated on each $\mathtt{emotion}\in\mathcal{E}$, for each emotion story inside the story dataset $\mathcal{S}_\mathtt{emotion}$. Furthermore, 
-$\mathcal{E}$ can be either the 9-emotion, or 20-emotion, dataset list available on Appendix~\ref{apdx:full-emotion-list}. Finally, $\mathcal{S}_\mathtt{emotion}$ 
-is the set of generated emotional stories that convey the emotional tone of \texttt{emotion}.
+these two interfaces may refer to adjacent residual-stream locations; we retain this implemented indexing convention and treat it as a limitation.
+We repeat the extraction for every story in each emotion-specific set $\mathcal{S}_\mathtt{emotion}$ and for every
+$\mathtt{emotion}\in\mathcal{E}$. The label set $\mathcal{E}$ contains either nine or twenty emotions, listed in
+Appendix~\ref{apdx:full-emotion-list}.
 
 \paragraph{Token Aggregation} Since every generated story has a different length, the extracted token representations are averaged. Let $L_i$ be 
 the number of non-padding tokens in story $i$. The implemented starting index is $t_{0,i}=50$ when $L_i>50$ and $t_{0,i}=\lfloor L_i/2\rfloor$ otherwise. 
@@ -41,16 +39,14 @@ Using zero-based token indices, the pooled representation is:
 where $\mathbf{\overline{h}}_i$ is the pooled representation of story $i$ and $\mathbf{h}_{i,t}^{(l)}$ is its token-$t$ hidden representation at 
 the selected extraction index.
 
-\paragraph{Prototype Computation} Stories belonging to the same emotion are averaged to better represent the overarching emotion. Said calculation 
-follows the equation:
+\paragraph{Prototype Computation} We average the pooled story representations within each emotion category:
 \begin{equation}
     \boldsymbol{\mu}_{\mathtt{emotion}}=\frac{1}{\left|\mathcal{S}_{\mathtt{emotion}}\right|}\sum_{i=1}^{\left|\mathcal{S}_\mathtt{emotion}\right|}\mathbf{\overline{h}}_{\mathtt{emotion},i}
     \label{eqtn:prototype-comp}
 \end{equation}
-where $\boldsymbol{\mu}_{\mathtt{emotion}}$ is the mean hidden activation of all stories $i$ conveying 
-the tone of \texttt{emotion}. On a similar vein, $\mathbf{\overline{h}}_{\mathtt{emotion},i}$ represents the mean individual activation 
-for story $i$ belonging to \texttt{emotion}. Finally, $\left|\mathcal{S}_{\mathtt{emotion}}\right|$ is the total number of emotionally
-expressive stories for \texttt{emotion}.
+where $\boldsymbol{\mu}_{\mathtt{emotion}}$ is the emotion prototype,
+$\mathbf{\overline{h}}_{\mathtt{emotion},i}$ is the pooled representation of story $i$, and
+$\left|\mathcal{S}_{\mathtt{emotion}}\right|$ is the number of stories in that category.
 
 \paragraph{Mean Neutral Statements} Following our interpretation of the extraction procedure described by Sofroniew et al.\ \cite{sofroniew_emotion_2026} and the open-weight replication by Hsieh \cite{hsieh_replicating_2026}, we first compute the mean neutral representation from the hidden activations obtained from the neutral-statements dataset:
 \begin{equation}
@@ -81,8 +77,7 @@ where $\mathbf{v}_{\mathtt{emotion}}$ is the globally centered, neutral-adjusted
 every emotion prototype, it cancels during global centering: $\mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\frac{1}{|\mathcal{E}|}\sum_{e\in\mathcal{E}}\boldsymbol{\mu}_e$. 
 Thus, the final vectors are globally emotion-centered; the neutral corpus is retained only in the intermediate calculation.
 
-\paragraph{Vector Normalization} Finally, for computational convenience and numerical stability, we normalize the emotion vector by performing 
-the following computation:
+\paragraph{Vector Normalization} We L2-normalize each centered direction:
 \begin{equation}
     \mathbf{\hat{v}}_{\mathtt{emotion}}=\frac{\mathbf{v}_{\mathtt{emotion}}}{\lVert \mathbf{v}_{\mathtt{emotion}} \rVert_2}
     \label{eqtn:normalized-emotion}
@@ -105,13 +100,12 @@ where $\mathbf{z}_{\mathtt{emotion}}$ is the list of raw logit values for $\math
 is the learned unembedding matrix and $\mathbf{b}_U$ is the learned output-head bias when the architecture provides one (and is zero otherwise). 
 No random-noise bias is added.
 
-Expanding the results, $\mathbf{z}_{\mathtt{emotion}}$ contains the following list of values:
+The resulting vector contains one value per vocabulary item:
 \begin{equation}
     \mathbf{z}_{\mathtt{emotion}}=[z_1,z_2,\dots,z_{|V|}]
     \label{eqtn:logits-set}
 \end{equation}
-where $z_t$ is the raw logit value of token $t$, while $|V|$ is the total number of tokens in 
-vocabulary $V$.
+where $z_t$ is the raw score for token $t$ and $|V|$ is the vocabulary size.
 
 \paragraph{Vocabulary Standardization} To rank vocabulary items on a common scale within each projected direction, we standardize the raw 
 logits into $z$-scores.
@@ -119,10 +113,9 @@ logits into $z$-scores.
     \mu_z=\frac{1}{|V|}\sum_{t\in V}^{} z_t
     \label{eqtn:mean-logits}
 \end{equation}
-where $\mu_z$ is the mean of the raw logit scores $z_t$, where $t$ is a token of the vocabulary $V$.
-Finally, $|V|$ is the total number of tokens in the vocabulary.
+where $\mu_z$ is the mean raw score over vocabulary $V$.
 
-Next, we compute the standard deviation of the raw logit scores with the following formula:
+We then compute the sample standard deviation:
 \begin{equation}
     \sigma_z=\sqrt{\frac{1}{|V|-1}\sum_{t\in V}^{}\left(z_t-\mu_z\right)^2}
     \label{eqtn:stddev-logits}
@@ -136,7 +129,7 @@ Finally, we compute the z-score of each vocabulary token $t$ with:
 \end{equation}
 where $\tilde{z}_t$ is the z-score of token $t$.
 
-\paragraph{Top- and Bottom-k Vocabulary Extraction} As a selection criterion for the extraction process, we utilize:
+\paragraph{Top- and Bottom-k Vocabulary Extraction} We select the highest- and lowest-scoring vocabulary items:
 \begin{equation}
     \mathcal{T}_k=\text{TopK}(\tilde{\mathbf{z}}, k)
     \label{eqtn:topk-vocabs}
@@ -186,7 +179,7 @@ sums their log probabilities at the same next-token position; this is an approxi
 We compute a two-dimensional PCA projection with \texttt{scikit-learn}. The components are estimated without emotion ratings; any valence- or 
 arousal-like interpretation is therefore made descriptively after inspecting the labeled projection and is not built into the PCA calculation.
 
-\paragraph{Emotion Matrix} First and foremost, we construct the matrix containing the normalized emotion vectors,
+\paragraph{Emotion Matrix} We stack the normalized emotion vectors by row:
 \begin{equation}
     X=
     \begin{bmatrix}
@@ -197,41 +190,36 @@ arousal-like interpretation is therefore made descriptively after inspecting the
     \end{bmatrix}
     \label{eqtn:pca-emotionMatrix}
 \end{equation}
-where $X$ is the matrix whose rows are normalized emotion vectors. $|\mathcal{E}|$ is total number of emotions
-utilized, which can either be 9 emotions, or 20 emotions total.
+where $X$ is the matrix of normalized emotion vectors and $|\mathcal{E}|$ is either nine or twenty.
 
-\paragraph{Matrix Centering} Before the actual decomposition, we center every feature by subtracting the global mean of all vectors:
+\paragraph{Matrix Centering} Before decomposition, we center each feature across emotion vectors:
 \begin{equation}
     X_c = X - \bar{X}
     \label{eqtn:pca-centering}
 \end{equation}
-where $X_c$ is the centered emotion matrix used internally during the PCA computation and $\bar{X}$ is the 
-aforementioned global mean vector.
+where $X_c$ is the centered emotion matrix and $\bar{X}$ is the feature-wise mean vector.
 
-\paragraph{Singular Value Decomposition} Now, the singular value decomposition is computed by decomposing $X_c$ into the following expressions:
+\paragraph{Singular Value Decomposition} We decompose the centered matrix as:
 \begin{equation}
     X_c=U\Sigma V^{\top}
     \label{eqtn:pca-svd}
 \end{equation}
-where $U$ are the left singular vectors describing each emotion sample. $\Sigma$ is the diagonal matrix containing 
-singular values. Finally, $V^{\top}$ represents the principal components in the original hidden-state space.
+where $U$ contains the left singular vectors, $\Sigma$ contains the singular values, and $V^{\top}$ contains the
+principal-component directions in the original hidden-state space.
 
-\paragraph{Projection of 2D Coordinates} Finally, we perform the projection onto the first two principal components of the previously 
-extracted $V^{\top}$:
+\paragraph{Projection of 2D Coordinates} We project onto the first two principal-component directions:
 \begin{equation}
-    Y = X_c V_{1:2}
+    Y = X_c V_{:,1:2}
     \label{eqtn:pca-proj}
 \end{equation}
-where $Y$ is the two-dimensional PCA coordinates utilized in the PCA plot, and $V_{1:2}$ is the matrix formed by the
-\emph{first two directions} of the principal components.
+where $Y$ contains the plotted two-dimensional coordinates and $V_{:,1:2}$ contains the first two right singular vectors.
 
 \subsection{Cosine Similarity}
 
-Our final experiment, cosine similarity, is performed to calculate similarities, and differences, between
-emotion vectors. The computed scores are further illustrated inside a heatmap which visualizes emotion 
-clusters. To calculate this, we utilize the following equation:
+Finally, we compute pairwise cosine similarity to summarize directional alignment between emotion vectors. The resulting
+matrix is displayed as a heatmap:
 \begin{equation}
-    S_{i,j}=\frac{\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}_j}}{\lVert \mathbf{\hat{v}}_i \rVert \lVert \mathbf{\hat{v}}_j \rVert}
+    S_{i,j}=\frac{\mathbf{\hat{v}}_i\cdot \mathbf{\hat{v}}_j}{\lVert \mathbf{\hat{v}}_i \rVert \lVert \mathbf{\hat{v}}_j \rVert}
     \label{eqtn:cos-similarity}
 \end{equation}
 where $S_{i,j}$ is the cosine similarity score between emotion vectors $\mathbf{\hat{v}}_i$ and $\mathbf{\hat{v}}_j$.

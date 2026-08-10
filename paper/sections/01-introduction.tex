@@ -28,8 +28,8 @@ selected analyses from that investigation in
 stories, extract normalized and globally centered directions at a fixed
 mid-late residual-stream depth, and assess them with (i) Logit Lens vocabulary
 projections, (ii) PCA and pairwise cosine-similarity analyses, and (iii)
-activation steering on two neutral prompts.  We evaluate both a nine-emotion
-set and a 20-emotion extension.  The purpose is not to reproduce every
+activation steering on two fixed prompts that do not name a target emotion.
+We evaluate both a nine-emotion set and a 20-emotion extension.  The purpose is not to reproduce every
 behavioral and safety claim from the Claude study, but to add two inexpensive,
 independently available model cases to the emerging comparison literature.
 
@@ -38,8 +38,8 @@ Sofroniew et al.  We do not test the original study's alignment-relevant
 behaviors, search across layers, estimate correlations with external human
 valence--arousal ratings, or compare against random and shuffled-label
 directions.  We instead ask which qualitative patterns recur under one fixed,
-low-cost pipeline and which appear model- or corpus-specific.  Convergence is
-assessed through repeated local geometry and vocabulary associations; newer
+low-cost pipeline and which vary by model or label-set size.  Convergence is
+assessed through repeated local geometry and vocabulary associations; additional
 observations include the behavior of an earlier GPT-2 model, the instability
 of a simple PC2-as-arousal interpretation, and differences in token projections
 and generated-text quality between the two models.  Steering provides a causal

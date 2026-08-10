@@ -1,10 +1,9 @@
 \section{Experimental Setup}
 
-The proposed methodology was evaluated on two publicly available transformer language models using emotion
-datasets containing either 9 or 20 emotion categories. All experiments follow the activation 
-extraction, steering, and evaluation pipeline described in Section~\ref{sec:methodology}. The implementation
-was developed in Python via Google Colab notebooks, using the PyTorch, HuggingFace Transformers, and 
-scikit-learn libraries.
+We evaluated the pipeline on two publicly available Transformer language models using label sets containing either nine or twenty
+emotion categories. All experiments follow the activation-extraction, steering, and evaluation procedures in
+Section~\ref{sec:methodology}. The implementation used Python notebooks in Google Colab with PyTorch, Hugging Face Transformers,
+and scikit-learn.
 
 \subsection{Models}
 Two language models were evaluated:
@@ -19,18 +18,17 @@ GPT-2 Medium serves as an earlier-generation baseline, whereas Gemma 4 E2B provi
 Recurring patterns across the two models are treated as qualitative convergence under the shared pipeline, not as 
 sufficient evidence of a general property of all Transformer representations.
 
-\subsection{Emotion Datasets}
+\subsection{Emotion Label Sets}
 
-The proposed methodology was evaluated using two emotion datasets derived from a common emotion-story corpus. The 
-first corresponds to the publicly available nine-emotion list adopted by \cite{hsieh_replicating_2026}, providing a reproducible
-baseline for comparison. Building upon this benchmark, we additionally construct an extended dataset containing twenty
-emotion categories to evaluate the proposed methodology under a broader and finer-grained affective space.
+We used two label sets derived from a common emotion-story corpus. The first follows the public nine-emotion list adopted by
+\cite{hsieh_replicating_2026}, providing a direct comparison point. We also constructed a twenty-emotion extension to examine
+the pipeline under a broader, more fine-grained label space.
 
 Unlike \cite{sofroniew_emotion_2026}, which investigated 171 emotional concepts, this work intentionally focuses on smaller
-emotion datasets that are practical to analyze and compare while remaining computationally reproducible inside free-tier
-computing hosts. The twenty-emotion dataset extends the original nine emotions with semantically related affective states, 
+emotion sets that are practical to analyze and compare in free-tier compute environments. The twenty-emotion set extends
+the original nine emotions with semantically related affective states,
 allowing us to inspect how the qualitative geometry changes with a more granular label set. To maintain a consistent 
-comparison, the nine-emotion experiments were conducted using the corresponding subset of the twenty-emotion emotional stories,
+comparison, the nine-emotion experiments used the corresponding subset of the twenty-emotion story corpus,
 so that the two settings differ in label-set size rather than in the generation procedure used for their shared categories.
 
 Stories were used as generated, without manual rewriting or post-hoc quality filtering. This was an intentional first-pass 
@@ -40,8 +38,8 @@ than a corpus-independent property of either model.
 
 \subsection{Extraction Configuration}
 
-All experiments were conducted using a common extraction configuration across both evaluated language models. Emotion Vectors
-were extracted from the residual stream representations described in the previous section, followed by normalization, Logit Lens vocabulary
+All experiments used a common extraction configuration across both models. Emotion vectors
+were extracted from the residual-stream representations described in the previous section, followed by normalization, Logit Lens vocabulary
 analysis, principal component visualization, and activation-intervention diagnostics. Identical extraction settings were maintained for the 
 9-emotion and 20-emotion story datasets, reducing configuration changes as an explanation for differences between the two label sets. 
 Table~\ref{tab:extraction-config} summarizes the configuration employed throughout the experiments. The extraction layer was selected 
@@ -90,10 +88,10 @@ PCA components & 2 \\
 
 \subsection{Steering Configuration}
 
-The steering experiments were adapted from the evaluation setting used by Anthropic \cite{sofroniew_emotion_2026}. Two neutral prompt 
-templates (Prompt00 and Prompt01) were employed to elicit unconstrained text continuations before and after applying emotion vector 
-steering. By minimizing the emotional content of the initial prompt, the resulting generations provide a common prompt context for 
-descriptive comparisons of the injected directions' effects on the generated text. Throughout all steering experiments, a fixed 
+The steering experiments were adapted from the evaluation setting used by Anthropic \cite{sofroniew_emotion_2026}. Two fixed,
+minimally specified affect-elicitation prompts (Prompt00 and Prompt01) were used to obtain continuations before and after emotion-vector
+steering. Neither prompt names a target emotion, so both provide a common context for descriptive comparison across injected directions.
+Throughout all steering experiments, a fixed
 steering coefficient of $\alpha=+0.5$ was used because the source study presents steering results at that strength. In this implementation, 
 the intervention is scaled by the current token's residual norm; therefore, this value is a source-informed operating point, not a claim of 
 optimality or a directly comparable absolute strength across models. Text was generated using stochastic sampling with a temperature of 
@@ -124,7 +122,7 @@ Steering coefficient $\alpha$ & +0.5 \\
 Prompt templates & Prompt00 and Prompt01 \\
 Maximum generated tokens & 100 \\
 Temperature & 0.7 \\
-Sampling & True \\
+Sampling & Enabled \\
 
 \bottomrule
 \end{tabularx}
@@ -133,7 +131,7 @@ Sampling & True \\
 
 \begin{minipage}{0.75\linewidth}
 \footnotesize
-\textbf{Note.} Both Prompt00 and Prompt01 are available on Appendix ~\ref{apdx:primers}.
+\textbf{Note.} Prompt00 and Prompt01 are provided in Appendix~\ref{apdx:primers}.
 \end{minipage}
 
 \end{table}
@@ -152,24 +150,24 @@ descriptions of the extracted vectors; none serves as an independent semantic gr
 
 \subsection{Implementation Details}
 
-All experiments were implemented in Python using Google Colab notebooks. Model inference was performed with the HuggingFace 
+All experiments were implemented in Python using Google Colab notebooks. Model inference was performed with the Hugging Face
 \emph{Transformers} library and PyTorch, while activation extraction, residual stream steering, and Logit Lens analyses were
-implemented using custom Python scripts. Principal Component Analysis (PCA) was performed with scikit-learn, and quantitative
-analyses were conducted using NumPy and Pandas. Visualizations, including PCA projections, Cosine Similarity Heatmaps, and Delta 
-Log Probability heatmaps, were generated using Matplotlib and Plotly. To reduce redundant computation, extracted emotion vectors
+implemented using custom Python scripts. Principal component analysis (PCA) was performed with scikit-learn, and quantitative
+analyses were conducted using NumPy and Pandas. PCA projections, cosine-similarity heatmaps, and delta-log-probability heatmaps
+were generated using Matplotlib and Plotly. To reduce redundant computation, extracted emotion vectors
 were cached and reused throughout the evaluation pipeline. Finally, all experiments were executed using the free-tier Google Colab
 environment equipped with NVIDIA T4 GPUs.
 
 \subsection{Computational Resources}
 
 Unlike the large-scale infrastructure available to Anthropic, the experiments presented in this work were intentionally
-designed to operate within free-tier commodity compute environments. Table ~\ref{tab:experimental-scope} below summarizes the principal 
+designed to operate within free-tier commodity compute environments. Table~\ref{tab:experimental-scope} summarizes the principal
 differences in computational scope.
 
 \begin{table}[!htbp]
 \centering
 \small
-\caption{Experimental Scope Comparison of Anthropic versus Current Manuscript}
+\caption{Comparison of experimental scope}
 \label{tab:experimental-scope}
 
     \begin{tabularx}{\linewidth}{>{\bfseries}p{2.8cm}XX}
@@ -179,7 +177,7 @@ differences in computational scope.
 
     \textbf{Models} &
     Claude Sonnet 4.5 &
-    GPT 2 Medium and Gemma 4 E2B \\[0.4em]
+    GPT-2 Medium and Gemma 4 E2B \\[0.4em]
 
     \textbf{Emotions} &
     171 &
@@ -195,7 +193,7 @@ differences in computational scope.
 
     \textbf{Hardware} &
     Internal compute cluster &
-    2 Google Colab Notebooks with Free-Tier T4 NVIDIA GPUs \\
+    Two free-tier Google Colab sessions with NVIDIA T4 GPUs \\
 
     \bottomrule
     \end{tabularx}

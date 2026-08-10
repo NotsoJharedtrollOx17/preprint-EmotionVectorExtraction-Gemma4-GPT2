@@ -4,7 +4,9 @@ This study asked whether a lightweight adaptation of the emotion-vector pipeline
 models not analyzed in the original Claude study: GPT-2 Medium and Gemma 4 E2B. The answer is mixed but informative. Several results 
 recur across models and label-set sizes: some Logit Lens projections contain label-related vocabulary, the cosine matrices contain 
 coherent local families, PC1 partially separates positive-labeled directions from fear-, anger-, and anxiety-related directions, 
-and activation addition changes next-token probabilities and sampled text. At the same time, these patterns are incomplete. 
+and activation addition produces prompt- and direction-dependent changes in next-token probabilities and sampled text. The PCA 
+quadrants make these arrangements easy to inspect, especially where similarly labeled vectors occupy neighboring regions. At the 
+same time, these patterns are incomplete. 
 Some projected tokens are fragmentary or unrelated, multiple emotions violate a simple valence ordering, PC2 does not consistently 
 resemble arousal, and steered generations frequently exhibit repetition or other degradation. The resulting picture is therefore one 
 of partial convergence rather than a full reproduction of Anthropic's findings.
@@ -14,7 +16,7 @@ of partial convergence rather than a full reproduction of Anthropic's findings.
 The strongest cross-study convergence concerns local geometry. Sofroniew et al.\ \cite{sofroniew_emotion_2026} report emotion concepts 
 organized partly by valence and arousal in Claude Sonnet 4.5, and Hsieh \cite{hsieh_replicating_2026} reports a valence-like PC1 
 and related cosine structure in Gemma 4 E4B. In our nine-emotion projections, both GPT-2 Medium and Gemma 4 E2B place 
-\texttt{happy}, \texttt{calm}, and \texttt{loving} toward one PC1 end and several negative high-intensity labels toward the 
+\texttt{happy}, \texttt{calm}, and \texttt{loving} toward one PC1 end and several negative-labeled directions toward the 
 other, up to the arbitrary sign of PCA. The cosine matrices reinforce this observation without depending on a two-dimensional 
 projection: fear/anxiety/anger and hope/inspiration form high-similarity groups, while several positive--negative pairs point in 
 opposing directions. The recurrence of these motifs across Claude, Gemma 4 E4B, Gemma 4 E2B, and GPT-2 Medium contributes evidence 
@@ -25,15 +27,17 @@ single valence ordering. PC2 is especially unstable across models and label sets
 recovered affective circumplex: the present evidence supports a partial valence-like tendency, while an arousal correspondence 
 remains unresolved. This model dependence is compatible with the open-weight results of van der Ben et al.\ \cite{ben_where_2026}, who 
 find that layer, model, and corpus choices affect the apparent geometry. It also explains why the cosine heatmaps are more informative
-here than quadrant membership alone: they expose repeated local relationships without requiring PC1 and PC2 to reproduce a prespecified 
-psychological coordinate system.
+here as a complement to quadrant membership: they expose repeated full-dimensional relationships without requiring PC1 and PC2 to 
+reproduce a prespecified psychological coordinate system. The quadrants remain useful for illustrating the displayed two-dimensional 
+arrangement, but they are not fixed affective coordinates.
 
 \subsection{Model-specific observations}
 
 GPT-2 Medium provides the clearest new comparison case because it predates modern instruction tuning and is substantially smaller than
 the models emphasized in recent emotion-vector work. Its affect-associated directions nevertheless produce several direct English 
 vocabulary associations and strong local cosine pairs. Gemma 4 E2B produces more multilingual, emoji, and subword outputs through 
-its unembedding, including heart symbols for \texttt{loving} and multilingual terms for several labels. This difference is consistent 
+its unembedding, including heart symbols for \texttt{loving}, Chinese \cn{震惊} (``shocked'') for \texttt{surprised}, and Spanish 
+\emph{tranquila} (``calm'') for \texttt{calm}. This difference is consistent 
 with the models' tokenizers and training regimes, but the present experiments do not isolate its cause.
 
 The intervention outputs also differ qualitatively. GPT-2 Medium often repeats label-associated words or stems, whereas Gemma 4 E2B 
@@ -48,7 +52,9 @@ Activation addition is causal in the limited computational sense that the hooked
 model outputs. The delta-log-probability heatmaps and sampled continuations therefore establish intervention sensitivity for the 
 implemented directions. They do not, however, establish that the effect is uniquely emotional. The heatmap target sets are the 
 top tokens obtained from the same direction's Logit Lens projection, making the evaluation internally coupled to the vectors under 
-test. In addition, no random-direction, shuffled-label, or matched-norm control is included. A causal claim about computation is 
+test. Several modest diagonal cells in the Gemma heatmaps also show why direct projection and downstream steering should not be treated 
+as equivalent: later layers can transform the intervention before the final logits, and the diagnostic averages only five projected 
+vocabulary items. In addition, no random-direction, shuffled-label, or matched-norm control is included. A causal claim about computation is 
 therefore warranted; a broader claim about specific functional emotions is not yet supported by this evaluation.
 
 \subsection{Limitations}
@@ -81,11 +87,12 @@ across a prespecified set of random seeds, so individual continuation difference
 
 \subsection{Implications and next steps}
 
-Within these bounds, the manuscript contributes a useful first-attempt data point to an emerging consensus: affect-labeled text 
+Within these bounds, the manuscript contributes a useful first-attempt data point to an emerging comparative record: affect-labeled text 
 can produce residual-stream directions with recurring local structure in multiple model families, including GPT-2 Medium. It also adds 
 a cautionary observation: a partial valence-like PC1 can recur even when PC2, token projections, and steering quality remain 
-strongly model- and corpus-dependent. This combination of convergence and disagreement is more informative than treating every 
-visually plausible PCA quadrant as a successful circumplex replication.
+model- and label-set-dependent. Corpus construction may also contribute, but the present experiment does not isolate that effect. 
+The quadrant descriptions provide an intuitive comparison with the affective circumplex; they are illustrative rather than sufficient 
+evidence that the learned coordinates reproduce Russell's axes.
 
 The highest-value next steps are to align extraction and steering locations exactly; implement and compare Anthropic's neutral-PC 
 projection; introduce held-out stories, shuffled labels, and matched random directions; evaluate correlations with external 
