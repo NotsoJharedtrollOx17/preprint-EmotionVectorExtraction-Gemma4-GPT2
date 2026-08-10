@@ -1,24 +1,12 @@
 \section{Results}
 
-We evaluated the extracted emotion vectors utilizing (1) \texttt{openai-community/gpt-2-medium} and
-(2) \texttt{google/gemma-4-e2b}, in which we performed four analyses: (i) Logit Lens, (ii) Emotion Steering, 
-(iii) PCA Projection, and (iv) Cosine Similarity Heatmap. Each analysis was bounded by using the 9-emotions dataset, and 
-the 20-emotions dataset respectively.
+We evaluated the extracted vectors in \texttt{openai-community/gpt-2-medium} and \texttt{google/gemma-4-e2b} using four descriptive analyses: Logit Lens projections, steering heatmaps and representative continuations, PCA projections, and pairwise cosine-similarity heatmaps. Each analysis was run for the nine- and 20-emotion sets. The results below report patterns visible in these outputs. In particular, PCA axes are data-dependent and have arbitrary signs; references to a ``valence-like'' direction describe the ordering of selected labeled emotions, rather than a validated correspondence with human affect ratings.
 
 \subsection{GPT 2 Medium}
 
 \subsubsection{Logit Lens}
 
-Applying the Logit lens to the extracted emotion vectors in \texttt{openai-community/gpt-2-medium} produced token
-distributions aligning consistently with their corresponding emotional labels. The highest-scoring tokens for each 
-emotion reflected coherent affective language. For example, vectors associated with \texttt{happy} and 
-\texttt{sad} yielded tokens corresponding to positive and negative emotional expressions related to their respective
-emotion concept.
-
-
-The resulting token sets were relatively concentrated, with limited inclusion of unrelated terms. This indicates that
-the projected logits from the emotion vectors produce stable and interpretable outputs. In addition, this effect appears
-for the list of 9 emotions, and 20 emotions as well, which can be appreciated in \Cref{tab:gpt2_logitlens_9,tab:gpt2_logitlens_20}.
+For GPT-2 Medium, several projected token lists align directly with their labels. For example, the \texttt{happy}, \texttt{calm}, \texttt{loving}, \texttt{angry}, and \texttt{desperate} vectors rank tokens such as \emph{joyful}, \emph{relaxation}, \emph{nurturing}, \emph{angrily}, and \emph{frantically}, respectively. These patterns persist in the 20-emotion set, where additional examples include \texttt{lonely} (\emph{solitude}, \emph{lonely}) and \texttt{brooding} (\emph{haunted}, \emph{melancholy}); see \Cref{tab:gpt2_logitlens_9,tab:gpt2_logitlens_20}. Other rows are less direct---for instance, \texttt{surprised} is associated with technical and fragmentary tokens. The Logit Lens tables therefore provide a diagnostic of directions in vocabulary space, not an independent validation that every vector uniquely encodes its label.
 
 %% * GPT 2 Medium 9 emotions Logit Lens Table
 \begin{table}[!htbp]
@@ -170,16 +158,7 @@ for the list of 9 emotions, and 20 emotions as well, which can be appreciated in
 
 \subsubsection{Emotion Steering}
 
-Activation steering experiments in \texttt{openai-community/gpt-2-medium} produced clear and consistent changes in
-generated outputs, although the output text seems repetitive with certain words and word-stems alluding to the steered
-emotion. Increasing the steering value resulted in text reflecting the intended emotional tone. For example, steering
-with \texttt{sad} produced negative or introspective phrasing, while steering with \texttt{Happy} produced positive 
-language. 
-
-In particular, the experiments were executed utilizing two primers prompts to observe if the model favored certain tokens
-depending on the initial input. The steering heatmaps can be appreciated in 
-\Cref{fig:gpt2-deltalogprob}. Overall, the model's outputs remained \emph{brokenly consistent} across the steering intervention.
-interventions.
+The GPT-2 Medium steering heatmaps show that the intervention changes next-token log probabilities under both prompts and emotion-set sizes (\Cref{fig:gpt2-deltalogprob}). Each cell is the mean change for the target emotion's five Logit-Lens-derived tokens; consequently, the diagonal and related blocks are a direction-consistent diagnostic rather than an independent semantic evaluation. The representative continuations show corresponding lexical changes, but they also exhibit frequent repetition and degraded fluency---for example, repeated \emph{joy} under \texttt{happy} steering and repeated phrasing under \texttt{loving} steering (\Cref{tab:gpt2-excerptSteering}). These outputs establish that the fixed intervention changes GPT-2 Medium's generation, while leaving the specificity and text quality of that change unresolved.
 
 % * Quadruple plot for Emotion Steering Heatmaps with GPT 2 Medium
 \begin{figure}[!htbp]
@@ -292,11 +271,7 @@ interventions.
 
 \subsubsection{PCA Projection}
 
-Principal Component Analysis for the extracted emotion vectors revealed structured clustering patterns across
-emotion categories. Emotion Vectors corresponding to similar emotional valence (PC1) appeared closer in the
-projection space, while opposing emotions were spread out. The PCA projections produced visually distinct groupings,
-indicating that the vectors occupy separable regions in the reduced dimensional space. The PCA Projections can be
-appreciated in \Cref{fig:gpt2-pca-projection}.
+For the nine-emotion GPT-2 Medium set, the first two components explain 61.1\% of the variance (PC1: 40.1\%; PC2: 21.0\%). Up to the arbitrary sign of PC1, \texttt{happy}, \texttt{calm}, and \texttt{loving} occupy one side, whereas \texttt{afraid}, \texttt{angry}, and \texttt{desperate} occupy the other. \texttt{sad}, \texttt{guilty}, and \texttt{surprised} do not follow this ordering cleanly. The 20-emotion projection explains 49.5\% in its first two components (35.3\% and 14.2\%), but its PC1 ordering is less uniform across the expanded labels. Thus, the GPT-2 projections contain a partial valence-like separation, not a demonstrated valence--arousal coordinate system (\Cref{fig:gpt2-pca-projection}).
 
 % * PCA Projection for GPT 2 Medium
 \begin{figure}[!htbp]
@@ -327,12 +302,7 @@ appreciated in \Cref{fig:gpt2-pca-projection}.
 
 \subsubsection{Cosine Similarity Heatmap}
 
-Pairwise cosine similarity between emotion vectors in \texttt{openai-community/gpt-2-medium} display clear relationships
-between emotional categories. Similar emotions exhibited higher similarity scores, while opposing emotions displayed lower
-or negative similarity values. The Cosine Similarity Heatmaps can be appreciated in \Cref{fig:gpt2-cos-sim9,fig:gpt2-cos-sim20}.
-
-
-In particular, the similarities and differences are more pronounced when we utilize 20 emotions. As we can observe, lorem ipsum dolor.
+The GPT-2 Medium cosine matrices show several repeated local relationships. In the nine-emotion set, \texttt{afraid}--\texttt{angry} has cosine similarity 0.76, while \texttt{loving}--\texttt{afraid} is -0.78 and \texttt{happy}--\texttt{desperate} is -0.57. In the 20-emotion set, \texttt{anxious}--\texttt{afraid} (0.92), \texttt{afraid}--\texttt{angry} (0.82), and \texttt{hopeful}--\texttt{inspired} (0.85) form visible high-similarity pairs, with negative similarities between several of these groups. These are descriptive directional alignments; they do not establish a human affect taxonomy or a one-to-one semantic representation (\Cref{fig:gpt2-cos-sim9,fig:gpt2-cos-sim20}).
 
 
 % * Cosine Similarity  for GPT 2 Medium with 9 emotions
@@ -360,10 +330,7 @@ In particular, the similarities and differences are more pronounced when we util
 
 \subsubsection{Logit Lens}
 
-Performing the Logit Lens extraction on \texttt{google/gemma-4-e2b} produced interesting token distributions across
-emotion vectors. Most tokens display multilingual and emoji-like characteristics, where the \texttt{loving} vector consistently
-produced heart-related emoji tokens. In addition, this effect appears for the list of 9 emotions, and 20 emotions. The logits
-can be appreciated in \Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}.
+Gemma 4 E2B's Logit Lens tables are more multilingual and more fragmentary than GPT-2 Medium's. Some rows have direct label-consistent tokens: \texttt{loving} ranks heart emoji and \emph{LOVE}, \texttt{surprised} ranks \emph{surprise}/\emph{amazement} and corresponding multilingual tokens, and \texttt{calm} ranks \emph{Calm}, \emph{tranquila}, and related tokens. Other rows mix semantically plausible tokens with subword fragments or unrelated vocabulary. These tables document the projection behavior of the extracted directions; the presence of multilingual or emoji tokens should not itself be interpreted as stronger semantic encoding (\Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}).
 
 % * Gemma 4 E2B 9 emotions Logit Lens Table
 \begin{table}[!htbp]
@@ -527,13 +494,7 @@ can be appreciated in \Cref{tab:gemma_logitlens_9,tab:gemma_logitlens_20}.
 
 \subsubsection{Emotion Steering}
 
-During the steering intervention, \texttt{google/gemma-4-e2b} exhibited changes in the generated outputs. Fur sufficiently
-large steering values, the model produced text reflecting the intended emotional tone, including explicit acknowledgements
-of the underlying emotion and stylistic variations. In some cases, the output text included unrelated elements such as HTML
-tags enclosing certain phrases or words. Despite this behavior, the overall emotional tone and direction remained observable.
-The steering heatmaps can be appreciated in \Cref{fig:gemma-deltalogprob}. Finally, it is relevent to 
-highlight that the row for \texttt{disgusting} deactivates all other emotion tokens, includings its own. Text output can be 
-appreciated in \Cref{tab:gemma-excerptSteering}.
+Gemma 4 E2B also shows prompt- and direction-dependent changes in the target-token heatmaps (\Cref{fig:gemma-deltalogprob}). The representative generations contain label-related words in some conditions, such as \emph{happy}, \emph{great}, and \emph{love}, but also include HTML-like markup, repetition, and unrelated dialogue continuations (\Cref{tab:gemma-excerptSteering}). As for GPT-2 Medium, these heatmaps measure mean next-token log-probability changes for token sets derived from the same emotion vectors used for steering. They show that the intervention affects this diagnostic, but do not independently quantify emotional control or generation quality.
 
 % * Quadruple plot for Emotion Steering Heatmaps with Gemma 4 E2B
 \begin{figure}[!htbp]
@@ -639,10 +600,7 @@ appreciated in \Cref{tab:gemma-excerptSteering}.
 
 \subsubsection{PCA Projection}
 
-Principal Component Analysis for the extracted emotion vectors displays a peculiar clustering pattern. In comparison to
-the PCA plots of \text{openai-community/gpt-2-medium} (\Cref{fig:gpt2-pca-projection}), \texttt{google-gemma-4-e2b} (\Cref{fig:gemma-pca-projection}) shows a distinct 
-flip on the PC1 axis; most emotions with a positive valence are now found on Quadrants II and III of the plot, while negative 
-valence emotions are found on Quadrants I and IV.
+For the nine-emotion Gemma 4 E2B set, PC1 and PC2 explain 38.3\% and 20.0\% of variance, respectively (58.3\% jointly). Up to sign, \texttt{happy}, \texttt{calm}, and \texttt{loving} lie on one end of PC1, while \texttt{afraid}, \texttt{angry}, \texttt{desperate}, and \texttt{guilty} lie on the other; \texttt{sad} and \texttt{surprised} are intermediate or exception cases. The 20-emotion projection again separates several positive-labeled vectors (for example, \texttt{hopeful}, \texttt{inspired}, \texttt{proud}, \texttt{happy}, and \texttt{loving}) from a group containing \texttt{anxious}, \texttt{afraid}, and \texttt{angry}, while \texttt{sad}, \texttt{brooding}, and \texttt{lonely} do not form a simple ordering. PC2 does not produce a stable, readily interpretable low-versus-high-arousal separation in either set. A sign reversal between PCA plots would have no substantive interpretation because PCA component signs are arbitrary (\Cref{fig:gemma-pca-projection}).
 
 % * PCA Projection for Gemma 4 E2B
 \begin{figure}[!htbp]
@@ -673,9 +631,7 @@ valence emotions are found on Quadrants I and IV.
 
 \subsubsection{Cosine Similarity Heatmap}
 
-The cosine similarity values show lower similarity between most emotion vector pairs. While some expected relationships were present,
-the overall magnitude of similarity scores was lower. The similarity matrix contained more moderate values, indicating increased 
-overlap between the vector representations. The heatmaps can be appreciated in \Cref{fig:gemma-cos-sim9,fig:gemma-cos-sim20}.
+Gemma 4 E2B's cosine matrices show the same broad pattern of local alignments and oppositions. In the nine-emotion set, \texttt{happy}--\texttt{calm} is 0.48, \texttt{afraid}--\texttt{angry} is 0.62, and \texttt{loving}--\texttt{afraid} is -0.66. In the 20-emotion set, \texttt{hopeful}--\texttt{inspired} is 0.82, \texttt{anxious}--\texttt{afraid} is 0.88, \texttt{afraid}--\texttt{angry} is 0.70, and \texttt{happy}--\texttt{calm} is 0.57. Lower absolute cosine similarity indicates weaker directional alignment, not greater representational overlap. The heatmaps therefore support descriptive clustering among several related labels, while substantial mixed and near-zero entries show that the geometry is not exhausted by a single affective partition (\Cref{fig:gemma-cos-sim9,fig:gemma-cos-sim20}).
 
 % * Cosine Similarity  for Gemma 4 E2B with 9 emotions
 \begin{figure}[!htbp]
@@ -700,3 +656,7 @@ overlap between the vector representations. The heatmaps can be appreciated in \
     \label{fig:gemma-cos-sim20}
     \end{figure}
 \end{landscape}
+
+\subsection{Cross-model summary and relation to prior replications}
+
+Across both models, the most consistent geometric observation is a partial PC1 separation between several positive-labeled vectors and a group containing fear-, anger-, and anxiety-related vectors, together with corresponding local cosine-similarity families. This is qualitatively related to the community Gemma 4 E4B replication by Hsieh \cite{hsieh_replicating_2026}, which reports a valence-like PC1 and labels PC2 as arousal for a nine-emotion E4B analysis. Our nine-emotion E2B PCA has comparable first-two-component variance (58.3\% versus the E4B report's 60.5\%), but this is not a numerical replication: the model variant, corpus, vector construction, and neutral-control procedure differ. In particular, the present PC2 plots do not provide a stable enough ordering to support an arousal interpretation. The results therefore support a narrower conclusion: under the present extraction pipeline, both evaluated models exhibit non-random-looking directional geometry and intervention-sensitive token diagnostics, with partial but unvalidated alignment to affective labels.

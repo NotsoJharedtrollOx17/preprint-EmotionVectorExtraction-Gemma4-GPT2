@@ -1,6 +1,6 @@
 paper/build/
 agent-notes/
-
+tmp/
 *.aux
 *.log
 *.out
