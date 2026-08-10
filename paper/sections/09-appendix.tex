@@ -3,7 +3,7 @@
 %% * Full List of Emotion Utilized
 \section{Full List of Emotions Utilized}
 \label{apdx:full-emotion-list}
-Below is the full list of emotion words for which we computed emotion vectors.
+This section lists the emotion labels used to compute the vectors.
 
 \subsection{9 Emotions}
 \label{apdx:9-emotions}
@@ -35,13 +35,12 @@ Below is the full list of emotion words for which we computed emotion vectors.
 \section{Prompt Templates}
 \label{apdx:templates}
 
-Below we present the utilized prompt templates for the dataset generation
-of this writing.
+This section gives the prompt templates used to generate the story dataset.
 
 \subsection{Emotion Story Context}
 \label{apdx:story-context}
 
-This prompt must be provided at the start of the LLM conversation.
+Use this prompt at the start of each model conversation.
 
 \begin{anthropicbox}
     \ttfamily
@@ -117,8 +116,8 @@ This prompt must be provided at the start of the LLM conversation.
 \subsection{Emotion Story Generation}
 \label{apdx:story-generation}
 
-After providing the previous prompt, one must input each block of 10 entries to generate
-the emotion stories.
+After the context prompt, submit each block of ten entries to generate the
+emotion stories.
 
 \begin{anthropicbox}
     \ttfamily
@@ -350,7 +349,7 @@ the emotion stories.
 \subsection{Neutral Prompt Statements}
 \label{apdx:neutral-prompt}
 
-The initial neutral prompts are credited to \cite{hsieh_replicating_2026}.
+The initial neutral prompts were adapted from \cite{hsieh_replicating_2026}.
 
 \begin{anthropicbox}
     \ttfamily
@@ -379,8 +378,8 @@ The initial neutral prompts are credited to \cite{hsieh_replicating_2026}.
 \subsection{Primers For Logit Lens Extraction and Emotion Steering}
 \label{apdx:primers}
 
-We utilized two prompts for the extraction of the semantically relevant tokens
-revealed when the evaluated language models attempt to answer each prompt.
+We used two prompts to extract semantically relevant tokens from the models'
+responses.
 
 \subsubsection{How does he feel? [Prompt 00]}
 \label{apdx:primer-00}
@@ -419,9 +418,8 @@ revealed when the evaluated language models attempt to answer each prompt.
 \section{Examples from Emotional Stories Dataset}
 \label{apdx:examples-stories}
 
-Here we provide selected samples of emotional stories used to extract the emotion vectors.
-In particular, we display two stories each for the emotions of \texttt{happy}, \texttt{sad},
-and \texttt{loving}.
+This section presents selected stories used to extract the emotion vectors. We
+show two examples for each of \texttt{happy}, \texttt{sad}, and \texttt{loving}.
 
 \subsection{Emotion Concept: \texttt{happy}}
 \label{apdx:happy-stories}
