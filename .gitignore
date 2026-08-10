@@ -1,4 +1,5 @@
 paper/build/
+agent-notes/
 
 *.aux
 *.log

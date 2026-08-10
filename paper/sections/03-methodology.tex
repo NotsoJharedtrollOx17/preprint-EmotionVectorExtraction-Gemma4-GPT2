@@ -6,8 +6,7 @@ Following the prompting strategy proposed by \cite{sofroniew_emotion_2026}, we e
 to generate emotionally expressive narratives. For each emotion category, Google's Gemini language model was instructed to 
 produce batches of 5 short stories following one of 10 story topics as a JSON array, facilitating their organization into 
 emotion-specific datasets. In addition, a separate neutral prompt template (Appendix ~\ref{apdx:neutral-prompt}) was used to generate a 
-collection of emotionally neutral commands and requests, which served as the reference corpus for constructing the neutral 
-representation described throughout the rest of this section.
+collection of emotionally neutral commands and requests, which served as the reference corpus for the intermediate neutral-centering step described below.
 
 \subsection{Emotion Vector Extraction}
 
@@ -47,31 +46,32 @@ for story $i$ belonging to \texttt{emotion}. Finally, $\left|\mathcal{S}_{\matht
 expressive stories for \texttt{emotion}.
 
 %\subsubsection{Mean Neutral Statements}
-\paragraph{Mean Neutral Statements} To enhance our centering procedures, we compute the mean neutral statements from the hidden activations
-obtained from the neutral statements dataset:
+\paragraph{Mean Neutral Statements} Following our interpretation of the extraction procedure described by Sofroniew et al.\ \cite{sofroniew_emotion_2026} and the open-weight replication by Hsieh \cite{hsieh_replicating_2026}, we first compute the mean neutral representation from the hidden activations obtained from the neutral-statements dataset:
 \begin{equation}
     \boldsymbol{\mu}_{\mathtt{neutral}}=\frac{1}{\left|\mathcal{N}\right|}\sum_{i=1}^{\left|\mathcal{N}\right|}\mathbf{\overline{h}}_{\mathtt{neutral},i}
     \label{eqtn:neutral-mean}
 \end{equation}
-where $\boldsymbol{\mu}_{\mathtt{neutral}}$ is the mean neutral statements value. $\left|\mathcal{N}\right|$ is total number of neutral prompts, and
-$\mathbf{\overline{h}}_{\mathtt{neutral},i}$ is the mean hidden representations of the individual neutral prompt $i$.
+where $\boldsymbol{\mu}_{\mathtt{neutral}}$ is the mean neutral representation, $\left|\mathcal{N}\right|$ is the number of neutral prompts, and
+$\mathbf{\overline{h}}_{\mathtt{neutral},i}$ is the mean hidden representation of neutral prompt $i$. We then form a neutral-adjusted prototype for each emotion:
+\begin{equation}
+    \boldsymbol{\nu}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}_{\mathtt{neutral}}
+    \label{eqtn:neutral-adjusted-prototype}
+\end{equation}
 
 %\subsubsection{Global Mean Centering}
-\paragraph{Global Mean Centering} To calculate the individual contribution of each vector on the semantical understanding of the model, we center each vector by
-subtracting the global emotional average. To obtain the global emotional average, we utilize the following equation:
+\paragraph{Global Mean Centering} We center each neutral-adjusted prototype by subtracting their global mean. This mean is:
 \begin{equation}
-    \boldsymbol{\mu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\mu}_{\mathtt{emotion}}
+    \boldsymbol{\nu}=\frac{1}{|\mathcal{E}|}\sum_{{\mathtt{emotion}}\in \mathcal{E}}^{}\boldsymbol{\nu}_{\mathtt{emotion}}
     \label{eqtn:global-mean}
 \end{equation}
-where $\boldsymbol{\mu}$ is the global mean of the calculated prototype emotion $\boldsymbol{\mu}_{\mathtt{emotion}}$. 
+where $\boldsymbol{\nu}$ is the global mean of the neutral-adjusted emotion prototypes.
 
-Afterwards, we calculate the centered emotion vector as follows:
+We calculate the centered emotion vector as follows:
 \begin{equation}
-    \mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\boldsymbol{\mu}_{\mathtt{neutral}}-\boldsymbol{\mu}
+    \mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\nu}_{\mathtt{emotion}}-\boldsymbol{\nu}
     \label{eqtn:emotion-vector}
 \end{equation}
-where $\mathbf{v}_{\mathtt{emotion}}$ is the result of subtracting $\boldsymbol{\mu}_{\mathtt{neutral}}$ and $\boldsymbol{\mu}$ from 
-$\boldsymbol{\mu}_{\mathtt{emotion}}$.
+where $\mathbf{v}_{\mathtt{emotion}}$ is the globally centered, neutral-adjusted prototype. Because the same neutral mean is subtracted from every emotion prototype, it cancels during global centering: $\mathbf{v}_{\mathtt{emotion}}=\boldsymbol{\mu}_{\mathtt{emotion}}-\frac{1}{|\mathcal{E}|}\sum_{e\in\mathcal{E}}\boldsymbol{\mu}_e$. Thus, the final vectors are globally emotion-centered; the neutral corpus is retained only in the intermediate calculation.
 
 %\subsubsection{Vector Normalization}
 \paragraph{Vector Normalization} Finally, for computational convenience and numerical stability, we normalize the emotion vector by performing the following
