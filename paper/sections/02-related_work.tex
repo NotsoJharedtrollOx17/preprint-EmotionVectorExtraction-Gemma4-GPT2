@@ -1,3 +1,62 @@
 \section{Related Work}
 
-Lorem ipsum dolor.
+\subsection{Affect as a geometric target}
+
+The use of emotion as a probe of representation geometry has a useful external
+anchor.  Psychological accounts often organize affect continuously by valence
+(pleasantness) and arousal (activation), rather than treating every emotion as
+an unrelated category \cite{russell_circumplex_1980,posner_circumplex_2005}.
+This does not imply that a language model implements human affective
+mechanisms.  It does, however, provide a testable expectation: if a model has
+coherent representations of emotion concepts, related concepts may cluster and
+their leading dimensions may align with these established descriptors.
+Recent analyses report such structure in LLM hidden states.  Choi and Weber
+\cite{choi_latent_2026} find affective representations that align with
+valence--arousal models and are approximately linearly recoverable, whereas
+Reichman et al.\ \cite{reichman_emotions_2026} report a low-dimensional,
+cross-lingual emotional subspace.  Sun et al.\ \cite{sun_valence-arousal_2026}
+further report a circular valence--arousal geometry and monotonic affective
+control in several open-weight models.  Our PCA and cosine-similarity analyses
+are qualitative tests in this tradition; they do not estimate an external
+valence--arousal correlation and therefore should not be interpreted as a
+quantitative validation of either model.
+
+\subsection{Activation steering and interpretation}
+
+Activation steering modifies an internal activation by adding a direction
+associated with a desired property, then measures the resulting change in
+output.  It is a causal intervention on the model computation, but a successful
+intervention alone does not establish that the direction is a unique or
+complete representation of the named concept.  This distinction matters
+because steering vectors can fall outside the distribution on which common
+interpretability tools are trained and can have meaningful negative feature
+components \cite{mayne_can_2024}.  The residual-stream setting used here is
+also compatible with work showing that Transformer components combine
+interpretable patterns through residual connections before producing output
+distributions \cite{geva_transformer_2021}.  We use Logit Lens projections and
+steered generations as complementary diagnostic evidence, rather than treating
+either one as a semantic ground truth.
+
+\subsection{Emotion vectors in language models}
+
+The direct precursor to this study is the analysis of Claude Sonnet 4.5 by
+Sofroniew et al.\ \cite{sofroniew_emotion_2026}.  They extracted representations
+for 171 emotion concepts, showed that the representations tracked contextual
+emotion and exhibited valence--arousal structure, and tested their functional
+effects with interventions.  Their term \emph{functional emotions} refers to
+representations that influence behavior; it explicitly does not entail a claim
+of subjective experience.
+
+The question of transfer beyond Claude is now beginning to receive direct
+attention.  Hsieh \cite{hsieh_replicating_2026} released an early community
+replication on Gemma 4 E4B.  In a systematic open-weight study, van der Ben et
+al.\ \cite{ben_where_2026} recover valence geometry in Gemma 4 E4B-it and
+Apertus-8B-Instruct-2509, while finding that the layer at which valence emerges
+and the apparent arousal structure depend on the model and extraction corpus.
+These results make model choice, layer selection, and corpus construction
+central experimental variables rather than incidental implementation details.
+Our study complements this evidence by applying a fixed, inexpensive pipeline
+to GPT-2 Medium and Gemma 4 E2B, and by contrasting a nine-category set with a
+20-category set.  It is therefore best understood as a partial replication and
+an exploratory robustness check, not as a test of the full behavioral and
+safety claims in the original work.

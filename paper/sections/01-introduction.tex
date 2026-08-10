@@ -1,3 +1,44 @@
 \section{Introduction}
 
-lorem ipsum dolor
+Large language models (LLMs) often generate language that appears emotionally
+appropriate: they can respond empathetically to distress, adopt an angry tone
+when describing harm, or express enthusiasm about positive outcomes.  Such
+behavior alone is not evidence that a model has subjective experience.  A more
+tractable scientific question is whether a model contains internal
+representations of \emph{emotion concepts} that are activated in relevant
+contexts and that causally affect its output.  This question sits naturally
+within mechanistic interpretability, which seeks to connect internal
+activations and computations to model behavior rather than relying only on
+input--output correlations \cite{geva_transformer_2021,sawant_mechanistic_2026}.
+
+Sofroniew et al.\ \cite{sofroniew_emotion_2026} introduced the term
+\emph{emotion vectors} for directions in Claude Sonnet 4.5's residual stream
+that represent broad emotion concepts.  They reported that these directions
+generalize beyond explicit emotion words, organize partly along the
+psychological dimensions of valence and arousal, and influence generated
+behavior under activation steering.  Their results motivate an important
+generality question: are comparable affective directions a property of one
+frontier, proprietary model, or can they also be recovered in independently
+available Transformer language models?
+
+This work provides a partial, resource-constrained replication of three parts
+of that investigation in \texttt{openai-community/gpt-2-medium} and
+\texttt{google/gemma-4-e2b}.  We construct emotion prototypes from generated
+stories and a neutral reference corpus, extract normalized contrast vectors at
+an intermediate residual-stream layer, and assess them with (i) Logit Lens
+vocabulary projections, (ii) PCA and pairwise cosine-similarity analyses, and
+(iii) activation steering on two neutral prompts.  We evaluate both a
+nine-emotion set and a 20-emotion extension, allowing us to examine whether
+the qualitative findings persist as nearby affective categories are added.
+
+Our contribution is deliberately narrower than a full replication of
+Sofroniew et al.  We do not test the original study's behavioral or alignment
+evaluations, search across layers, or estimate correlations with external
+human valence--arousal ratings.  Instead, we ask whether this lightweight
+pipeline recovers interpretable, structured, and behaviorally consequential
+directions in two models with substantially different age, scale, and training
+regimes.  In our experiments, both models yield emotion vectors with a
+valence-like separation and semantically meaningful similarity structure;
+steering visibly changes token probabilities and continuations, with stronger
+effects in GPT-2 Medium.  These observations are evidence for portability of
+the procedure, not evidence that either model experiences emotion.
